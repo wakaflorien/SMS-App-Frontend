@@ -16,7 +16,11 @@ import {
     MenuList,
     MenuItem,
     Avatar,
-    IconButton
+    IconButton,
+    SpeedDial,
+    SpeedDialHandler,
+    SpeedDialContent,
+    SpeedDialAction,
 } from '@material-tailwind/react';
 
 export {
@@ -35,5 +39,9 @@ export {
     MenuList,
     MenuItem,
     Avatar,
-    IconButton
+    IconButton,
+    SpeedDial,
+    SpeedDialHandler,
+    SpeedDialContent,
+    SpeedDialAction,
 };

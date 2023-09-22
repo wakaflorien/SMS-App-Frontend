@@ -33,29 +33,55 @@ import {
     ChevronDownIcon,
     Bars3Icon,
 } from "@heroicons/react/24/outline";
+import { useRouter } from "next/navigation";
 
 export default function DashbaordLayout({ children }) {
     const [open, setOpen] = useState(0);
+    const router = useRouter()
 
     const handleOpen = (value) => {
         setOpen(open === value ? 0 : value);
     };
 
-    const Icon = () => {
-        return (
-            <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-                className="h-5 w-5"
-            >
-                <path
-                    fillRule="evenodd"
-                    d="M18.685 19.097A9.723 9.723 0 0021.75 12c0-5.385-4.365-9.75-9.75-9.75S2.25 6.615 2.25 12a9.723 9.723 0 003.065 7.097A9.716 9.716 0 0012 21.75a9.716 9.716 0 006.685-2.653zm-12.54-1.285A7.486 7.486 0 0112 15a7.486 7.486 0 015.855 2.812A8.224 8.224 0 0112 20.25a8.224 8.224 0 01-5.855-2.438zM15.75 9a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z"
-                    clipRule="evenodd"
-                />
-            </svg>
-        );
+    const sideNav = [
+        {
+            label: "Dashboard",
+            icon: <PresentationChartBarIcon />,
+            href: "/dashboard",
+            sub: [],
+        },
+        {
+            label: "Inbox",
+            icon: <InboxIcon className="h-5 w-5" />,
+            href: "/dashboard/messages",
+            sub: < Chip
+                value="14"
+                size="sm"
+                variant="ghost"
+                color="blue-gray"
+                className="rounded-full"
+            />,
+        },
+
+        {
+            label: "Messages",
+            icon: <UserCircleIcon className="h-5 w-5" />,
+            href: "/dashboard/messages",
+            sub: [],
+        }, {
+            label: "Settings",
+            icon: <Cog6ToothIcon className="h-5 w-5" />,
+            href: "/dashboard/messages",
+            sub: [],
+        },
+        {
+            label: "Logout",
+            icon: <PowerIcon className="h-5 w-5" />,
+            href: "/dashboard/awards",
+        }
+    ];
+    const handleRoute = (value) => {
+        router.push(value)
     }
 
     return (
@@ -160,39 +186,19 @@ export default function DashbaordLayout({ children }) {
                         </AccordionBody>
                     </Accordion>
                     <hr className="my-2 border-blue-gray-50" />
-                    <ListItem>
-                        <ListItemPrefix>
-                            <InboxIcon className="h-5 w-5" />
-                        </ListItemPrefix>
-                        Inbox
-                        <ListItemSuffix>
-                            <Chip
-                                value="14"
-                                size="sm"
-                                variant="ghost"
-                                color="blue-gray"
-                                className="rounded-full"
-                            />
-                        </ListItemSuffix>
-                    </ListItem>
-                    <ListItem>
-                        <ListItemPrefix>
-                            <UserCircleIcon className="h-5 w-5" />
-                        </ListItemPrefix>
-                        Profile
-                    </ListItem>
-                    <ListItem>
-                        <ListItemPrefix>
-                            <Cog6ToothIcon className="h-5 w-5" />
-                        </ListItemPrefix>
-                        Settings
-                    </ListItem>
-                    <ListItem>
-                        <ListItemPrefix>
-                            <PowerIcon className="h-5 w-5" />
-                        </ListItemPrefix>
-                        Log Out
-                    </ListItem>
+                    <>
+                        {sideNav.map((item, index) => (
+                            <ListItem key={index} className="cursor-pointer" onClick={() => handleRoute(item.href)}>
+                                <ListItemPrefix>
+                                    {item.icon}
+                                </ListItemPrefix>
+                                {item.label}
+                                <ListItemSuffix>
+                                    {item.sub}
+                                </ListItemSuffix>
+                            </ListItem>
+                        ))}
+                    </>
                 </List>
             </Card>
             <main className="h-screen w-full bg-secondary">
@@ -230,7 +236,7 @@ export default function DashbaordLayout({ children }) {
                                         variant="small"
                                         className="flex items-center gap-1 text-xs text-gray-600"
                                     >
-                                        
+
                                         13 minutes ago
                                     </Typography>
                                 </div>
@@ -394,3 +400,5 @@ export default function DashbaordLayout({ children }) {
         </div>
     );
 }
+
+
