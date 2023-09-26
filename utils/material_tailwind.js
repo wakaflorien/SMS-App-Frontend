@@ -1,7 +1,7 @@
 "use client";
 
 import {
-    ThemeProvider, Button, Card,
+    ThemeProvider, Button, 
     Typography,
     List,
     ListItem,
@@ -21,10 +21,21 @@ import {
     SpeedDialHandler,
     SpeedDialContent,
     SpeedDialAction,
+    Dialog,
+    DialogHeader,
+    DialogBody,
+    DialogFooter,
+    Card, 
+    CardBody, 
+    CardFooter,
+    CardHeader,
+    Textarea,
+    Input
 } from '@material-tailwind/react';
 
 export {
-    ThemeProvider, Button, Card,
+    ThemeProvider, 
+    Button,
     Typography,
     List,
     ListItem,
@@ -44,4 +55,14 @@ export {
     SpeedDialHandler,
     SpeedDialContent,
     SpeedDialAction,
+    Dialog,
+    DialogHeader,
+    DialogBody,
+    DialogFooter,
+    Card, 
+    CardBody, 
+    CardFooter,
+    CardHeader,
+    Textarea,
+    Input
 };
