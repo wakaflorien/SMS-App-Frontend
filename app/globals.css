@@ -20,3 +20,6 @@ body {
   color: #000000;
   background: #fff;
 }
+body::-webkit-scrollbar{
+  display: none;
+}
