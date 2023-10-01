@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import ApexChart from "../components/ApexChart";
+import Card from "../components/Cards";
 
 export default function DashboardPage() {
   const state = {
@@ -76,10 +77,20 @@ export default function DashboardPage() {
       },
     },
   };
+  const cards = [1, 2, 3, 4];
+
   const [isChatReady, setIsChatReady] = useState(false);
 
   return (
-    <div className="p-4">
+    <>
+      <div className="p-4">
+        <div className="grid my-6 grid-cols-4 gap-3">
+          {cards.map((_card, index) => {
+            return <Card key={`card-${index}`} />;
+          })}
+        </div>
+      </div>
+
       <div id="chart" className="bg-white rounded-xl shadow-md">
         {typeof window !== "undefined" && (
           <ApexChart
@@ -94,6 +105,6 @@ export default function DashboardPage() {
           />
         )}
       </div>
-    </div>
+    </>
   );
 }
