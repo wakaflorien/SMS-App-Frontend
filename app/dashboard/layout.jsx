@@ -60,15 +60,51 @@ export default function DashbaordLayout({ children }) {
             id: 3,
             label: "Send To group",
             icon: <ShoppingBagIcon className="h-5 w-5" />,
-            link: "/dashboard/message/sendtogroup"
+            link: "/dashboard/messages/sendtogroup"
         },
         {
             id: 4,
             label: "Send From Csv",
             icon: <PresentationChartBarIcon className="h-5 w-5" />,
-            link: "/dashboard/message/sendfromcsv"
+            link: "/dashboard/messages/sendfromcsv"
         }
     ]
+    const contactsMenu = [
+        {
+            id: 1,
+            label: "All contacts",
+            icon: <ClockIcon className="h-5 w-5" />,
+            link: "/dashboard/contacts"
+        },
+        {
+            id: 2,
+            label: "Add New contacts",
+            icon: <UserCircleIcon className="h-5 w-5" />,
+            link: "/dashboard/contacts/sendtonumber"
+        },
+        {
+            id: 4,
+            label: "Add From Csv",
+            icon: <PresentationChartBarIcon className="h-5 w-5" />,
+            link: "/dashboard/contacts/sendfromcsv"
+        }
+    ]
+
+    const groupsMenu = [
+        {
+            id: 1,
+            label: "All groups",
+            icon: <ClockIcon className="h-5 w-5" />,
+            link: "/dashboard/groups"
+        },
+        {
+            id: 2,
+            label: "Create Group",
+            icon: <ShoppingBagIcon className="h-5 w-5" />,
+            link: "/dashboard/groups/addnewgroup"
+        }
+    ]
+    
     const sideNav = [
         {
             id: 1,
