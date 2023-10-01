@@ -1,7 +1,99 @@
+"use client";
+import { useState } from "react";
+import ApexChart from "../components/ApexChart";
+
 export default function DashboardPage() {
-    return (
-        <div>
-            <h1>Dashboard</h1>
-        </div>
-    )
+  const state = {
+    series: [
+      {
+        name: "Message",
+        data: [44, 55, 57, 56, 61, 58, 63, 60, 66],
+      },
+      {
+        name: "Pending",
+        data: [76, 85, 101, 98, 87, 105, 91, 114, 94],
+      },
+      {
+        name: "Sent",
+        data: [35, 41, 36, 26, 45, 48, 52, 53, 41],
+      },
+    ],
+    options: {
+      chart: {
+        type: "bar",
+        height: 350,
+      },
+      plotOptions: {
+        bar: {
+          horizontal: false,
+          columnWidth: "55%",
+          endingShape: "rounded",
+        },
+      },
+      dataLabels: {
+        enabled: false,
+        style: {
+          fontFamily: "Poppins",
+          fontWeight: "600",
+        },
+      },
+      stroke: {
+        show: true,
+        width: 2,
+        colors: ["transparent"],
+      },
+      xaxis: {
+        categories: [
+          "Feb",
+          "Mar",
+          "Apr",
+          "May",
+          "Jun",
+          "Jul",
+          "Aug",
+          "Sep",
+          "Oct",
+        ],
+      },
+      yaxis: {
+        title: {
+          text: "$ (thousands)",
+          style: {
+            fontFamily: "Poppins",
+            fontWeight: "600",
+          },
+        },
+      },
+      fill: {
+        opacity: 1,
+      },
+      tooltip: {
+        y: {
+          formatter: function (val) {
+            return "$ " + val + " thousands";
+          },
+        },
+      },
+    },
+  };
+  const [isChatReady, setIsChatReady] = useState(false);
+
+  return (
+    <div className="p-4">
+      <div id="chart" className="bg-white rounded-xl shadow-md">
+        {typeof window !== "undefined" && (
+          <ApexChart
+            // @ts-nocheck
+            onReady={() => {
+              setIsChatReady(true);
+            }}
+            options={state.options}
+            series={state.series}
+            type="bar"
+            height={350}
+          />
+        )}
+      </div>
+    </div>
+  );
 }
