@@ -51,12 +51,6 @@ export default function DashbaordLayout({ children }) {
             link: "/dashboard/messages"
         },
         {
-            id: 2,
-            label: "Send To number",
-            icon: <UserCircleIcon className="h-5 w-5" />,
-            link: "/dashboard/messages/sendtonumber"
-        },
-        {
             id: 3,
             label: "Send To group",
             icon: <ShoppingBagIcon className="h-5 w-5" />,

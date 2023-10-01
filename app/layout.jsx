@@ -13,7 +13,9 @@ export default function RootLayout({ children }) {
   return (
     <ThemeProvider>
       <html lang="en">
-        <body className={inter.className}>{children}</body>
+        <body className={inter.className}>{children}
+          <script src="../path/to/flowbite/dist/flowbite.min.js"></script>
+        </body>
       </html>
     </ThemeProvider>
   )

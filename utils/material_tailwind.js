@@ -30,7 +30,8 @@ import {
     CardFooter,
     CardHeader,
     Textarea,
-    Input
+    Input,
+    Select, Option
 } from '@material-tailwind/react';
 
 export {
@@ -64,5 +65,7 @@ export {
     CardFooter,
     CardHeader,
     Textarea,
-    Input
+    Input,
+    Option,
+    Select
 };
