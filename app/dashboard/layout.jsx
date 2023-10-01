@@ -54,19 +54,19 @@ export default function DashbaordLayout({ children }) {
             id: 2,
             label: "Send To number",
             icon: <UserCircleIcon className="h-5 w-5" />,
-            link: "/dashboard/sendToNumber"
+            link: "/dashboard/messages/sendtonumber"
         },
         {
             id: 3,
             label: "Send To group",
             icon: <ShoppingBagIcon className="h-5 w-5" />,
-            link: "/dashboard/sendToGroup"
+            link: "/dashboard/message/sendtogroup"
         },
         {
             id: 4,
             label: "Send From Csv",
             icon: <PresentationChartBarIcon className="h-5 w-5" />,
-            link: "/dashboard/sendFromCsv"
+            link: "/dashboard/message/sendfromcsv"
         }
     ]
     const sideNav = [
