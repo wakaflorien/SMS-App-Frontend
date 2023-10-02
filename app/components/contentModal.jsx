@@ -8,7 +8,7 @@ import {
     DialogFooter,
 } from "../../utils/material_tailwind";
 
-export const ConfirmModal = (props) => {
+export const ContentModal = (props) => {
     return (
         <>
             <Dialog open={props.open} handler={props.handleOpen}>

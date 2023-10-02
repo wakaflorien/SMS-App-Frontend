@@ -1,5 +1,5 @@
 "use client";
-import { ConfirmModal } from "@/app/components/confirmModal";
+import { ConfirmModal, ContentModal } from "@/app/components/contentModal";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import {
@@ -24,7 +24,7 @@ export default function Groups() {
   const handleOpen = () => setOpen(!open);
   return (
     <>
-      <ConfirmModal open={open} handleOpen={handleOpen} />
+      <ContentModal open={open} handleOpen={handleOpen} />
       <div className="flex flex-col  p-4 space-y-3">
         <header className="self-center">All Groups</header>
         <Card className="h-fit w-full rounded-none space-y-4">
