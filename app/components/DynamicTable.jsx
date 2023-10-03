@@ -1,7 +1,7 @@
 import { useRouter, usePathname } from "next/navigation";
 import { Card, CardBody, Input, Textarea } from "../../utils/material_tailwind";
 import { useState } from "react";
-import { ContentModal } from "./contentModal";
+import { ContentModal } from "./ContentModal";
 
 export const DynamicTable = (props) => {
     const [open, setOpen] = useState(false);

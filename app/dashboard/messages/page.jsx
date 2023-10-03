@@ -10,10 +10,10 @@ import {
 import {
     ChatBubbleBottomCenterTextIcon, UserIcon,
 } from "@heroicons/react/24/outline";
-import { DefaultPagination } from "@/app/components/pagination";
+import { DefaultPagination } from "@/app/components/Pagination";
 import { useState } from "react";
-import { TABLE_HEAD_MESSAGE, TABLE_ROWS_MESSAGE } from "@/app/components/tablecolumns";
-import { ConfirmModal, ContentModal } from "@/app/components/contentModal";
+import { TABLE_HEAD_MESSAGE, TABLE_ROWS_MESSAGE } from "@/app/components/Tablecolumns";
+import { ConfirmModal, ContentModal } from "@/app/components/ContentModal";
 import { useRouter } from "next/navigation";
 import { DynamicTable } from "@/app/components/DynamicTable";
 

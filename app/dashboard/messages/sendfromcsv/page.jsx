@@ -8,7 +8,7 @@ import {
     CardFooter,
     Button,
 } from "../../../../utils/material_tailwind";
-import { DefaultPagination } from "@/app/components/pagination";
+import { DefaultPagination } from "@/app/components/Pagination";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
