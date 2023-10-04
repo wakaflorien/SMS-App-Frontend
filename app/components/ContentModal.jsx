@@ -19,13 +19,12 @@ export const ContentModal = (props) => {
                 <DialogFooter>
                     <Button
                         variant="outlined"
-                        color="red"
                         onClick={props.handleOpen}
-                        className="mr-1"
+                        className="mr-1 normal-case"
                     >
                         <span>{props.cancelText}</span>
                     </Button>
-                    <Button variant="gradient" onClick={props.handleOpen}>
+                    <Button variant="gradient" color="green" onClick={props.handleOpen} className="normal-case">
                         <span>{props.okText}</span>
                     </Button>
                 </DialogFooter>

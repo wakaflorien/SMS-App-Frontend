@@ -89,21 +89,20 @@ export default function DashboardPage() {
             return <Card key={`card-${index}`} />;
           })}
         </div>
-      </div>
-
-      <div id="chart" className="bg-white rounded-xl shadow-md">
-        {typeof window !== "undefined" && (
-          <ApexChart
-            // @ts-nocheck
-            onReady={() => {
-              setIsChatReady(true);
-            }}
-            options={state.options}
-            series={state.series}
-            type="bar"
-            height={350}
-          />
-        )}
+        <div id="chart" className="bg-white rounded-md shadow-md">
+          {typeof window !== "undefined" && (
+            <ApexChart
+              // @ts-nocheck
+              onReady={() => {
+                setIsChatReady(true);
+              }}
+              options={state.options}
+              series={state.series}
+              type="bar"
+              height={350}
+            />
+          )}
+        </div>
       </div>
     </>
   );

@@ -9,12 +9,10 @@ export const TABLE_HEAD_MESSAGE = [
     "Status",
     "Date time",
     "Group",
-    "Action"
 ];
 export const TABLE_HEAD_CONTACTS = [
     "Name",
     "Number",
-    "Action",
 ];
 
 export const TABLE_HEAD_GROUP = [
@@ -31,7 +29,6 @@ export const TABLE_ROWS_MESSAGE = [
         content: "Manager",
         status: "23/04/18",
         date: "23/04/18",
-        group: "Edit",
     },
     {
         id: 2,
@@ -40,7 +37,6 @@ export const TABLE_ROWS_MESSAGE = [
         content: "Manager",
         status: "23/04/18",
         date: "23/04/18",
-        group: "Edit",
     },
     {
         id: 3,
@@ -49,7 +45,6 @@ export const TABLE_ROWS_MESSAGE = [
         content: "Manager",
         status: "23/04/18",
         date: "23/04/18",
-        group: "Edit",
     },
     {
         id: 4,
@@ -58,7 +53,6 @@ export const TABLE_ROWS_MESSAGE = [
         content: "Manager",
         status: "23/04/18",
         date: "23/04/18",
-        group: "Edit",
     },
     {
         id: 5,
@@ -67,7 +61,6 @@ export const TABLE_ROWS_MESSAGE = [
         content: "Manager",
         status: "23/04/18",
         date: "23/04/18",
-        group: "Edit",
     },
 
 ];
@@ -75,47 +68,47 @@ export const TABLE_ROWS_CONTACTS = [
     {
         to: "Alexa Liras",
         id: "+2508585757577",
-        subject: <div className="flex gap-5">
-            <TrashIcon className="h-5 w-5 text-red-500" />
-            <PencilIcon className="h-5 w-5 text-red-500" />
-            <EyeIcon className="h-5 w-5 text-red-500" />
-        </div>,
     },
     {
         to: "Alexa Liras",
         id: "+2508585757577",
-        subject: <div className="flex gap-5">
-            <TrashIcon className="h-5 w-5 text-red-500" />
-            <PencilIcon className="h-5 w-5 text-red-500" />
-            <EyeIcon className="h-5 w-5 text-red-500" />
-        </div>,
     },
     {
         to: "Alexa Liras",
         id: "+2508585757577",
-        subject: <div className="flex gap-5">
-            <TrashIcon className="h-5 w-5 text-red-500" />
-            <PencilIcon className="h-5 w-5 text-red-500" />
-            <EyeIcon className="h-5 w-5 text-red-500" />
-        </div>,
     },
     {
         to: "Alexa Liras",
         id: "+2508585757577",
-        subject: <div className="flex gap-5">
-            <TrashIcon className="h-5 w-5 text-red-500" />
-            <PencilIcon className="h-5 w-5 text-red-500" />
-            <EyeIcon className="h-5 w-5 text-red-500" />
-        </div>,
+
     },
     {
         to: "Alexa Liras",
         id: "+2508585757577",
-        subject: <div className="flex gap-5">
-            <TrashIcon className="h-5 w-5 text-red-500" />
-            <PencilIcon className="h-5 w-5 text-red-500" />
-            <EyeIcon className="h-5 w-5 text-red-500" />
-        </div>,
+    },
+
+];
+export const TABLE_ROWS_GROUPS = [
+    {
+        to: "Alexa Liras",
+        id: "7577",
+    },
+    {
+        to: "Alexa Liras",
+        id: "7577",
+    },
+    {
+        to: "Alexa Liras",
+        id: "7577",
+    },
+    {
+        to: "Alexa Liras",
+        id: "7577",
+
+    },
+    {
+        to: "Alexa Liras",
+        id: "7577",
     },
 
 ];

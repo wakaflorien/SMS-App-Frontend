@@ -12,6 +12,7 @@ import {
 } from "@heroicons/react/24/outline";
 import { DefaultPagination } from "@/app/components/Pagination";
 import { DynamicTable } from "@/app/components/DynamicTable";
+import { ContactModalContent } from "@/app/components/CreateModals";
 import { TABLE_HEAD_CONTACTS, TABLE_ROWS_CONTACTS } from "@/app/components/Tablecolumns";
 
 export default function Contacts() {
@@ -21,12 +22,18 @@ export default function Contacts() {
     const handleOpen = () => setOpen(!open);
     return (
         <>
-            <ContentModal open={open} handleOpen={handleOpen} />
+            <ContentModal
+                title="Create new Contact"
+                open={open}
+                handleOpen={handleOpen}
+                okText="Create" cancelText="Cancel"
+                modalContent={<ContactModalContent />}
+            />
             <div className="flex flex-col  p-4 space-y-3">
                 <header className="self-center">All Contacts</header>
                 <Card className="h-fit w-full rounded-none space-y-4">
-                    <div className="w-3/6 px-6 pt-6">
-                        <Input label="Search contact" size="sm" icon={<UserIcon className="h-5 w-5" />} />
+                    <div className="w-full px-6 pt-6">
+                        <Input label="Search contact" size="lg" icon={<UserIcon className="h-5 w-5" />} />
                     </div>
                     <DynamicTable columns={TABLE_HEAD_CONTACTS} data={TABLE_ROWS_CONTACTS} />
                 </Card>

@@ -7,21 +7,39 @@ import {
     Option,
     CardFooter,
     Button,
+    SpeedDial,
+    SpeedDialHandler,
+    IconButton,
 } from "../../../../utils/material_tailwind";
 import { DefaultPagination } from "@/app/components/Pagination";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { ArrowLeftCircleIcon, ChatBubbleBottomCenterTextIcon } from "@heroicons/react/24/outline"; 
+import { ContentModal } from "@/app/components/ContentModal";
+import { MessageModalContent } from "@/app/components/ModalMessage";
 
 
 export default function SendGroup() {
+    const [open, setOpen] = useState(false);
+    const handleOpen = () => setOpen(!open);
+
+    const router = useRouter();
     return (
         <>
+            <ContentModal
+                title="Message / Send to number"
+                open={open}
+                handleOpen={handleOpen}
+                okText="Send" cancelText="Cancel"
+                modalContent={<MessageModalContent />}
+            />
             <div className="flex flex-col w-full shadow-none p-4 space-y-3">
                 <header className="self-center">Message / Send to group</header>
-                <div className="flex items-center justify-between">
-                    <Button variant="outlined">
-                        Back
-                    </Button>
+                <div className="flex items-center justify-between cursor-pointer">
+                    <div className="w-fit normal-case flex gap-2" onClick={() => router.back()}>
+                        <ArrowLeftCircleIcon className="w-5" />
+                        <span>Back</span>
+                    </div>
                 </div>
                 <Card className="h-fit w-full rounded-none">
                     <div className="px-6 pt-6">
@@ -58,7 +76,7 @@ export default function SendGroup() {
                     </CardBody>
                     <CardFooter>
                         <div className="flex items-center justify-between">
-                            <Button variant="filled">
+                            <Button color="green" className="normal-case">
                                 Send
                             </Button>
                         </div>
@@ -66,6 +84,15 @@ export default function SendGroup() {
                 </Card>
                 <div className="flex items-center justify-between">
                     <DefaultPagination className="mt-4" />
+                </div>
+                <div className="flex items-center justify-end">
+                    <SpeedDial>
+                        <SpeedDialHandler onClick={handleOpen}>
+                            <IconButton size="lg" className="rounded-full">
+                                <ChatBubbleBottomCenterTextIcon className="h-5 w-5 transition-transform group-hover:rotate-45" />
+                            </IconButton>
+                        </SpeedDialHandler>
+                    </SpeedDial>
                 </div>
             </div>
         </>
