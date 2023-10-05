@@ -18,7 +18,6 @@ export const TABLE_HEAD_CONTACTS = [
 export const TABLE_HEAD_GROUP = [
     "Group Name",
     "Number of contacts",
-    "Action",
 ];
 
 export const TABLE_ROWS_MESSAGE = [

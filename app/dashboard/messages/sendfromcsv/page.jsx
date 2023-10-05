@@ -1,17 +1,12 @@
 "use client";
-import {
-    Card, Typography,
-    CardBody,
-    Textarea,
-    Select,
-    Option,
-    CardFooter,
-    Button,
-} from "../../../../utils/material_tailwind";
 import { DefaultPagination } from "@/app/components/Pagination";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { ArrowLeftCircleIcon } from "@heroicons/react/24/outline";
+import {ArrowLeftCircleIcon, ChatBubbleBottomCenterTextIcon} from "@heroicons/react/24/outline";
+import { Card, CardBody, Textarea, CardFooter,
+    Button,IconButton, SpeedDial, SpeedDialHandler} from "@/utils/material_tailwind";
+import {MessageModalContent} from "@/app/components/CreateModals";
+import {ContentModal} from "@/app/components/ContentModal";
 
 
 export default function SendCsv() {
@@ -21,6 +16,13 @@ export default function SendCsv() {
     const handleOpen = () => setOpen(!open);
     return (
         <>
+            <ContentModal
+                title="Message / Send to number"
+                open={open}
+                handleOpen={handleOpen}
+                okText="Send" cancelText="Cancel"
+                modalContent={<MessageModalContent />}
+            />
             <div className="flex flex-col w-full shadow-none p-4 space-y-3">
                 <header className="self-center">Message / Send from csv</header>
                 <div className="flex items-center justify-between cursor-pointer">
@@ -51,6 +53,13 @@ export default function SendCsv() {
                 </Card>
                 <div className="flex items-center justify-between">
                     <DefaultPagination className="mt-4" />
+                    <SpeedDial>
+                        <SpeedDialHandler onClick={handleOpen}>
+                            <IconButton size="lg" className="rounded-full">
+                                <ChatBubbleBottomCenterTextIcon className="h-5 w-5 transition-transform group-hover:rotate-45" />
+                            </IconButton>
+                        </SpeedDialHandler>
+                    </SpeedDial>
                 </div>
             </div>
         </>
