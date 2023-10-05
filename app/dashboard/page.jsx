@@ -84,12 +84,12 @@ export default function DashboardPage() {
   return (
     <>
       <div className="p-4">
-        <div className="grid my-6 grid-cols-4 gap-3">
+        <div className="grid my-6 lg:grid-cols-4 gap-3">
           {cards.map((_card, index) => {
             return <Card key={`card-${index}`} />;
           })}
         </div>
-        <div id="chart" className="bg-white rounded-md shadow-md">
+        <div id="chart" className="bg-white rounded-md shadow-md grid grid-cols-1">
           {typeof window !== "undefined" && (
             <ApexChart
               // @ts-nocheck
