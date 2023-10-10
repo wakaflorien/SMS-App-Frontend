@@ -1,7 +1,7 @@
 "use client";
 
 import {
-    ThemeProvider, Button, 
+    ThemeProvider, Button,
     Typography,
     List,
     ListItem,
@@ -25,18 +25,24 @@ import {
     DialogHeader,
     DialogBody,
     DialogFooter,
-    Card, 
-    CardBody, 
+    Card,
+    CardBody,
     CardFooter,
     CardHeader,
     Textarea,
     Input,
     Select, Option,
-    Alert
+    Alert,
+    Checkbox,
+    Tab,
+    TabPanel,
+    Tabs,
+    TabsBody,
+    TabsHeader
 } from '@material-tailwind/react';
 
 export {
-    ThemeProvider, 
+    ThemeProvider,
     Button,
     Typography,
     List,
@@ -61,13 +67,19 @@ export {
     DialogHeader,
     DialogBody,
     DialogFooter,
-    Card, 
-    CardBody, 
+    Card,
+    CardBody,
     CardFooter,
     CardHeader,
     Textarea,
     Input,
     Option,
     Select,
-    Alert
+    Alert,
+    Checkbox,
+    Tab,
+    TabPanel,
+    Tabs,
+    TabsBody,
+    TabsHeader
 };
