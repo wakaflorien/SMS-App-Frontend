@@ -28,11 +28,11 @@ export default function Home() {
     },
     {
       label: 'Login',
-      link: '/login'
+      link: '/authentication'
     },
     {
       label: 'Sign Up',
-      link: '/register'
+      link: '/authentication'
     },
   ]
   const router = useRouter()
@@ -43,7 +43,7 @@ export default function Home() {
         <nav>
           <ul className='flex gap-4'>
             {navList.map((item, index) => <li key={index}>
-              <Link href="/">{item.label}</Link>
+              <Link href={item.link}>{item.label}</Link>
             </li>)}
           </ul>
         </nav>
