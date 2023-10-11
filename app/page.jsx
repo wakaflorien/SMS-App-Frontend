@@ -1,53 +1,25 @@
-"use client";
-import { Button } from '@/utils/material_tailwind'
-import Image from 'next/image'
-import Link from 'next/link';
-import { useRouter } from 'next/navigation'
+import { Button } from "@/utils/material_tailwind";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { Wrapper } from "./components/layout/Wrapper";
+import Link from "next/link";
+import { NavBar } from "./components/sections/NavBar";
+import { Hero } from "./components/sections/Hero";
 
 export default function Home() {
-  const navList = [
-    {
-      label: 'About',
-      link: '/about'
-    },
-    {
-      label: 'Products',
-      link: '/products'
-    },
-    {
-      label: 'Pricing',
-      link: '/pricing'
-    },
-    {
-      label: 'Docs',
-      link: '/docs'
-    },
-    {
-      label: 'Contact',
-      link: '/contact'
-    },
-    {
-      label: 'Login',
-      link: '/authentication'
-    },
-    {
-      label: 'Sign Up',
-      link: '/authentication'
-    },
-  ]
-  const router = useRouter()
   return (
-    <main className='flex flex-col items-center'>
-      <header className='absolute top-0 flex bg-primary w-full justify-between'>
-        <div>Logo</div>
-        <nav>
-          <ul className='flex gap-4'>
-            {navList.map((item, index) => <li key={index}>
-              <Link href={item.link}>{item.label}</Link>
-            </li>)}
-          </ul>
-        </nav>
-      </header>
-    </main >
-  )
+    <main className="flex flex-col items-center">
+      {/* Header */}
+      <div className="h-screen w-screen bg-header text-white bg-no-repeat bg-cover">
+        {/* NavBar */}
+        <NavBar />
+        {/* Hero */}
+        <Hero />
+      </div>
+      {/* SMS Portal */}
+      {/* What we offer */}
+      {/* What we makes us */}
+      {/* Footer */}
+    </main>
+  );
 }

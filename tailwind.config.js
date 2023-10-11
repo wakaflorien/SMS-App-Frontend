@@ -14,7 +14,14 @@ module.exports = withMT({
       primary: '#90C126',
       secondary: '#F7FFE7',
     },
-    extend: {},
+    extend: {
+      fontFamily: {
+        poppnis: ["'Poppins', sans-serif;"],
+      },
+      backgroundImage: {
+        header: "url(/images/header.jpg)"
+      }
+    },
   },
   plugins: [
     require('flowbite/plugin'),
