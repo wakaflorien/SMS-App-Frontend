@@ -34,10 +34,6 @@ export default function Messages() {
                 okText="Send" cancelText="Cancel"
                 modalContent={<MessageModalContent />}
             />
-<<<<<<< HEAD
-            
-            <div className="flex flex-col  p-4 space-y-3">
-=======
             {/* <ConfirmModal
                 title="Delete Message"
                 open={open}
@@ -46,7 +42,6 @@ export default function Messages() {
                 modalContent={modalContent}
             /> */}
             <div className="flex flex-col p-4 space-y-3">
->>>>>>> 585584d (feat: add header section on landing page)
                 <header className="self-center">Messages</header>
                 <Card className="h-fit w-full rounded-none relative overflow-x-auto">
                     <DynamicTable columns={TABLE_HEAD_MESSAGE} data={TABLE_ROWS_MESSAGE} />
