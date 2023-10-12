@@ -1,3 +1,3 @@
-export function Wrapper({ children }) {
-  return <div className="mx-auto max-w-6xl">{children}</div>;
+export function Wrapper({ children , className}) {
+  return <div className={`w-full px-5 xl:max-w-page md:px-8 lg:px-9 xl:px-16 mx-auto relative ${className}`}>{children}</div>;
 }
