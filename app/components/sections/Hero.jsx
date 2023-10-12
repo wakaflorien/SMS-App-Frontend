@@ -1,5 +1,5 @@
 "use client"
-import { Button } from "@material-tailwind/react";
+import { Button } from "@/utils/material_tailwind";
 import Link from "next/link";
 
 export function Hero() {
@@ -11,7 +11,7 @@ export function Hero() {
             <p className="text-xl">Delight your custom with one simple SMS. Simplicity delivered</p>
           </div>
         </div>
-        <Link href={"/login"}>
+        <Link href={"/authentication"}>
           <Button className="rounded-none py-3 px-8" variant="outlined" color="white">
             Get Started
           </Button>

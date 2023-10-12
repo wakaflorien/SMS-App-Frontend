@@ -1,7 +1,8 @@
 "use client";
 
 import {
-    ThemeProvider, Button,
+    ThemeProvider,
+    Button,
     Typography,
     List,
     ListItem,
@@ -38,7 +39,8 @@ import {
     TabPanel,
     Tabs,
     TabsBody,
-    TabsHeader
+    TabsHeader,
+    Tooltip
 } from '@material-tailwind/react';
 
 export {
@@ -81,5 +83,6 @@ export {
     TabPanel,
     Tabs,
     TabsBody,
-    TabsHeader
+    TabsHeader,
+    Tooltip
 };
