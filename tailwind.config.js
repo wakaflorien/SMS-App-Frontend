@@ -19,7 +19,8 @@ module.exports = withMT({
         poppnis: ["'Poppins', sans-serif;"],
       },
       backgroundImage: {
-        header: "url(/images/header.jpg)"
+        header: "url(/images/header.jpg)",
+        helpcenter: "url(/images/help-center.jpg)",
       }
     },
   },

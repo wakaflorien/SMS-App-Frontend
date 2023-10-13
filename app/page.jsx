@@ -7,6 +7,7 @@ import { NavBar } from "./components/sections/NavBar";
 import { Hero } from "./components/sections/Hero";
 import { Offer } from "./components/sections/Offer";
 import { Different } from "./components/sections/Defferent";
+import { HelpCenter } from "./components/sections/HelpCenter";
 
 export default function Home() {
   return (
@@ -19,8 +20,10 @@ export default function Home() {
         <Hero />
       </div>
       {/* SMS Portal */}
-      <Offer />
       {/* What we offer */}
+      <Offer />
+      {/* Help center section */}
+      <HelpCenter />
       {/* What we makes us */}
       <Different />
       {/* Footer */}
