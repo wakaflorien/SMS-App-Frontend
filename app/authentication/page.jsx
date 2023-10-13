@@ -17,7 +17,8 @@ import {
     UserPlusIcon
 } from "@heroicons/react/24/solid";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import {usePathname, useRouter} from "next/navigation";
+import {BreadCrumbs} from "@/app/components/BreadCrumbs";
 
 export default function Login() {
 
@@ -35,6 +36,7 @@ export default function Login() {
     ]
     const [defaultTab, setDefaultTab] = useState("login")
     const router = useRouter()
+    const pathname = usePathname()
     return (
         <main>
             <Tabs value={defaultTab}>
@@ -48,21 +50,22 @@ export default function Login() {
                         </Tab>
                     ))}
                 </TabsHeader>
-                <TabsBody>
+                <TabsBody className="dark:bg-primary h-screen flex flex-col mb-8 ">
+                    <BreadCrumbs pathname={pathname} />
                     <TabPanel key="signup" value="signup">
-                        <Card color="transparent" shadow={false} className="flex items-center rounded-none">
+                        <Card color="transparent" shadow={false} className="h-full flex items-center rounded-none">
                             <Typography variant="h4" color="blue-gray">
                                 Sign Up
                             </Typography>
                             <Typography color="gray" className="mt-1 font-normal">
                                 Enter your details to register.
                             </Typography>
-                            <form className="mt-8 mb-2 w-80 max-w-screen-lg sm:w-96">
+                            <form className="mt-8 mb-2 w-full lg:w-96 max-w-screen-lg">
                                 <div className="mb-4 flex flex-col gap-6">
-                                    <Input type="text" size="sm" label="Firstname" />
-                                    <Input type="text" size="sm" label="Lastname" />
-                                    <Input type="text" size="sm" label="Email" />
-                                    <Input type="tel" size="sm" label="Phone number" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" />
+                                    <Input type="text" size="lg" label="Firstname" />
+                                    <Input type="text" size="lg" label="Lastname" />
+                                    <Input type="text" size="lg" label="Email" />
+                                    <Input type="tel" size="lg" label="Phone number" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" />
                                     <Input type="password" size="sm" label="Password" />
                                 </div>
                                 <Checkbox
@@ -83,7 +86,7 @@ export default function Login() {
                                     }
                                     containerProps={{ className: "-ml-2.5" }}
                                 />
-                                <Button className="mt-6 bg-primary normal-case" ripple={false} fullWidth>
+                                <Button className="mt-6 bg-primary normal-case" ripple={true} fullWidth>
                                     Sign up
                                 </Button>
                                 <Typography color="gray" className="mt-4 text-center font-normal">
@@ -103,12 +106,12 @@ export default function Login() {
                             <Typography color="gray" className="mt-1 font-normal">
                                 Enter your credentials to continue.
                             </Typography>
-                            <form className="mt-8 mb-2 w-80 max-w-screen-lg sm:w-96">
+                            <form className="mt-8 mb-2 w-full lg:w-96 max-w-screen-lg">
                                 <div className="mb-4 flex flex-col gap-6">
-                                    <Input size="sm" label="Email" />
-                                    <Input type="password" size="sm" label="Password" />
+                                    <Input size="lg" label="Email" />
+                                    <Input type="password" size="lg" label="Password" />
                                 </div>
-                                <Button className="mt-6 bg-primary normal-case" ripple={false} fullWidth
+                                <Button className="mt-6 bg-primary normal-case" ripple={true} fullWidth
                                     onClick={() => router.push("/dashboard")}>
                                     Login
                                 </Button>
@@ -123,6 +126,7 @@ export default function Login() {
                     </TabPanel>
                 </TabsBody>
             </Tabs>
+
         </main>
     )
 }
