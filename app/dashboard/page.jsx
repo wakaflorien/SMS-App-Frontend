@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
-import ApexChart from "../components/ApexChart";
-import Card from "../components/Cards";
+import ApexChart from "../components/Charts/ApexChart";
+import Card from "../components/Cards/Cards";
 
 export default function DashboardPage() {
   const state = {

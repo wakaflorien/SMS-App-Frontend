@@ -66,7 +66,7 @@ export function Offer() {
               <Button
                 className="rounded-none py-3 px-8 w-full"
                 variant="outlined"
-                color="#475569"
+                size={"lg"}
               >
                 Learn more
               </Button>

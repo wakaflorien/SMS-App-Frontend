@@ -4,7 +4,7 @@ import {
     Alert,
     Button,
     Typography
-} from "../../utils/material_tailwind";
+} from "../../../utils/material_tailwind";
 import { QuestionMarkCircleIcon } from "@heroicons/react/24/solid";
 
 export const ConfirmModal = (props) => {

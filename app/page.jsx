@@ -1,8 +1,3 @@
-import { Button } from "@/utils/material_tailwind";
-import Image from "next/image";
-import { useRouter } from "next/navigation";
-import { Wrapper } from "./components/layout/Wrapper";
-import Link from "next/link";
 import { NavBar } from "./components/sections/NavBar";
 import { Hero } from "./components/sections/Hero";
 import { Offer } from "./components/sections/Offer";

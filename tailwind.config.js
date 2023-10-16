@@ -13,6 +13,7 @@ module.exports = withMT({
     colors: {
       primary: '#1a337b',
       secondary: '#eff0fc',
+      tertiarry: "#475569",
     },
     extend: {
       fontFamily: {

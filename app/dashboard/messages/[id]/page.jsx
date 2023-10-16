@@ -1,7 +1,7 @@
 "use client";
-import { ConfirmModal } from "@/app/components/ConfirmModal";
-import { ContentModal } from "@/app/components/ContentModal";
-import { EditMessageModalContent } from "@/app/components/EditForms";
+import { ConfirmModal } from "@/app/components/Modals/ConfirmModal";
+import { ContentModal } from "@/app/components/Modals/ContentModal";
+import { EditMessageModalContent } from "@/app/components/Modals/EditForms";
 import {
     Button, Card, CardBody, CardFooter, Typography, SpeedDial, IconButton,
     SpeedDialHandler
@@ -9,7 +9,7 @@ import {
 import { ChatBubbleBottomCenterTextIcon, ArrowLeftCircleIcon } from "@heroicons/react/24/outline";
 import { useRouter } from "next/navigation"
 import { useState } from "react";
-import {MessageModalContent} from "@/app/components/CreateModals";
+import {MessageModalContent} from "@/app/components/Modals/CreateModals";
 
 export default function ViewMessage() {
     const [open, setOpen] = useState(false);

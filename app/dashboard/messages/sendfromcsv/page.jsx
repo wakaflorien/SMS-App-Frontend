@@ -5,8 +5,8 @@ import { useRouter } from "next/navigation";
 import {ArrowLeftCircleIcon, ChatBubbleBottomCenterTextIcon} from "@heroicons/react/24/outline";
 import { Card, CardBody, Textarea, CardFooter,
     Button,IconButton, SpeedDial, SpeedDialHandler} from "@/utils/material_tailwind";
-import {MessageModalContent} from "@/app/components/CreateModals";
-import {ContentModal} from "@/app/components/ContentModal";
+import {MessageModalContent} from "@/app/components/Modals/CreateModals";
+import {ContentModal} from "@/app/components/Modals/ContentModal";
 
 
 export default function SendCsv() {

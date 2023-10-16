@@ -72,6 +72,7 @@ export function NavBar() {
                                 className="rounded-none  py-2 px-9 "
                                 variant="outlined"
                                 color="white"
+                                size={"lg"}
                             >
                                 Sign Up
                             </Button>

@@ -1,11 +1,11 @@
 "use client";
-import { ConfirmModal } from "@/app/components/ConfirmModal";
-import { ContentModal } from "@/app/components/ContentModal";
+import { ConfirmModal } from "@/app/components/Modals/ConfirmModal";
+import { ContentModal } from "@/app/components/Modals/ContentModal";
 import { Button, Card, CardBody, CardFooter, Typography, Textarea } from "@/utils/material_tailwind"
 import { ArrowLeftCircleIcon } from "@heroicons/react/24/outline";
 import { useRouter } from "next/navigation"
 import { useState } from "react";
-import {EditContactModalContent} from "@/app/components/EditForms";
+import {EditContactModalContent} from "@/app/components/Modals/EditForms";
 
 export default function ViewMessage() {
     const [openConfirm, setOpenConfirm] = useState(false);

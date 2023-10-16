@@ -1,5 +1,5 @@
 "use client";
-import { ContentModal } from "@/app/components/ContentModal";
+import { ContentModal } from "@/app/components/Modals/ContentModal";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import {
@@ -11,12 +11,12 @@ import {
 } from "../../../utils/material_tailwind";
 import { UserGroupIcon } from "@heroicons/react/24/outline";
 import { DefaultPagination } from "@/app/components/Pagination";
-import { DynamicTable } from "@/app/components/DynamicTable";
+import { DynamicTable } from "@/app/components/Tables/DynamicTable";
 import {
   TABLE_HEAD_GROUP,
   TABLE_ROWS_GROUPS,
-} from "@/app/components/Tablecolumns";
-import { GroupsModalContent } from "@/app/components/CreateModals";
+} from "@/app/components/Tables/Tablecolumns";
+import { GroupsModalContent } from "@/app/components/Modals/CreateModals";
 
 export default function Groups() {
   const [open, setOpen] = useState(false);

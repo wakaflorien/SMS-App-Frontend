@@ -6,7 +6,7 @@ import {
     DialogHeader,
     DialogBody,
     DialogFooter,
-} from "../../utils/material_tailwind";
+} from "../../../utils/material_tailwind";
 
 export const ContentModal = (props) => {
     return (

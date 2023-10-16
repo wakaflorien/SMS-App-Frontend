@@ -12,13 +12,9 @@ import {
     TabsHeader,
     Typography
 } from "@/utils/material_tailwind";
-import {
-    UserCircleIcon,
-    UserPlusIcon
-} from "@heroicons/react/24/solid";
-import Link from "next/link";
+import { UserCircleIcon, UserPlusIcon } from "@heroicons/react/24/outline";
 import {usePathname, useRouter} from "next/navigation";
-import {BreadCrumbs} from "@/app/components/BreadCrumbs";
+import {BreadcrumbsDefault} from "@/app/components/Crumbs";
 
 export default function Login() {
 
@@ -26,12 +22,12 @@ export default function Login() {
         {
             label: "Signup",
             value: "signup",
-            icon: UserPlusIcon,
+            icon: <UserPlusIcon/>,
         },
         {
             label: "Login",
             value: "login",
-            icon: UserCircleIcon,
+            icon: <UserCircleIcon/>,
         }
     ]
     const [defaultTab, setDefaultTab] = useState("login")
@@ -44,14 +40,15 @@ export default function Login() {
                     {navList.map(({ label, value, icon }) => (
                         <Tab key={value} value={value}>
                             <div className="flex items-center gap-2 text-primary">
-                                {createElement(icon, { className: "w-5 h-5" })}
+                                {icon}
                                 {label}
                             </div>
                         </Tab>
                     ))}
                 </TabsHeader>
+                <BreadcrumbsDefault pathname={pathname}/>
+
                 <TabsBody className="dark:bg-primary h-screen flex flex-col mb-8 ">
-                    <BreadCrumbs pathname={pathname} />
                     <TabPanel key="signup" value="signup">
                         <Card color="transparent" shadow={false} className="h-full flex items-center rounded-none">
                             <Typography variant="h4" color="blue-gray">

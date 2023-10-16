@@ -15,8 +15,8 @@ import { DefaultPagination } from "@/app/components/Pagination";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { ArrowLeftCircleIcon, ChatBubbleBottomCenterTextIcon } from "@heroicons/react/24/outline"; 
-import { ContentModal } from "@/app/components/ContentModal";
-import { MessageModalContent } from "@/app/components/CreateModals";
+import { ContentModal } from "@/app/components/Modals/ContentModal";
+import { MessageModalContent } from "@/app/components/Modals/CreateModals";
 
 
 export default function SendGroup() {

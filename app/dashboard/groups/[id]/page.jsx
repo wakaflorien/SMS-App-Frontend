@@ -1,7 +1,7 @@
 "use client";
-import { ConfirmModal } from "@/app/components/ConfirmModal";
-import { ContentModal } from "@/app/components/ContentModal";
-import { EditGroupModalContent } from "@/app/components/EditForms";
+import { ConfirmModal } from "@/app/components/Modals/ConfirmModal";
+import { ContentModal } from "@/app/components/Modals/ContentModal";
+import { EditGroupModalContent } from "@/app/components/Modals/EditForms";
 import { Button, Card, CardBody, CardFooter, Typography, Textarea } from "@/utils/material_tailwind"
 import { ArrowLeftCircleIcon } from "@heroicons/react/24/outline";
 import { useRouter } from "next/navigation"

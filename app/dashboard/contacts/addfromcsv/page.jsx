@@ -15,8 +15,8 @@ import { DefaultPagination } from "@/app/components/Pagination";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { ArrowLeftCircleIcon, UserPlusIcon } from "@heroicons/react/24/outline";
-import { ContactModalContent } from "@/app/components/CreateModals";
-import { ContentModal } from "@/app/components/ContentModal";
+import { ContactModalContent } from "@/app/components/Modals/CreateModals";
+import { ContentModal } from "@/app/components/Modals/ContentModal";
 
 
 export default function AddFromCsv() {

@@ -20,6 +20,7 @@ export function Hero() {
           className="rounded-none py-3 px-8"
           variant="outlined"
           color="white"
+          size={"lg"}
         >
           Get Started
         </Button>

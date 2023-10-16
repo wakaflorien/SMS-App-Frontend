@@ -1,5 +1,5 @@
 "use client";
-import { ConfirmModal, ContentModal } from "@/app/components/ContentModal";
+import { ConfirmModal, ContentModal } from "@/app/components/Modals/ContentModal";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import {
@@ -11,9 +11,9 @@ import {
     UserIcon, UserPlusIcon
 } from "@heroicons/react/24/outline";
 import { DefaultPagination } from "@/app/components/Pagination";
-import { DynamicTable } from "@/app/components/DynamicTable";
-import { ContactModalContent } from "@/app/components/CreateModals";
-import { TABLE_HEAD_CONTACTS, TABLE_ROWS_CONTACTS } from "@/app/components/Tablecolumns";
+import { DynamicTable } from "@/app/components/Tables/DynamicTable";
+import { ContactModalContent } from "@/app/components/Modals/CreateModals";
+import { TABLE_HEAD_CONTACTS, TABLE_ROWS_CONTACTS } from "@/app/components/Tables/Tablecolumns";
 
 export default function Contacts() {
     const [open, setOpen] = useState(false);

@@ -19,7 +19,8 @@ export function HelpCenter() {
         <Button
           className="rounded-none py-4 px-9 bg-[#4b7fef] text-white mt-20 w-48"
           color="white"
-          variant="primary"
+          variant="filled"
+          size={"lg"}
         >
           Help Centre
         </Button>

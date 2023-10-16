@@ -13,10 +13,10 @@ import {
 import { DefaultPagination } from "@/app/components/Pagination";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { DynamicTable } from "@/app/components/DynamicTable";
-import { ContentModal } from "@/app/components/ContentModal";
-import { TABLE_HEAD_MESSAGE, TABLE_ROWS_MESSAGE } from "@/app/components/Tablecolumns";
-import { MessageModalContent } from "@/app/components/CreateModals";
+import { DynamicTable } from "@/app/components/Tables/DynamicTable";
+import { ContentModal } from "@/app/components/Modals/ContentModal";
+import { TABLE_HEAD_MESSAGE, TABLE_ROWS_MESSAGE } from "@/app/components/Tables/Tablecolumns";
+import { MessageModalContent } from "@/app/components/Modals/CreateModals";
 
 
 export default function Messages() {
