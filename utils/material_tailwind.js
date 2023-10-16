@@ -41,7 +41,8 @@ import {
     TabsBody,
     TabsHeader,
     Tooltip,
-    Breadcrumbs
+    Breadcrumbs,
+    Navbar,
 } from '@material-tailwind/react';
 
 export {
@@ -86,5 +87,6 @@ export {
     TabsBody,
     TabsHeader,
     Tooltip,
-    Breadcrumbs
+    Breadcrumbs,
+    Navbar,
 };
