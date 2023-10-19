@@ -7,7 +7,7 @@ import { Footer } from "./components/sections/Footer";
 
 export default function Home() {
   return (
-    <main className="flex flex-col">
+    <main className="flex flex-col relative">
       {/* Header */}
       <div className="h-screen w-screen bg-header text-white bg-no-repeat bg-cover">
         {/* NavBar */}

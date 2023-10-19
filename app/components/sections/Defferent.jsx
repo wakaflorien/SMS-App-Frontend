@@ -35,20 +35,24 @@ const cardsData = [
 ];
 
 export function Different() {
-    return (<Wrapper className={"my-9"}>
-        <div className="w-full" id={"different"}>
-            <h1 className="text-[#475569] text-4xl font-bold opacity-80 text-center my-9">
-                What makes us defferent?
-            </h1>
-        </div>
-        <div className="grid grid-cols-3 min-w-full gap-8">
-            {cardsData.map((data, index) => (<div
-                key={`index-${index}`}
-                className="flex flex-col border border-[#47556956] p-8 text-[#475569] gap-4"
-            >
-                {data.icon && <data.icon className="h-9 w-9 text-[#4755699f]"/>}
-                {data.title && (<h1 className="text-2xl font-bold opacity-80">{data.title}</h1>)}
-                <p className="text-[#4755699f] flex-grow">{data.description}</p>
+  return (
+    <Wrapper className={"my-9"}>
+      <div className="w-full">
+        <h1 className="text-[#475569] text-4xl font-bold opacity-80 text-center my-9">
+          What makes us defferent?
+        </h1>
+      </div>
+      <div className="grid xl:grid-cols-3 min-w-full gap-16">
+        {cardsData.map((data, index) => (
+          <div
+            key={`index-${index}`}
+            className="flex flex-col border border-[#47556956] p-8 text-[#475569] gap-4"
+          >
+            {data.icon && <data.icon className="h-9 w-9 text-[#4755699f]" />}
+            {data.title && (
+              <h1 className="text-lg xl:text-2xl font-bold opacity-80">{data.title}</h1>
+            )}
+            <p className="text-[#4755699f] flex-grow text-md xl:text-lg">{data.description}</p>
 
                 {data.withButton ? (<Button
                     className="rounded-none py-3 px-8 w-full"
