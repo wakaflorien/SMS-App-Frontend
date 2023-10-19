@@ -1,7 +1,8 @@
 "use client";
 import Link from "next/link";
 import {Wrapper} from "../layout/Wrapper";
-import {CodeBracketIcon, Cog6ToothIcon} from "@heroicons/react/24/solid";
+import {CodeBracketIcon} from "@heroicons/react/24/solid";
+import {Cog6ToothIcon} from "@heroicons/react/24/outline"
 import {Button} from "@material-tailwind/react";
 
 const offerCartds = [{

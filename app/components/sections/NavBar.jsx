@@ -59,7 +59,7 @@ export function NavBar() {
         <div className="flex gap-8 items-center">
           {/* logo */}
           <div className="font-extrabold text-xl xl:text-3xl tracking-wide">
-            smsportal
+            <Image src={"/images/logo.png"} alt={"Logo"} width={200} height={200}/>
           </div>
           <ul className="hidden xl:flex gap-9">
             <li>

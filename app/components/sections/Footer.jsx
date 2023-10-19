@@ -39,9 +39,7 @@ export function Footer() {
               <p>Space Centre</p>
             </h1>
             <div className="text-xl">
-              If you require any further information about SMSPortal Product,
-              please do not hasitate to contact us. Our team of highly trained
-              proffessionals are standing by
+              If you require any further information about InfoText Services, please do not hesitate to contact us. Our team of highly trained professionals are on standby to assist you.
             </div>
             <div className="flex flex-col">
               <div className="grid  grid-cols-2 xl:grid-cols-12">
@@ -56,13 +54,13 @@ export function Footer() {
                 <div className="text-white font-bold xl:col-span-8">Telphone</div>
                 <div className="text-white xl:col-span-4">
                   <p>SA: 086 111 2021</p>
-                  <p>Ireland: +353 (0)21 731 9734</p>
+                  <p>Telephone: +353 (0)21 731 9734</p>
                 </div>
               </div>
               <div className="grid  grid-cols-2 xl:grid-cols-12">
                 <div className="text-white font-bold xl:col-span-8">Email</div>
                 <div className="text-white xl:col-span-4">
-                  <p>info@smsportal.com</p>
+                  <p>info@infotext.com</p>
                 </div>
               </div>
             </div>
