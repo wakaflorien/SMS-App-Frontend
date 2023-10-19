@@ -27,20 +27,21 @@ export default function ProfileCard() {
                 okText="Edit" cancelText="Cancel"
                 modalContent={<EditUserModalContent />}
             />
-            <Card className="w-full h-screen">
-                <CardHeader floated={false} className="relative h-1/2 shadow-none flex justify-center bg-secondary">
-                    <ArrowLeftCircleIcon className={"absolute h-5 w-5 cursor-pointer left-0 top-0 m-2 lg:m-4"} onClick={() => router.back()}/>
-                    <img
-                        src="https://static.vecteezy.com/system/resources/thumbnails/001/838/754/small_2x/elegant-business-woman-working-in-laptop-free-vector.jpg"
-                        className="w-fit md:h-64 w-fit md:w-64 rounded-full border border-secondary"
-                    />
-                </CardHeader>
+            <Card className="w-full h-screen lg:rounded-none">
+                {/*<CardHeader floated={false} className="relative h-1/2 shadow-none flex justify-center bg-secondary">*/}
+                {/*    <ArrowLeftCircleIcon className={"absolute h-5 w-5 cursor-pointer left-0 top-0 m-2 lg:m-4"} onClick={() => router.back()}/>*/}
+                {/*    <img*/}
+                {/*        src="https://static.vecteezy.com/system/resources/thumbnails/001/838/754/small_2x/elegant-business-woman-working-in-laptop-free-vector.jpg"*/}
+                {/*        className="w-fit md:h-64 w-fit md:w-64 rounded-full border border-secondary"*/}
+                {/*    />*/}
+                {/*</CardHeader>*/}
                 <CardBody className="text-center lg:p-12 p-4">
+                    <ArrowLeftCircleIcon className={"absolute h-5 w-5 cursor-pointer left-0 top-0 m-2 lg:m-4"} onClick={() => router.back()}/>
                     <Typography variant="h4" className="mb-2 text-primary">
-                        Natalie Paisley
+                        Sheldon Group
                     </Typography>
                     <Typography variant="lead" className="text-primary font-normal">
-                        Technical Assistant
+                        FinTech Buzz
                     </Typography>
                     <div className="w-fill space-y-8">
                         <div className="flex items-center justify-between border-b mt-4">

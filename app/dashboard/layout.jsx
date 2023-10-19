@@ -31,6 +31,7 @@ import classnames from "classnames";
 import {BellIcon, ChatBubbleLeftRightIcon, UsersIcon} from "@heroicons/react/20/solid";
 import Link from "next/link";
 import {Collapse} from "@material-tailwind/react";
+import Image from "next/image";
 
 export default function DashbaordLayout({children}) {
     const [open, setOpen] = useState(0);
@@ -117,14 +118,11 @@ export default function DashbaordLayout({children}) {
 
     return (
         <div className="flex relative w-full">
-            <Card
+            {showSideNav ? <Card
                 className={classnames("h-inherit w-full p-4 border-r shadow-xl shadow-blue-gray-900/5 bg-primary text-secondary " + `rounded-none hidden ${showSideNav ? "lg:block" : "lg:hidden"}`, {"max-w-[20rem]": showSidebar}, {"max-w-[7rem]": !showSidebar},)}
             >
                 <div className="mb-2 flex items-center justify-between p-4">
-                    {showSidebar && (<img src="/img/logo-ct-dark.png" alt="Logo" className="h-8 w-8"/>)}
-                    {showSidebar && (<Typography variant="h5" className="">
-                        SMS Dashboard
-                    </Typography>)}
+                    {showSidebar && (<Image src={"/images/logo.png"} alt={"Logo"} width={200} height={200}/>)}
                     <Bars3Icon
                         strokeWidth={2.5}
                         className={`h-4 w-4 transition-transform cursor-pointer`}
@@ -161,7 +159,7 @@ export default function DashbaordLayout({children}) {
                                     >
                                         {item.label}
                                     </Typography>
-                                        <ListItemSuffix className="text-secondary">{item?.suffix}</ListItemSuffix>
+                                    <ListItemSuffix className="text-secondary">{item?.suffix}</ListItemSuffix>
                                 </AccordionHeader> : <div className="p-3 bg-none text-secondary">
                                     <ListItemPrefix className="">{item.icon}</ListItemPrefix>
                                 </div>}
@@ -210,9 +208,10 @@ export default function DashbaordLayout({children}) {
                         </Accordion>))}
                     </div>
                 </List>
-            </Card>
+            </Card> : ""}
             <main className="h-screen w-full bg-secondary">
-                <Navbar className="w-full py-2 lg:py-4 px-4 lg:shadow-none lg:bg-transparent lg:border-none">
+                <Navbar
+                    className="w-full py-2 lg:py-4 px-4 lg:shadow-none lg:bg-transparent lg:border-none lg:rounded-none">
                     <div className="flex flex-col text-primary lg:items-end">
                         <div className={"flex items-center justify-between"}>
                             <IconButton
@@ -285,14 +284,16 @@ export default function DashbaordLayout({children}) {
                                 <div className="container">
                                     <List className="min-w-full h-fit flex justify-between text-primary hover:bg-none ">
                                         <div className="py-8">
-                                            <ListItem onClick={() => handleRoute("/dashboard")} ripple={false} className="hover:bg-none">
+                                            <ListItem onClick={() => handleRoute("/dashboard")} ripple={false}
+                                                      className="hover:bg-none">
                                                 <ListItemPrefix className="cursor-pointer">
                                                     <PresentationChartBarIcon className="h-5 w-5"/>
                                                 </ListItemPrefix>
                                                 {showSidebar && "Dashboard"}
                                             </ListItem>
                                             {sideNav.map((item, index) => (
-                                                <ListItem key={index} onClick={() => handleRoute(item.href)} ripple={false} className="hover:bg-none">
+                                                <ListItem key={index} onClick={() => handleRoute(item.href)}
+                                                          ripple={false} className="hover:bg-none">
                                                     <ListItemPrefix className="cursor-pointer">
                                                         {item.icon}
                                                     </ListItemPrefix>

@@ -83,7 +83,7 @@ export default function DashboardPage() {
 
   return (
     <>
-      <div className="p-4">
+      <div className="p-4 w-full">
         <div className="grid my-6 lg:grid-cols-4 gap-3">
           {cards.map((_card, index) => {
             return <Card key={`card-${index}`} />;
