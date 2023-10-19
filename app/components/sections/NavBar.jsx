@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Wrapper } from "../layout/Wrapper";
 import { Button } from "@/utils/material_tailwind";
 import { useEffect, useState } from "react";
+import Image from "next/image";
 
 const navList = [
   {
@@ -50,22 +51,24 @@ export function NavBar() {
       <nav className="flex justify-between h-20 items-center">
         <div className="flex gap-8 items-center">
           {/* logo */}
-          <div className="font-extrabold text-3xl">smsportal</div>
+          <div className="font-extrabold text-3xl">
+            <Image src={"/images/logo.png"} alt={"Logo"} width={200} height={200} />
+          </div>
           <ul className="flex gap-9">
             <li>
               <Link href={"/"}>About</Link>
             </li>
             <li>
-              <Link href={"/"}>Product</Link>
+              <Link href={"/#offers"}>Offers</Link>
             </li>
             <li>
-              <Link href={"/"}>Pricing</Link>
+              {/* <Link href={"/"}>Pricing</Link>
             </li>
             <li>
-              <Link href={"/"}>Docs</Link>
+              <Link href={"/"}>Docs</Link> */}
             </li>
             <li>
-              <Link href={"/"}>Contact</Link>
+              <Link href={"/#contact"}>Contact</Link>
             </li>
           </ul>
         </div>

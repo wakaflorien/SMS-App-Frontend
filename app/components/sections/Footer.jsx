@@ -2,11 +2,10 @@
 import { Button } from "@material-tailwind/react";
 import { Wrapper } from "../layout/Wrapper";
 import { InputWithButton } from "../ui/InputWithIcon";
-import { Textarea } from "../ui/TextArea";
 
 export function Footer() {
   return (
-    <div className="bg-blue-500 text-white opacity-100 h-screen flex items-center">
+    <div className="bg-blue-500 text-white opacity-100 h-screen flex items-center" id={"contact"}>
       <Wrapper className="py-20 grid grid-cols-12 gap-28">
         <div className="col-span-5">
           <h1 className="text-5xl font-extrabold">Contact SMSPortal</h1>
