@@ -34,21 +34,22 @@ export default function Login() {
     const router = useRouter()
     const pathname = usePathname()
     return (
-        <main>
-            <Tabs value={defaultTab}>
-                <TabsHeader className="bg-secondary">
-                    {navList.map(({ label, value, icon }) => (
-                        <Tab key={value} value={value}>
-                            <div className="flex items-center gap-2 text-primary">
-                                {icon}
-                                {label}
-                            </div>
-                        </Tab>
-                    ))}
-                </TabsHeader>
-                <BreadcrumbsDefault pathname={pathname}/>
-
-                <TabsBody className="dark:bg-primary h-screen flex flex-col mb-8 ">
+        <main className={"flex items-center justify-center lg:py-20"}>
+            <Tabs value={defaultTab} className={"lg:w-1/2 w-full"}>
+                <header className={"lg:w-1/2 w-full mx-auto"}>
+                    <TabsHeader className="bg-secondary">
+                        {navList.map(({ label, value, icon }) => (
+                            <Tab key={value} value={value}>
+                                <div className="flex items-center gap-2 text-primary">
+                                    {icon}
+                                    {label}
+                                </div>
+                            </Tab>
+                        ))}
+                    </TabsHeader>
+                    <BreadcrumbsDefault pathname={pathname}/>
+                </header>
+                <TabsBody className="h-screen flex flex-col">
                     <TabPanel key="signup" value="signup">
                         <Card color="transparent" shadow={false} className="h-full flex items-center rounded-none">
                             <Typography variant="h4" color="blue-gray">
@@ -57,8 +58,8 @@ export default function Login() {
                             <Typography color="gray" className="mt-1 font-normal">
                                 Enter your details to register.
                             </Typography>
-                            <form className="mt-8 mb-2 w-full lg:w-96 max-w-screen-lg">
-                                <div className="mb-4 flex flex-col gap-6">
+                            <form className="mt-8 mb-2 w-full lg:w-1/2 max-w-screen-lg">
+                                <div className="flex flex-col gap-6">
                                     <Input type="text" size="lg" label="Firstname" />
                                     <Input type="text" size="lg" label="Lastname" />
                                     <Input type="text" size="lg" label="Email" />
@@ -103,7 +104,7 @@ export default function Login() {
                             <Typography color="gray" className="mt-1 font-normal">
                                 Enter your credentials to continue.
                             </Typography>
-                            <form className="mt-8 mb-2 w-full lg:w-96 max-w-screen-lg">
+                            <form className="mt-8 mb-2 w-full lg:w-1/2 max-w-screen-lg">
                                 <div className="mb-4 flex flex-col gap-6">
                                     <Input size="lg" label="Email" />
                                     <Input type="password" size="lg" label="Password" />
