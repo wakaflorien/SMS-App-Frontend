@@ -46,7 +46,7 @@ export default function Messages() {
                 <Card className="h-fit w-full rounded-none relative overflow-x-auto">
                     <DynamicTable columns={TABLE_HEAD_MESSAGE} data={TABLE_ROWS_MESSAGE} />
                 </Card>
-                <div className="flex items-center justify-between">
+                <div className="flex items-center justify-between w-full overflow-x-scroll">
                     <DefaultPagination className="mt-4" />
                     <SpeedDial>
                         <SpeedDialHandler onClick={handleOpen}>

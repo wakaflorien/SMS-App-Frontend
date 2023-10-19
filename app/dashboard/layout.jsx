@@ -212,8 +212,8 @@ export default function DashbaordLayout({children}) {
                 </List>
             </Card>
             <main className="h-screen w-full bg-secondary">
-                <Navbar className="mx-auto max-w-screen-xl py-2 px-4 lg:px-8 lg:py-4">
-                    <div className="flex flex-col text-primary">
+                <Navbar className="w-full py-2 lg:py-4 px-4 lg:shadow-none lg:bg-transparent lg:border-none">
+                    <div className="flex flex-col text-primary lg:items-end">
                         <div className={"flex items-center justify-between"}>
                             <IconButton
                                 variant="text"

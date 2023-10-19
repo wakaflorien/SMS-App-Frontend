@@ -37,7 +37,7 @@ export default function Contacts() {
                     </div>
                     <DynamicTable columns={TABLE_HEAD_CONTACTS} data={TABLE_ROWS_CONTACTS} />
                 </Card>
-                <div className="flex items-center justify-between">
+                <div className="flex items-center justify-between  w-full overflow-x-scroll">
                     <DefaultPagination className="mt-4" />
                     <SpeedDial>
                         <SpeedDialHandler onClick={handleOpen}>
