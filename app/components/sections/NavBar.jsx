@@ -52,7 +52,7 @@ export function NavBar() {
   return (
     <Wrapper
       className={`!fixed top-0 ${
-        (scrolled) && "bg-blue-500"
+        scrolled && "bg-blue-500"
       } z-50 transition-all duration-200 ease-in-out`}
     >
       <nav className="flex justify-between h-16 xl:h-20 items-center">
@@ -63,28 +63,22 @@ export function NavBar() {
           </div>
           <ul className="hidden xl:flex gap-9">
             <li>
-              <Link href={"/"}>About</Link>
+              <a href={"/#about"}>About</a>
             </li>
             <li>
-              <Link href={"/#offers"}>Offers</Link>
+              <a href={"/#offers"}>Offers</a>
             </li>
             <li>
-              {/* <Link href={"/"}>Pricing</Link>
-            </li>
-            <li>
-              <Link href={"/"}>Docs</Link> */}
-            </li>
-            <li>
-              <Link href={"/#contact"}>Contact</Link>
+              <a href={"/#contact"}>Contact</a>
             </li>
           </ul>
         </div>
         <ul className="hidden xl:flex justify-center items-center gap-7">
           <li>
-            <Link href={"/"}>System Status</Link>
+            <a href={"/"}>System Status</a>
           </li>
           <li>
-            <Link href={"/authentication"}>Login</Link>
+            <a href={"/authentication"}>Login</a>
           </li>
           <li>
             <Link href={"/authentication"}>
@@ -123,28 +117,22 @@ export function NavBar() {
       >
         <ul className="flex flex-col justify-center items-center gap-7">
           <li>
-            <Link href={"/"}>About</Link>
+            <a href={"/#about"}>About</a>
           </li>
           <li>
-            <Link href={"/"}>Product</Link>
+            <a href={"/#offers"}>Offers</a>
           </li>
           <li>
-            <Link href={"/"}>Pricing</Link>
+            <a href={"/#contact"}>Contact</a>
           </li>
           <li>
-            <Link href={"/"}>Docs</Link>
+            <a href={"/"}>System Status</a>
           </li>
           <li>
-            <Link href={"/"}>Contact</Link>
+            <a href={"/authentication"}>Login</a>
           </li>
           <li>
-            <Link href={"/"}>System Status</Link>
-          </li>
-          <li>
-            <Link href={"/authentication"}>Login</Link>
-          </li>
-          <li>
-            <Link href={"/authentication"}>
+            <a href={"/authentication"}>
               <Button
                 className="rounded-none  py-2 px-9 "
                 variant="outlined"
@@ -153,7 +141,7 @@ export function NavBar() {
               >
                 Sign Up
               </Button>
-            </Link>
+            </a>
           </li>
         </ul>
       </div>

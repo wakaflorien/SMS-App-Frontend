@@ -5,7 +5,7 @@ import { InputWithButton } from "../ui/InputWithIcon";
 
 export function Footer() {
   return (
-    <div className="bg-blue-500 text-white opacity-100 min-h-screen flex items-center relative">
+    <div className="bg-blue-500 text-white opacity-100 min-h-screen flex items-center relative" id="contact">
       <Wrapper className="py-14 xl:py-20 grid xl:grid-cols-12 gap-28 w-full">
         <div className="xl:col-span-5 max-w-full">
           <h1 className="text-2xl xl:text-5xl font-extrabold">
@@ -43,7 +43,7 @@ export function Footer() {
             </div>
             <div className="flex flex-col">
               <div className="grid  grid-cols-2 xl:grid-cols-12">
-                <div className="text-white font-bold x:col-span-8">
+                <div className="text-white font-bold xl:col-span-8">
                   Monday to Friday
                 </div>
                 <div className="text-white xl:col-span-4">
