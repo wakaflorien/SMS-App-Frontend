@@ -100,6 +100,7 @@ export default function DashboardPage() {
               series={state.series}
               type="bar"
               height={350}
+              width={"62%"}
             />
           )}
         </div>
