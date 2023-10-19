@@ -3,6 +3,7 @@ import { Hero } from "./components/sections/Hero";
 import { Offer } from "./components/sections/Offer";
 import { Different } from "./components/sections/Defferent";
 import { HelpCenter } from "./components/sections/HelpCenter";
+import { Footer } from "./components/sections/Footer";
 
 export default function Home() {
   return (
@@ -22,6 +23,7 @@ export default function Home() {
       {/* What we makes us */}
       <Different />
       {/* Footer */}
+      <Footer />
     </main>
   );
 }
