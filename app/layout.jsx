@@ -1,7 +1,9 @@
 /* eslint-disable @next/next/no-sync-scripts */
 import "./globals.css";
 import { ThemeProvider } from "@/utils/material_tailwind";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import Script from "next/script";
+const queryClient = new QueryClient()
 
 export const metadata = {
   title: "Create Next App",
@@ -10,13 +12,15 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <ThemeProvider>
-      <html lang="en">
-        <body>
-          {children}
-          <Script src="../path/to/flowbite/dist/flowbite.min.js"></Script>
-        </body>
-      </html>
-    </ThemeProvider>
+    <QueryClientProvider client={queryClient}>
+      <ThemeProvider>
+        <html lang="en">
+          <body>
+            {children}
+            <Script src="../path/to/flowbite/dist/flowbite.min.js"></Script>
+          </body>
+        </html>
+      </ThemeProvider>
+    </QueryClientProvider>
   );
 }
