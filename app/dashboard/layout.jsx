@@ -19,7 +19,7 @@ import {
     Avatar,
     IconButton,
     Navbar,
-} from "@/utils/material_tailwind";
+} from "@material-tailwind/react";
 import {
     PresentationChartBarIcon, ShoppingBagIcon, UserCircleIcon, ClockIcon, UserGroupIcon, Cog6ToothIcon
 } from "@heroicons/react/24/solid";
