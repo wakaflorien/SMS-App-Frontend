@@ -1,11 +1,12 @@
 "use client";
-import { ConfirmModal } from "@/app/components/Modals/ConfirmModal";
-import { ContentModal } from "@/app/components/Modals/ContentModal";
-import { Button, Card, CardBody, CardFooter, Typography, Textarea } from "@/utils/material_tailwind"
+import { ConfirmModal } from "../../../components/Modals/ConfirmModal";
+import { ContentModal } from "../../../components/Modals/ContentModal";
+import { Button, Card, CardBody, Typography } from "@material-tailwind/react";
 import { ArrowLeftCircleIcon } from "@heroicons/react/24/outline";
-import { useRouter } from "next/navigation"
+import { usePathname, useRouter } from "next/navigation"
 import { useState } from "react";
-import {EditContactModalContent} from "@/app/components/Modals/EditForms";
+import { EditContactModalContent } from "../../../components/Modals/EditForms";
+import { useMutation } from "react-query";
 
 export default function ViewMessage() {
     const [openConfirm, setOpenConfirm] = useState(false);
@@ -14,13 +15,33 @@ export default function ViewMessage() {
     const handleOpenConfirm = () => setOpenConfirm(!openConfirm);
     const handleOpenEdit = () => setOpenEdit(!openEdit);
     const router = useRouter()
+
+    const pathname = usePathname()
+    console.log("path", pathname)
+
+    const mutation = useMutation((id) => {
+        console.log(id);
+        return axios.delete('/api/v1/message/' + id);
+    })
+
     const handleOk = () => {
-        console.log("ok")
-        setOpenConfirm(false);
+        mutation.mutate();
     }
     const handleCancel = () => {
         console.log("cancel")
         setOpenConfirm(false);
+    }
+
+    if (mutation.isLoading) {
+        return <span>Deleting...</span>;
+    }
+
+    if (mutation.isError) {
+        return <span>Error: {mutation.error.message}</span>;
+    }
+
+    if (mutation.isSuccess) {
+        return <span>Post deleted!</span>;
     }
     return (
         <>

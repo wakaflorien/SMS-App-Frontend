@@ -24,7 +24,7 @@ export const ContentModal = (props) => {
                     >
                         <span>{props.cancelText}</span>
                     </Button>
-                    <Button variant="gradient" color="blue" onClick={props.handleOpen} className="normal-case">
+                    <Button variant="gradient" color="blue" onClick={props.handleSubmit} className="normal-case">
                         <span>{props.okText}</span>
                     </Button>
                 </DialogFooter>

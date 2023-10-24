@@ -1,15 +1,15 @@
 "use client";
-import { ConfirmModal } from "@/app/components/Modals/ConfirmModal";
-import { ContentModal } from "@/app/components/Modals/ContentModal";
-import { EditMessageModalContent } from "@/app/components/Modals/EditForms";
+import { ConfirmModal } from "../../../components/Modals/ConfirmModal";
+import { ContentModal } from "../../../components/Modals/ContentModal";
+import { EditMessageModalContent } from "../../../components/Modals/EditForms";
 import {
     Button, Card, CardBody, CardFooter, Typography, SpeedDial, IconButton,
     SpeedDialHandler
-} from "@/utils/material_tailwind"
+} from "@material-tailwind/react";
 import { ChatBubbleBottomCenterTextIcon, ArrowLeftCircleIcon } from "@heroicons/react/24/outline";
 import { useRouter } from "next/navigation"
 import { useState } from "react";
-import {MessageModalContent} from "@/app/components/Modals/CreateModals";
+import {MessageModalContent} from "../../../components/Modals/CreateModals";
 
 export default function ViewMessage() {
     const [open, setOpen] = useState(false);

@@ -20,8 +20,8 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { DynamicTable } from "@/app/components/Tables/DynamicTable";
 import { ContentModal } from "@/app/components/Modals/ContentModal";
-import { Loading } from "@/app/components/ui/Loading";
-import { TABLE_HEAD_MESSAGE, TABLE_ROWS_MESSAGE } from "@/app/components/Tables/Tablecolumns";
+import { Loading } from "../../components/ui/Loading";
+import { TABLE_HEAD_MESSAGE, TABLE_ROWS_MESSAGE } from "../../components/Tables/Tablecolumns";
 import { MessageModalContent } from "@/app/components/Modals/CreateModals";
 import { useQuery } from "react-query";
 import { getMessages, sendMessage } from "@/utils/https/messages";
@@ -98,7 +98,7 @@ export default function Messages() {
                         <span>Cancel</span>
                     </Button>
                     <Button variant="gradient" color="blue" onClick={handleSend} className="normal-case">
-                        <span>Sendi</span>
+                        <span>Send</span>
                     </Button>
                 </DialogFooter>
             </Dialog>
