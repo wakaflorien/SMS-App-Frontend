@@ -54,7 +54,8 @@ export default function DashbaordLayout({children}) {
         setOpen(open === value ? 0 : value);
     };
 
-    const messageMenu = [{
+    const messageMenu = [
+        {
         id: 1, label: "All messages", link: "/dashboard/messages",
     }, {
         id: 2, label: "Send New Message", link: "/dashboard/messages",
@@ -69,12 +70,14 @@ export default function DashbaordLayout({children}) {
         id: 1, label: "All contacts", icon: <ClockIcon className="h-5 w-5"/>, link: "/dashboard/contacts",
     }, {
         id: 2, label: "Add New Contact", icon: <ClockIcon className="h-5 w-5"/>, link: "/dashboard/contacts",
-    }, {
-        id: 3,
-        label: "Add From Csv",
-        icon: <PresentationChartBarIcon className="h-5 w-5"/>,
-        link: "/dashboard/contacts/addfromcsv",
-    },];
+    },
+        {
+            id: 3,
+            label: "Add From Csv",
+            icon: <PresentationChartBarIcon className="h-5 w-5"/>,
+            link: "/dashboard/contacts/addfromcsv",
+        },
+    ];
 
     const groupsMenu = [{
         id: 1, label: "All groups", link: "/dashboard/groups",

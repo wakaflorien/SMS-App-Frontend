@@ -7,20 +7,38 @@ import {
     SpeedDialHandler
 } from "@material-tailwind/react";
 import { ChatBubbleBottomCenterTextIcon, ArrowLeftCircleIcon } from "@heroicons/react/24/outline";
-import { useRouter } from "next/navigation"
+import {useRouter, useSearchParams} from "next/navigation"
 import { useState } from "react";
 import {MessageModalContent} from "../../../components/Modals/CreateModals";
+import {useQuery} from "react-query";
+import {getContact} from "@/utils/https/contacts";
+import {getMessages} from "@/utils/https/messages";
 
 export default function ViewMessage() {
     const [open, setOpen] = useState(false);
     const [openConfirm, setOpenConfirm] = useState(false);
-    const [openEdit, setOpenEdit] = useState(false);
 
     const router = useRouter()
+    const searchParams = useSearchParams();
+    const messageId = searchParams.get("id")
 
     const handleOpen = () => setOpen(!open);
     const handleOpenConfirm = () => setOpenConfirm(!openConfirm);
-    const handleOpenEdit = () => setOpenEdit(!openEdit);
+
+    // const {
+    //     data: responseMessage,
+    //     error,
+    //     isLoading,
+    //     refetch
+    // } = useQuery(["messageData", messageId], () => getMessages(messageId));
+    //
+    // const [messageBody, setMessageBody] = useState({
+    //     name: responseMessage?.name || "",
+    //     email: responseMessage?.email || "",
+    //     phone_number: responseMessage?.phone_number || "",
+    //     description: responseMessage?.description || "",
+    // })
+
     const handleOk = () => {
         console.log("ok")
         setOpenConfirm(false);
@@ -39,13 +57,6 @@ export default function ViewMessage() {
                 handleOpen={handleOpen}
                 okText="Send" cancelText="Cancel"
                 modalContent={<MessageModalContent />}
-            />
-            <ContentModal
-                title="Edit Message"
-                open={openEdit}
-                handleOpen={handleOpenEdit}
-                okText="Edit" cancelText="Cancel"
-                modalContent={<EditMessageModalContent />}
             />
             <ConfirmModal
                 title="Edit Message"
@@ -68,15 +79,12 @@ export default function ViewMessage() {
                     <CardBody className="space-y-4">
                         <Typography variant="lead" color="blue-gray" className="flex justify-between">
                             Contact: +34 123 456 789
-                            <Button variant="outlined" size="small" className="normal-case w-24" onClick={handleOpenEdit}>
-                                Edit
+                            <Button color="red" size="small" className="normal-case w-24" onClick={handleOpenConfirm}>
+                                Delete
                             </Button>
                         </Typography>
                         <Typography className="flex justify-between">
                             Is group message? True
-                            <Button color="red" size="small" className="normal-case w-24" onClick={handleOpenConfirm}>
-                                Delete
-                            </Button>
                         </Typography>
                         <Typography variant="p" color="blue-gray" className="w-1/2">
                             The place is close to Barceloneta Beach and bus stop just 2 min by

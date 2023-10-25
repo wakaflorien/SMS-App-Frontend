@@ -11,10 +11,10 @@ import {
     TabsBody,
     TabsHeader,
     Typography
-} from "@/utils/material_tailwind";
+} from "@material-tailwind/react";
 import { UserCircleIcon, UserPlusIcon } from "@heroicons/react/24/outline";
 import {usePathname, useRouter} from "next/navigation";
-import {BreadcrumbsDefault} from "@/app/components/Crumbs";
+import {BreadcrumbsDefault} from "../components/Crumbs";
 
 export default function Login() {
 

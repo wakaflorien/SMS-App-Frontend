@@ -1,11 +1,15 @@
 "use client";
-import { ConfirmModal } from "@/app/components/Modals/ConfirmModal";
-import { ContentModal } from "@/app/components/Modals/ContentModal";
-import { EditGroupModalContent } from "@/app/components/Modals/EditForms";
-import { Button, Card, CardBody, CardFooter, Typography, Textarea } from "@/utils/material_tailwind"
-import { ArrowLeftCircleIcon } from "@heroicons/react/24/outline";
-import { useRouter } from "next/navigation"
-import { useState } from "react";
+import {ConfirmModal} from "@/app/components/Modals/ConfirmModal";
+import {ContentModal} from "@/app/components/Modals/ContentModal";
+import {EditGroupModalContent} from "@/app/components/Modals/EditForms";
+import {Button, Card, CardBody, CardFooter, Typography, Textarea} from "@/utils/material_tailwind"
+import {ArrowLeftCircleIcon} from "@heroicons/react/24/outline";
+import {useRouter, useSearchParams} from "next/navigation"
+import {useState} from "react";
+import {useQuery} from "react-query";
+import {getContact} from "@/utils/https/contacts";
+import {getGroup, getGroupContacts, getGroupsContacts} from "@/utils/https/groups";
+import {Loading} from "@/app/components/ui/Loading";
 
 export default function ViewGroup() {
     const [openConfirm, setOpenConfirm] = useState(false);
@@ -13,7 +17,24 @@ export default function ViewGroup() {
 
     const handleOpenConfirm = () => setOpenConfirm(!openConfirm);
     const handleOpenEdit = () => setOpenEdit(!openEdit);
+
     const router = useRouter()
+    const searchParams = useSearchParams();
+    const groupId = searchParams.get("id")
+
+    const {
+        data: responseGroup,
+        error,
+        isLoading,
+    } = useQuery(["groupData", groupId], () => getGroup(groupId));
+    // const {
+    //     data: responseGroupContacts,
+    //     error: contacterror,
+    //     isLoading: contactload
+    // } = useQuery(["groupContactsData", groupId], () => getGroupContacts(groupId));
+    //
+    // console.log("SPECIFIC GROUP", responseGroupContacts)
+
     const handleOk = () => {
         console.log("ok")
         setOpenConfirm(false);
@@ -22,6 +43,15 @@ export default function ViewGroup() {
         console.log("cancel")
         setOpenConfirm(false);
     }
+
+    if (isLoading) {
+        return <Loading/>;
+    }
+
+    if (error) {
+        return <span>Error...</span>;
+    }
+
     return (
         <>
             <ContentModal
@@ -29,7 +59,7 @@ export default function ViewGroup() {
                 open={openEdit}
                 handleOpen={handleOpenEdit}
                 okText="Edit" cancelText="Cancel"
-                modalContent={<EditGroupModalContent />}
+                modalContent={<EditGroupModalContent/>}
             />
             <ConfirmModal
                 title="Edit Message"
@@ -46,17 +76,21 @@ export default function ViewGroup() {
                 <header className="self-center">Group / Single group</header>
                 <div className="flex items-center justify-between cursor-pointer">
                     <div className="w-fit normal-case flex gap-2" onClick={() => router.back()}>
-                        <ArrowLeftCircleIcon className="w-5" />
+                        <ArrowLeftCircleIcon className="w-5"/>
                         <span>Back</span>
                     </div>
                 </div>
                 <Card className="mt-6 w-full">
                     <CardBody className="space-y-4">
                         <Typography variant="lead" color="blue-gray" className="flex justify-between">
-                            Group name: Ojomo Keyune
-                            <Button variant="outlined" size="small" className="normal-case w-24" onClick={handleOpenEdit}>
+                            {responseGroup.name}
+                            <Button variant="outlined" size="small" className="normal-case w-24"
+                                    onClick={handleOpenEdit}>
                                 Edit
                             </Button>
+                        </Typography>
+                        <Typography className="flex justify-between">
+                            {responseGroup.description}
                         </Typography>
                         <Typography className="flex justify-between">
                             Members: 789

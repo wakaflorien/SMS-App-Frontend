@@ -1,12 +1,14 @@
 "use client";
-import { ConfirmModal } from "../../../components/Modals/ConfirmModal";
-import { ContentModal } from "../../../components/Modals/ContentModal";
-import { Button, Card, CardBody, Typography } from "@material-tailwind/react";
-import { ArrowLeftCircleIcon } from "@heroicons/react/24/outline";
-import { usePathname, useRouter } from "next/navigation"
-import { useState } from "react";
-import { EditContactModalContent } from "../../../components/Modals/EditForms";
-import { useMutation } from "react-query";
+import {ConfirmModal} from "../../../components/Modals/ConfirmModal";
+import {ContentModal} from "../../../components/Modals/ContentModal";
+import {Button, Card, CardBody, Typography} from "@material-tailwind/react";
+import {ArrowLeftCircleIcon} from "@heroicons/react/24/outline";
+import {useRouter, useSearchParams} from "next/navigation"
+import {useState} from "react"
+import {useMutation, useQuery} from "react-query";
+import {deleteContact, getContact, updateContact} from "../../../../utils/https/contacts";
+import {Loading} from "../../../components/ui/Loading";
+import {Input, Textarea} from "@material-tailwind/react";
 
 export default function ViewMessage() {
     const [openConfirm, setOpenConfirm] = useState(false);
@@ -14,35 +16,70 @@ export default function ViewMessage() {
 
     const handleOpenConfirm = () => setOpenConfirm(!openConfirm);
     const handleOpenEdit = () => setOpenEdit(!openEdit);
+
     const router = useRouter()
+    const searchParams = useSearchParams();
+    const contactId = searchParams.get("id")
 
-    const pathname = usePathname()
-    console.log("path", pathname)
+    const {
+        data: responseContact,
+        error,
+        isLoading,
+        refetch
+    } = useQuery(["contactData", contactId], () => getContact(contactId));
 
-    const mutation = useMutation((id) => {
-        console.log(id);
-        return axios.delete('/api/v1/message/' + id);
+    const [contactBody, setContactBody] = useState({
+        name: responseContact?.name || "",
+        email: responseContact?.email || "",
+        phone_number: responseContact?.phone_number || "",
+        description: responseContact?.description || "",
     })
 
+    const deleteMutation = useMutation(["deleteContact", contactId], () => deleteContact(contactId));
+    const updateMutation = useMutation(["updateContact", contactId, contactBody], () => {
+        updateContact(contactId, contactBody)
+    });
+
     const handleOk = () => {
-        mutation.mutate();
+        deleteMutation.mutate();
+    }
+    const handleSubmit = () => {
+        updateMutation.mutate();
+        setOpenEdit(false)
     }
     const handleCancel = () => {
-        console.log("cancel")
         setOpenConfirm(false);
     }
+    const handleChange = (e) => {
+        const {name, value} = e.target
+        setContactBody((prevState) => (
+            {
+                ...prevState, [name]: value
+            }
+        ));
+    };
 
-    if (mutation.isLoading) {
-        return <span>Deleting...</span>;
+    if (isLoading) {
+        return <Loading/>;
     }
 
-    if (mutation.isError) {
-        return <span>Error: {mutation.error.message}</span>;
+    if (error) {
+        return <span>Error...</span>;
     }
 
-    if (mutation.isSuccess) {
-        return <span>Post deleted!</span>;
+    if (deleteMutation.isLoading || updateMutation.isLoading) {
+        return <Loading/>;
     }
+
+    if (deleteMutation.isError || updateMutation.isError) {
+        return <span>Error: {deleteMutation.isError ? deleteMutation.error.message : updateMutation.isError}</span>;
+    }
+
+    if (deleteMutation.isSuccess) {
+        return router.push("/dashboard/contacts");
+    }
+
+    if (updateMutation.isSuccess) refetch();
     return (
         <>
             <ContentModal
@@ -50,7 +87,34 @@ export default function ViewMessage() {
                 open={openEdit}
                 handleOpen={handleOpenEdit}
                 okText="Edit" cancelText="Cancel"
-                modalContent={<EditContactModalContent />}
+                handleSubmit={handleSubmit}
+                modalContent={
+                    <>
+                        <Card className="mt-6 w-full shadow-none ">
+                            <div className="px-6">
+                                <div className="w-full space-y-4">
+                                    <Input type="text" label="Contact Name" value={contactBody.name} name={"name"}
+                                           className="w-full"
+                                           onChange={handleChange}/>
+                                    <Input type="telephone" label="Telephone" value={contactBody.phone_number}
+                                           name={"phone_number"}
+                                           className="w-full"
+                                           onChange={handleChange}/>
+                                    <Input size="lg" label="Email" value={contactBody.email} name={"email"}
+                                           onChange={handleChange}/>
+                                </div>
+                            </div>
+                            <CardBody className="space-y-4">
+                                <div className="w-full">
+                                    <Textarea label="Description" value={contactBody.description}
+                                              className="w-full"
+                                              name={"description"}
+                                              onChange={handleChange}/>
+                                </div>
+                            </CardBody>
+                        </Card>
+                    </>
+                }
             />
             <ConfirmModal
                 title="Edit Message"
@@ -67,52 +131,28 @@ export default function ViewMessage() {
                 <header className="self-center">Contact / Single contact</header>
                 <div className="flex items-center justify-between cursor-pointer">
                     <div className="w-fit normal-case flex gap-2" onClick={() => router.back()}>
-                        <ArrowLeftCircleIcon className="w-5" />
+                        <ArrowLeftCircleIcon className="w-5"/>
                         <span>Back</span>
                     </div>
                 </div>
                 <Card className="mt-6 w-full">
                     <CardBody className="space-y-4">
-                        <Typography variant="lead" color="blue-gray" className="flex justify-between">
-                            Contact: Ojomo Keyune
-                            <Button variant="outlined" size="small" className="normal-case w-24" onClick={handleOpenEdit}>
+                        <Typography variant="lead" color="blue-gray" className="flex justify-between capitalize">
+                            Name: {responseContact.name}
+                            <Button variant="outlined" size="small" className="normal-case w-24"
+                                    onClick={handleOpenEdit}>
                                 Edit
                             </Button>
                         </Typography>
-                        <Typography className="flex justify-between">
-                            Tel: +34 123 456 789
+                        <Typography className="flex justify-between space-y-4">
+                            <span>Tel: {responseContact.phone_number}</span>
+                            <span>Email: {responseContact.email}</span>
                             <Button color="red" size="small" className="normal-case w-24" onClick={handleOpenConfirm}>
                                 Delete
                             </Button>
                         </Typography>
-                        <Typography variant="lead" color="blue-gray" className="w-1/2">
-                            Groups
-                        </Typography>
-                        <div className="flex justify-between">
-                            <Typography variant="small" color="blue-gray">
-                                Group 1
-                            </Typography>
-                            <Typography variant="small" color="blue-gray">
-                                02/10/2022 at 10:00, By Peter
-                            </Typography>
-                            <Typography variant="small" color="blue-gray">
-                                02/10/2022 at 10:00, By John
-                            </Typography>
-                        </div>
-                        <div className="flex justify-between">
-                            <Typography variant="small" color="blue-gray">
-                                Group 2
-                            </Typography>
-                            <Typography variant="small" color="blue-gray">
-                                02/10/2022 at 10:00, By John
-                            </Typography>
-                            <Typography variant="small" color="blue-gray">
-                                02/10/2022 at 10:00, By Peter
-                            </Typography>
-                        </div>
                     </CardBody>
                 </Card>
             </div>
-        </>
-    )
+        </>)
 }

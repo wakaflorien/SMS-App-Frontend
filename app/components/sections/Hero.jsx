@@ -1,6 +1,6 @@
 "use client";
-import { Button } from "@/utils/material_tailwind";
 import Link from "next/link";
+import {Button} from "@material-tailwind/react";
 export function Hero() {
   return (
     <div className="flex justify-center items-center text-center flex-col gap-72 mt-20 min-h-full">

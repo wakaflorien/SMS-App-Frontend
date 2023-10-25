@@ -1,10 +1,10 @@
 "use client";
 import Link from "next/link";
 import { Wrapper } from "../layout/Wrapper";
-import { Button } from "@/utils/material_tailwind";
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/solid";
+import {Button} from "@material-tailwind/react";
 
 const navList = [
   {

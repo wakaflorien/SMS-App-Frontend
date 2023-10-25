@@ -2,7 +2,7 @@
 "use client";
 import "./globals.css";
 import { QueryClient, QueryClientProvider } from "react-query";
-import { ThemeProvider } from "@/utils/material_tailwind";
+import { ThemeProvider } from "@material-tailwind/react";
 import Script from "next/script";
 
 const queryClient = new QueryClient();
