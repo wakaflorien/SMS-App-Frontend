@@ -1,13 +1,13 @@
 "use client";
-import {ConfirmModal} from "../../../components/Modals/ConfirmModal";
-import {ContentModal} from "../../../components/Modals/ContentModal";
+import {ConfirmModal} from "../../../../components/Modals/ConfirmModal";
+import {ContentModal} from "../../../../components/Modals/ContentModal";
 import {Button, Card, CardBody, Typography} from "@material-tailwind/react";
 import {ArrowLeftCircleIcon} from "@heroicons/react/24/outline";
 import {useRouter, useSearchParams} from "next/navigation"
 import {useState} from "react"
 import {useMutation, useQuery} from "react-query";
 import {deleteContact, getContact, updateContact} from "../../../../utils/https/contacts";
-import {Loading} from "../../../components/ui/Loading";
+import {Loading} from "../../../../components/ui/Loading";
 import {Input, Textarea} from "@material-tailwind/react";
 
 export default function ViewMessage() {

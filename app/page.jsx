@@ -1,9 +1,9 @@
-import { NavBar } from "./components/sections/NavBar";
-import { Hero } from "./components/sections/Hero";
-import { Offer } from "./components/sections/Offer";
-import { Different } from "./components/sections/Defferent";
-import { HelpCenter } from "./components/sections/HelpCenter";
-import { Footer } from "./components/sections/Footer";
+import { NavBar } from "../components/sections/NavBar";
+import { Hero } from "../components/sections/Hero";
+import { Offer } from "../components/sections/Offer";
+import { Different } from "../components/sections/Defferent";
+import { HelpCenter } from "../components/sections/HelpCenter";
+import { Footer } from "../components/sections/Footer";
 
 export default function Home() {
   return (

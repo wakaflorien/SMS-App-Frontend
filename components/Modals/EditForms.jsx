@@ -1,4 +1,4 @@
-import { Card, CardBody, Input, Textarea } from "../../../utils/material_tailwind";
+import { Card, CardBody, Input, Textarea } from "../../utils/material_tailwind";
 export const EditContactModalContent = (props) => (
 
     <Card className="mt-6 w-full shadow-none ">

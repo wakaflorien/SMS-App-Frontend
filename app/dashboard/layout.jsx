@@ -32,8 +32,11 @@ import {BellIcon, ChatBubbleLeftRightIcon, UsersIcon} from "@heroicons/react/20/
 import Link from "next/link";
 import {Collapse} from "@material-tailwind/react";
 import Image from "next/image";
+import {signOut, useSession} from "next-auth/react";
 
 export default function DashbaordLayout({children}) {
+    const {data: session} = useSession()
+
     const [open, setOpen] = useState(0);
     const [openNav, setOpenNav] = useState(false)
     const [showSideNav, setShowSideNav] = useState(true)
@@ -56,10 +59,10 @@ export default function DashbaordLayout({children}) {
 
     const messageMenu = [
         {
-        id: 1, label: "All messages", link: "/dashboard/messages",
-    }, {
-        id: 2, label: "Send New Message", link: "/dashboard/messages",
-    },
+            id: 1, label: "All messages", link: "/dashboard/messages",
+        }, {
+            id: 2, label: "Send New Message", link: "/dashboard/messages",
+        },
 
         {
             id: 3, label: "Send To group", link: "/dashboard/messages/sendtogroup",
@@ -119,6 +122,10 @@ export default function DashbaordLayout({children}) {
 
     ]
 
+    console.log("logged in user", session)
+    if (!session) {
+        return router.push("/login")
+    }
     return (
         <div className="flex relative w-full">
             {showSideNav ? <Card
@@ -266,18 +273,24 @@ export default function DashbaordLayout({children}) {
                                             variant="circular"
                                             alt="tania andrew"
                                             className="cursor-pointer hover:border border-primary"
-                                            src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1480&q=80"
+                                            src={session?.user?.image}
                                         />
                                     </MenuHandler>
                                     <MenuList>
-                                        {profileMenu.map((item, index) => <Link key={index} href={item.link}>
-                                            <MenuItem className="flex items-center gap-2">
-                                                {item.icon}
-                                                <Typography variant="small" className="font-normal">
-                                                    {item.label}
-                                                </Typography>
-                                            </MenuItem>
-                                        </Link>)}
+                                        <MenuItem className="flex items-center gap-2"
+                                                  onClick={() => signOut()}>
+                                            <UserCircleIcon className={"h5- w-5"}/>
+                                            <Typography variant="small" className="font-normal">
+                                                Profile
+                                            </Typography>
+                                        </MenuItem>
+                                        <MenuItem className="flex items-center gap-2"
+                                                  onClick={() => signOut()}>
+                                            <PowerIcon className={" h-5 w-5"}/>
+                                            <Typography variant="small" className="font-normal">
+                                                Logout
+                                            </Typography>
+                                        </MenuItem>
                                     </MenuList>
                                 </Menu>
                             </div>

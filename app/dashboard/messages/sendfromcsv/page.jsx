@@ -1,12 +1,12 @@
 "use client";
-import { DefaultPagination } from "@/app/components/Pagination";
+import { DefaultPagination } from "@/components/Pagination";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import {ArrowLeftCircleIcon, ChatBubbleBottomCenterTextIcon} from "@heroicons/react/24/outline";
 import { Card, CardBody, Textarea, CardFooter,
     Button,IconButton, SpeedDial, SpeedDialHandler} from "@/utils/material_tailwind";
-import {MessageModalContent} from "@/app/components/Modals/CreateModals";
-import {ContentModal} from "@/app/components/Modals/ContentModal";
+import {MessageModalContent} from "@/components/Modals/CreateModals";
+import {ContentModal} from "@/components/Modals/ContentModal";
 
 
 export default function SendCsv() {

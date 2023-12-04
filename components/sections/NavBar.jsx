@@ -29,11 +29,11 @@ const navList = [
   },
   {
     label: "Login",
-    link: "/authentication",
+    link: "/login",
   },
   {
     label: "Sign Up",
-    link: "/authentication",
+    link: "/signup",
   },
 ];
 
@@ -78,10 +78,10 @@ export function NavBar() {
             <a href={"/"}>System Status</a>
           </li>
           <li>
-            <a href={"/authentication"}>Login</a>
+            <a href={"/login"}>Login</a>
           </li>
           <li>
-            <Link href={"/authentication"}>
+            <Link href={"/signup"}>
               <Button
                 className="rounded-none  py-2 px-9 "
                 variant="outlined"

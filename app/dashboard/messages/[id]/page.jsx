@@ -1,7 +1,7 @@
 "use client";
-import { ConfirmModal } from "../../../components/Modals/ConfirmModal";
-import { ContentModal } from "../../../components/Modals/ContentModal";
-import { EditMessageModalContent } from "../../../components/Modals/EditForms";
+import { ConfirmModal } from "../../../../components/Modals/ConfirmModal";
+import { ContentModal } from "../../../../components/Modals/ContentModal";
+import { EditMessageModalContent } from "../../../../components/Modals/EditForms";
 import {
     Button, Card, CardBody, CardFooter, Typography, SpeedDial, IconButton,
     SpeedDialHandler
@@ -9,7 +9,7 @@ import {
 import { ChatBubbleBottomCenterTextIcon, ArrowLeftCircleIcon } from "@heroicons/react/24/outline";
 import {useRouter, useSearchParams} from "next/navigation"
 import { useState } from "react";
-import {MessageModalContent} from "../../../components/Modals/CreateModals";
+import {MessageModalContent} from "../../../../components/Modals/CreateModals";
 import {useQuery} from "react-query";
 import {getContact} from "@/utils/https/contacts";
 import {getMessages} from "@/utils/https/messages";

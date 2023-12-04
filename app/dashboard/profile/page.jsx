@@ -9,8 +9,8 @@ import {
 } from "@/utils/material_tailwind";
 import {ArrowLeftCircleIcon, AtSymbolIcon, PencilIcon, PhoneIcon} from "@heroicons/react/24/outline";
 import {UserCircleIcon} from "@heroicons/react/24/solid";
-import {EditContactModalContent, EditUserModalContent} from "@/app/components/Modals/EditForms";
-import {ContentModal} from "@/app/components/Modals/ContentModal";
+import {EditContactModalContent, EditUserModalContent} from "@/components/Modals/EditForms";
+import {ContentModal} from "@/components/Modals/ContentModal";
 import {useState} from "react";
 import {useRouter} from "next/navigation";
 

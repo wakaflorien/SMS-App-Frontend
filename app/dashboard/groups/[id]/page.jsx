@@ -1,7 +1,7 @@
 "use client";
-import {ConfirmModal} from "@/app/components/Modals/ConfirmModal";
-import {ContentModal} from "@/app/components/Modals/ContentModal";
-import {EditGroupModalContent} from "@/app/components/Modals/EditForms";
+import {ConfirmModal} from "@/components/Modals/ConfirmModal";
+import {ContentModal} from "@/components/Modals/ContentModal";
+import {EditGroupModalContent} from "@/components/Modals/EditForms";
 import {Button, Card, CardBody, CardFooter, Typography, Textarea} from "@/utils/material_tailwind"
 import {ArrowLeftCircleIcon} from "@heroicons/react/24/outline";
 import {useRouter, useSearchParams} from "next/navigation"
@@ -9,7 +9,7 @@ import {useState} from "react";
 import {useQuery} from "react-query";
 import {getContact} from "@/utils/https/contacts";
 import {getGroup, getGroupContacts, getGroupsContacts} from "@/utils/https/groups";
-import {Loading} from "@/app/components/ui/Loading";
+import {Loading} from "@/components/ui/Loading";
 
 export default function ViewGroup() {
     const [openConfirm, setOpenConfirm] = useState(false);

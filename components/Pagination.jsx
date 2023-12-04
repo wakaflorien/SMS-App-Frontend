@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { Button, IconButton } from "../../utils/material_tailwind";
+import { Button, IconButton } from "../utils/material_tailwind";
 import { ArrowRightIcon, ArrowLeftIcon } from "@heroicons/react/24/outline";
 
 export function DefaultPagination() {

@@ -1,5 +1,5 @@
 "use client";
-import {ContentModal} from "../../components/Modals/ContentModal";
+import {ContentModal} from "../../../components/Modals/ContentModal";
 import {usePathname, useRouter, useSearchParams} from "next/navigation";
 import {useCallback, useState} from "react";
 import {
@@ -10,17 +10,17 @@ import {
     Input,
 } from "../../../utils/material_tailwind";
 import {UserGroupIcon} from "@heroicons/react/24/outline";
-import {DefaultPagination} from "../../components/Pagination";
-import {DynamicTable} from "../../components/Tables/DynamicTable";
+import {DefaultPagination} from "../../../components/Pagination";
+import {DynamicTable} from "../../../components/Tables/DynamicTable";
 import {
     TABLE_HEAD_GROUP,
     TABLE_ROWS_GROUPS,
-} from "../../components/Tables/Tablecolumns";
-import {GroupsModalContent} from "../../components/Modals/CreateModals";
+} from "../../../components/Tables/Tablecolumns";
+import {GroupsModalContent} from "../../../components/Modals/CreateModals";
 import {Alert, CardBody, Textarea, Typography} from "@/utils/material_tailwind";
 import {useMutation, useQuery} from "react-query";
 import {createGroup, getGroups} from "@/utils/https/groups";
-import {Loading} from "@/app/components/ui/Loading";
+import {Loading} from "@/components/ui/Loading";
 import moment from "moment";
 
 export default function Groups() {

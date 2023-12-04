@@ -15,10 +15,10 @@ import {
 import {
     ChatBubbleBottomCenterTextIcon, MagnifyingGlassIcon, UserIcon,
 } from "@heroicons/react/24/outline";
-import {DefaultPagination} from "@/app/components/Pagination";
+import {DefaultPagination} from "@/components/Pagination";
 import {useCallback, useState} from "react";
 import {usePathname, useRouter, useSearchParams} from "next/navigation";
-import {Loading} from "../../components/ui/Loading";
+import {Loading} from "../../../components/ui/Loading";
 import {useQuery} from "react-query";
 import {getMessages, sendMessage} from "@/utils/https/messages";
 import {useMutation} from "react-query";

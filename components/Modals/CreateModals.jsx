@@ -4,7 +4,7 @@ import {
     Textarea,
     Input,
     Button,
-} from "../../../utils/material_tailwind";
+} from "../../utils/material_tailwind";
 
 export const ContactModalContent = () => (
     <Card className="w-full shadow-none">
