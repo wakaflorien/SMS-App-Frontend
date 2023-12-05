@@ -269,12 +269,15 @@ export default function DashbaordLayout({children}) {
                                 </Menu>
                                 <Menu>
                                     <MenuHandler>
-                                        <Avatar
-                                            variant="circular"
-                                            alt="tania andrew"
-                                            className="cursor-pointer hover:border border-primary"
-                                            src={session?.user?.image}
-                                        />
+                                        {session?.user?.image ?
+                                            <Avatar
+                                                variant="circular"
+                                                alt="tania andrew"
+                                                className="cursor-pointer hover:border border-primary"
+                                                src={session?.user?.image}
+                                            /> :
+                                            <span className={"cursor-pointer bg-tertiarry p-4 rounded-full"}>{session?.user.name.split(" ")[0] +  session?.user.name.split(" ")[1].charAt(0).trim()}</span>
+                                        }
                                     </MenuHandler>
                                     <MenuList>
                                         <MenuItem className="flex items-center gap-2"

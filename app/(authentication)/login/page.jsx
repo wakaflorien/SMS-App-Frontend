@@ -6,6 +6,13 @@ import {
 import {usePathname, useRouter} from "next/navigation";
 import {BreadcrumbsDefault} from "../../../components/Crumbs";
 import {signIn, signOut, useSession} from "next-auth/react";
+import {
+    CredentialsSignInButton, FaceBookSignInButton,
+    GithubSignInButton,
+    GoogleLoginButton,
+    GoogleSignInButton
+} from "@/components/Buttons/AuthButtons";
+import {CredentialsForm} from "@/components/Buttons/CredentialsForm";
 
 export default function Login() {
     const {data: session} = useSession()
@@ -18,33 +25,23 @@ export default function Login() {
     }
 
     return (
-        <main className={"flex flex-col items-center justify-center lg:py-20"}>
+        <main className={"flex flex-col items-center justify-center lg:py-10"}>
         <header className={"lg:w-full w-full mx-auto"}>
             <BreadcrumbsDefault pathname={pathname} />
         </header>
         <Card color="transparent" shadow={false} className="flex items-center rounded-none">
             <Typography variant="h4" color="blue-gray">
-                Login
+                Sign In
             </Typography>
-            <Typography color="gray" className="mt-1 font-normal">
-                Enter your credentials to continue.
-            </Typography>
-            <form className="mt-8 mb-2 w-full lg:w-full max-w-screen-lg">
-                <div className="mb-4 flex flex-col gap-6">
-                    <Input size="lg" label="Email" />
-                    <Input type="password" size="lg" label="Password" />
+            <div className={"flex flex-col space-y-8 w-[500px] items-center"}>
+                <div className={"w-full"}>
+                    <GoogleSignInButton />
+                    {/*<FaceBookSignInButton />*/}
+                    <GithubSignInButton />
                 </div>
-                <Button className="mt-6 bg-primary normal-case" ripple={true} fullWidth
-                    onClick={() => signIn()}>
-                    Login
-                </Button>
-                <Typography color="gray" className="mt-4 text-center font-normal">
-                    Don&apos;t have an account?{" "}
-                    <a href="#" className="font-medium text-gray-900">
-                        Sign Up
-                    </a>
-                </Typography>
-            </form>
+                <span className={"font-bold text-base"}>Or</span>
+                <CredentialsForm />
+            </div>
         </Card>
     </main>)
 }
