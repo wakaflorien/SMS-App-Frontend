@@ -1,7 +1,10 @@
 import {useState} from "react";
 import {useRouter} from "next/navigation";
+import {useSession} from "next-auth/react";
 
 export const SignupForm = () => {
+    const {data: session} = useSession()
+
     const router = useRouter();
     const [error, setError] = useState(null);
 
@@ -10,6 +13,9 @@ export const SignupForm = () => {
         const data = new FormData(e.currentTarget);
         console.log("data", data, data.get("email"), data.get("password"))
     };
+    if (session) {
+        return router.push("/dashboard")
+    }
     return (
         <form
             className="w-full mt-8 text-xl text-black font-semibold flex flex-col space-y-4"

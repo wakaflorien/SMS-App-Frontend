@@ -122,7 +122,6 @@ export default function DashbaordLayout({children}) {
 
     ]
 
-    console.log("logged in user", session)
     if (!session) {
         return router.push("/login")
     }
