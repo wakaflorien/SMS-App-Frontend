@@ -46,11 +46,12 @@ export default function DashbaordLayout({ children }) {
     const router = useRouter();
     const pathname = usePathname()
 
-    useEffect(() => {
-        if (status !== "authenticated") {
-            return router.push("/login")
-        }
-    }, [])
+    // useEffect(() => {
+    //     console.log("not authenticated", status, session)
+    //     if (!session) {
+    //         return router.push("/login")
+    //     }
+    // }, [])
 
     useEffect(() => {
         if (pathname === "/dashboard/profile") {
