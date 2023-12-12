@@ -3,7 +3,6 @@
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ThemeProvider } from "@material-tailwind/react";
 import Providers from "@/components/Providers/Providers";
-import Script from "next/script";
 import "../public/styles/globals.css";
 import { Suspense } from "react";
 import { NavigationEvents } from "@/components/navigation-events";
@@ -11,7 +10,7 @@ import { NavigationEvents } from "@/components/navigation-events";
 const queryClient = new QueryClient();
 
 const metadata = {
-    title: "Infotext Messaging", description: "",
+    title: "Infotext Messaging", description: "Infotext Messaging",
 };
 
 export default function RootLayout({ children }) {
