@@ -1,5 +1,5 @@
 "use client"
-import {Button} from "@/utils/material_tailwind"
+import {Button} from "@material-tailwind/react"
 
 export const Buttons = (props) => {
     return (

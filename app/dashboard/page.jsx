@@ -82,7 +82,7 @@ export default function DashboardPage() {
   const [isChatReady, setIsChatReady] = useState(false);
 
   return (
-    <>
+    <div fallback={<div>Loading...</div>}>
       <div className="p-4 w-full">
         <div className="grid my-6 lg:grid-cols-4 gap-3">
           {cards.map((_card, index) => {
@@ -105,6 +105,6 @@ export default function DashboardPage() {
           )}
         </div>
       </div>
-    </>
+    </div>
   );
 }

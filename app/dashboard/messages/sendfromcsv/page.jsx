@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import {ArrowLeftCircleIcon, ChatBubbleBottomCenterTextIcon} from "@heroicons/react/24/outline";
 import { Card, CardBody, Textarea, CardFooter,
-    Button,IconButton, SpeedDial, SpeedDialHandler} from "@/utils/material_tailwind";
+    Button,IconButton, SpeedDial, SpeedDialHandler} from "@material-tailwind/react";
 import {MessageModalContent} from "@/components/Modals/CreateModals";
 import {ContentModal} from "@/components/Modals/ContentModal";
 

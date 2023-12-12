@@ -1,10 +1,12 @@
 /* eslint-disable @next/next/no-sync-scripts */
 "use client";
-import "./globals.css";
-import {QueryClient, QueryClientProvider} from "react-query";
-import {ThemeProvider} from "@material-tailwind/react";
-import Script from "next/script";
+import { QueryClient, QueryClientProvider } from "react-query";
+import { ThemeProvider } from "@material-tailwind/react";
 import Providers from "@/components/Providers/Providers";
+import Script from "next/script";
+import "../public/styles/globals.css";
+import { Suspense } from "react";
+import { NavigationEvents } from "@/components/navigation-events";
 
 const queryClient = new QueryClient();
 
@@ -12,17 +14,20 @@ const metadata = {
     title: "Infotext Messaging", description: "",
 };
 
-export default function RootLayout({children}) {
+export default function RootLayout({ children }) {
     return (<QueryClientProvider client={queryClient}>
-            <ThemeProvider>
-                <html lang="en">
+        <ThemeProvider>
+            <html lang="en">
                 <body>
-                <Providers>
-                    {children}
-                </Providers>
-                <Script src="../path/to/flowbite/dist/flowbite.min.js"></Script>
+                    <Providers>
+                        {children}
+                        <Suspense fallback={null}>
+                            <NavigationEvents />
+                        </Suspense>
+                    </Providers>
                 </body>
-                </html>
-            </ThemeProvider>
-        </QueryClientProvider>);
+            </html>
+        </ThemeProvider>
+    </QueryClientProvider>);
 }
+

@@ -10,11 +10,11 @@ import {
     SpeedDial,
     SpeedDialHandler,
     IconButton,
-} from "@/utils/material_tailwind";
+} from "@material-tailwind/react";
 import { DefaultPagination } from "@/components/Pagination";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { ArrowLeftCircleIcon, ChatBubbleBottomCenterTextIcon } from "@heroicons/react/24/outline"; 
+import { ArrowLeftCircleIcon, ChatBubbleBottomCenterTextIcon } from "@heroicons/react/24/outline";
 import { ContentModal } from "@/components/Modals/ContentModal";
 import { MessageModalContent } from "@/components/Modals/CreateModals";
 
@@ -25,7 +25,7 @@ export default function SendGroup() {
 
     const router = useRouter();
     return (
-        <>
+        <div fallback={<div>Loading...</div>}>
             <ContentModal
                 title="Message / Send to number"
                 open={open}
@@ -95,6 +95,6 @@ export default function SendGroup() {
                     </SpeedDial>
                 </div>
             </div>
-        </>
+        </div>
     )
 }

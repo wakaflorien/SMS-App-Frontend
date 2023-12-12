@@ -1,16 +1,14 @@
 "use client";
 import {
-    Card, Typography,
+    Card,
     CardBody,
     Textarea,
-    Select,
-    Option,
     CardFooter,
     Button,
     SpeedDialHandler,
     IconButton,
     SpeedDial,
-} from "../../../../utils/material_tailwind";
+} from "@material-tailwind/react";
 import { DefaultPagination } from "@/components/Pagination";
 import { useState } from "react";
 import { useRouter } from "next/navigation";

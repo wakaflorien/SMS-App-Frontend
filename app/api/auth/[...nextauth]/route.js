@@ -1,19 +1,14 @@
 import NextAuth from 'next-auth'
-import { redirect, useRouter } from "next/navigation";
-import { NextAuthOptions, User, getServerSession } from "next-auth";
 
-import { useSession } from "next-auth/react";
 import GoogleProvider from 'next-auth/providers/google'
 import GithubProvider from "next-auth/providers/github"
-import FacebookProvider from "next-auth/providers/facebook";
 import CredentialsProvider from "next-auth/providers/credentials";
-import { PrismaAdapter } from "@auth/prisma-adapter"
-import { PrismaClient } from "@prisma/client"
+// import { PrismaAdapter } from "@auth/prisma-adapter"
+// import { PrismaClient } from "@prisma/client"
+// const prisma = new PrismaClient()
 
-const prisma = new PrismaClient()
-
-const handler = NextAuth({
-    adapters: PrismaAdapter(prisma),
+export const authOptions = {
+    // adapters: PrismaAdapter(prisma),
     providers: [
         CredentialsProvider({
             name: "Sign in",
@@ -42,13 +37,24 @@ const handler = NextAuth({
             clientId: process.env.GITHUB_ID,
             clientSecret: process.env.GITHUB_SECRET,
         }),
-        // FacebookProvider({
-        //     clientId: process.env.FACEBOOK_CLIENT_ID,
-        //     clientSecret: process.env.FACEBOOK_CLIENT_SECRET
-        // }),
     ],
+    callbacks: {
+        async jwt({ token, account }) {
+            // Persist the OAuth access_token to the token right after signin
+            if (account) {
+                token.accessToken = account.access_token
+            }
+            return token
+        },
+        async session({ session, token, user }) {
+            // Send properties to the client, like an access_token from a provider.
+            session.accessToken = token.accessToken
+            return session
+        }
+    },
     secret: process.env.NEXTAUTH_SECRET,
     debug: true
-})
+}
+const handler = NextAuth(authOptions)
 
-export {handler as GET, handler as POST}
+export { handler as GET, handler as POST }

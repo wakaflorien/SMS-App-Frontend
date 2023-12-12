@@ -1,5 +1,5 @@
 "use client";
-import {ContentModal} from "../../../components/Modals/ContentModal";
+import {ContentModal} from "@/components/Modals/ContentModal";
 import {usePathname, useRouter, useSearchParams} from "next/navigation";
 import {useCallback, useState} from "react";
 import {
@@ -8,16 +8,10 @@ import {
     SpeedDial,
     SpeedDialHandler,
     Input,
-} from "../../../utils/material_tailwind";
+} from "@material-tailwind/react";
 import {UserGroupIcon} from "@heroicons/react/24/outline";
-import {DefaultPagination} from "../../../components/Pagination";
-import {DynamicTable} from "../../../components/Tables/DynamicTable";
-import {
-    TABLE_HEAD_GROUP,
-    TABLE_ROWS_GROUPS,
-} from "../../../components/Tables/Tablecolumns";
-import {GroupsModalContent} from "../../../components/Modals/CreateModals";
-import {Alert, CardBody, Textarea, Typography} from "@/utils/material_tailwind";
+import {DefaultPagination} from "@/components/Pagination";
+import {Alert, CardBody, Textarea, Typography} from "@material-tailwind/react";
 import {useMutation, useQuery} from "react-query";
 import {createGroup, getGroups} from "@/utils/https/groups";
 import {Loading} from "@/components/ui/Loading";

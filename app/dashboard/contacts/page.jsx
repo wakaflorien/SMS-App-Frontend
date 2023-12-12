@@ -1,22 +1,19 @@
 "use client";
-import {ContentModal} from "../../../components/Modals/ContentModal";
+import {ContentModal} from "@/components/Modals/ContentModal";
 import {usePathname, useRouter, useSearchParams} from "next/navigation";
 import {useCallback, useState} from "react";
 import {
     Card, IconButton,
     SpeedDial,
     SpeedDialHandler, Input, CardBody, Typography, Textarea, Alert
-} from "../../../utils/material_tailwind";
+} from "@material-tailwind/react";
 import {
     UserIcon, UserPlusIcon
 } from "@heroicons/react/24/outline";
-import {DefaultPagination} from "../../../components/Pagination";
-import {DynamicTable} from "../../../components/Tables/DynamicTable";
-import {ContactModalContent} from "../../../components/Modals/CreateModals";
-import {TABLE_HEAD_CONTACTS, TABLE_ROWS_CONTACTS} from "../../../components/Tables/Tablecolumns";
+import {DefaultPagination} from "@/components/Pagination";
 import {useMutation, useQuery} from "react-query";
-import {getContacts, createContact} from "../../../utils/https/contacts"
-import {Loading} from "../../../components/ui/Loading";
+import {getContacts, createContact} from "@/utils/https/contacts"
+import {Loading} from "@/components/ui/Loading";
 
 export default function Contacts() {
     const [open, setOpen] = useState(false);

@@ -2,7 +2,7 @@
 import {ConfirmModal} from "@/components/Modals/ConfirmModal";
 import {ContentModal} from "@/components/Modals/ContentModal";
 import {EditGroupModalContent} from "@/components/Modals/EditForms";
-import {Button, Card, CardBody, CardFooter, Typography, Textarea} from "@/utils/material_tailwind"
+import {Button, Card, CardBody, CardFooter, Typography, Textarea} from "@material-tailwind/react"
 import {ArrowLeftCircleIcon} from "@heroicons/react/24/outline";
 import {useRouter, useSearchParams} from "next/navigation"
 import {useState} from "react";
