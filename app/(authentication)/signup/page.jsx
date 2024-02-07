@@ -1,27 +1,38 @@
-'use client'
+'use client';
 import {useState} from "react"
-import {
-    Button, Card, Checkbox, Input, Typography
-} from "@material-tailwind/react";
+import {Card,Typography} from "@material-tailwind/react";
 import {usePathname, useRouter} from "next/navigation";
 import {BreadcrumbsDefault} from "../../../components/Crumbs";
-import {signIn, signOut, useSession} from "next-auth/react";
-import {
-    CredentialsSignInButton, FaceBookSignInButton,
-    GithubSignInButton,
-    GoogleLoginButton,
-    GoogleSignInButton
-} from "@/components/Buttons/AuthButtons";
-import {CredentialsForm} from "@/components/Buttons/CredentialsForm";
 import {SignupForm} from "@/components/Buttons/SignupForm";
 
+
 export default function Login() {
-    const {data: session} = useSession()
     const router = useRouter()
+    const [error, setError] = useState(null);
 
     const pathname = usePathname()
-    if (session && session.user) {
-        return router.push("/dashboard")
+
+    const handleSignup = async (email,password,lastname,firstname) => {
+        try {
+            const res = await fetch('api/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({email, password,lastname,firstname}),
+            })
+            const data = await res.json()
+            console.log('DATA',data)
+
+            if (data.error) {
+                setError(data.error);
+              } else {
+                router.push('/dashboard');
+              }
+        } catch (error) {
+            console.error(error);
+            setError('Internal Server Error');
+        }
     }
 
     return (
@@ -34,7 +45,7 @@ export default function Login() {
                     Sign Up
                 </Typography>
                 <div className={"flex flex-col space-y-8 w-[500px] items-center"}>
-                    <SignupForm />
+                    <SignupForm handleSignup={handleSignup} error={error} />
                 </div>
             </Card>
         </main>)
