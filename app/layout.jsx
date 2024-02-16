@@ -7,6 +7,9 @@ import "../public/styles/globals.css";
 import { Suspense } from "react";
 import { NavigationEvents } from "@/components/navigation-events";
 import { AuthContextProvider } from "./context/AuthContext";
+import { AntdRegistry } from "@ant-design/nextjs-registry";
+import { ConfigProvider } from "antd";
+import ThemeConfig from "@/theme/themeConfig";
 
 const queryClient = new QueryClient();
 
@@ -17,21 +20,25 @@ const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <QueryClientProvider client={queryClient}>
-      <ThemeProvider>
-        <html lang="en">
-          <body>
-            {/* <Providers> */}
-              <AuthContextProvider>
-                {children}
-                <Suspense fallback={null}>
-                  <NavigationEvents />
-                </Suspense>
-              </AuthContextProvider>
-            {/* </Providers> */}
-          </body>
-        </html>
-      </ThemeProvider>
-    </QueryClientProvider>
+    <ConfigProvider theme={ThemeConfig}>
+      <QueryClientProvider client={queryClient}>
+        <ThemeProvider>
+          <html lang="en">
+            <body>
+              <AntdRegistry>
+                {/* <Providers> */}
+                <AuthContextProvider>
+                  {children}
+                  <Suspense fallback={null}>
+                    <NavigationEvents />
+                  </Suspense>
+                </AuthContextProvider>
+                {/* </Providers> */}
+              </AntdRegistry>
+            </body>
+          </html>
+        </ThemeProvider>
+      </QueryClientProvider>
+    </ConfigProvider>
   );
 }

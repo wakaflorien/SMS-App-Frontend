@@ -69,7 +69,7 @@ export const CredentialsForm = () => {
 
       <button
         type="submit"
-        className="w-full h-12 px-6 mt-4 text-lg text-white transition-colors duration-150 bg-blue-600 rounded-lg focus:shadow-outline hover:bg-blue-700"
+        className="w-full h-12 px-6 mt-4 text-lg text-white transition-colors duration-150 !bg-primary rounded-lg focus:shadow-outline hover:bg-blue-700"
       >
         Log in
       </button>

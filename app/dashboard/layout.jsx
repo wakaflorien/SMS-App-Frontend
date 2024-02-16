@@ -114,6 +114,7 @@ export default function DashbaordLayout({ children }) {
     }, {
         id: 3, label: "Groups", icon: <UserGroupIcon className="h-5 w-5" />, href: "/dashboard/groups",
     },];
+    
     const handleRoute = (value) => {
         router.push(value);
     };

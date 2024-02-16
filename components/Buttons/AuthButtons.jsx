@@ -66,58 +66,6 @@ export function GoogleSignInButton() {
   );
 }
 
-export function GithubSignInButton() {
-
-  const handleGithubSignIn = async () => {
-    try {
-      const provider = new GithubAuthProvider();
-      const result = await signInWithPopup(auth, provider);
-      if (!result) {
-        return console.log("NO RESULT");
-      }
-      console.log("RESULT", result)
-      // const token = result.user.accessToken;
-      // const name = result.user.displayName.split(" ");
-      // const data = {
-      //   email: result.user.email,
-      //   uid: result.user.uid,
-      //   firstname: name[0],
-      //   lastname: name[1],
-      // };
-      // const res = await axios.post("/api/github", data);
-      // console.log("USER", res.data.user);
-    } catch (error) {
-      console.log("GITHUB ERROR", error);
-    }
-  };
-
-
-  return (
-    <button
-      onClick={handleGithubSignIn}
-      className="w-full flex items-center font-normal justify-center h-14 px-6 mt-4 text-lg transition-colors duration-300 bg-white border border-black text-black rounded-lg focus:shadow-outline hover:bg-slate-200"
-    >
-      <Image src={githubLogo} alt="Github Logo" width={20} height={20} />
-      <span className="ml-4">Continue with Github</span>
-    </button>
-  );
-}
-export function FaceBookSignInButton() {
-  const handleClick = () => {
-    signIn("facebook");
-  };
-
-  return (
-    <button
-      onClick={handleClick}
-      className="w-full flex items-center font-semibold justify-center h-14 px-6 mt-4 text-xl transition-colors duration-300 bg-white border border-black text-black rounded-lg focus:shadow-outline hover:bg-slate-200"
-    >
-      <Icon icon="mdi:facebook" />
-      <span className="ml-4">Continue with Github</span>
-    </button>
-  );
-}
-
 export function CredentialsSignInButton() {
   const handleClick = () => {
     signIn();
