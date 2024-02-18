@@ -1,9 +1,8 @@
 "use client";
-import { useRef } from "react";
 import { Wrapper } from "../layout/Wrapper";
-import { Checkbox, Form, Input, Button, Select, notification } from "antd";
-import emailjs from "@emailjs/browser";
-import axios from "axios";
+import { Form, Input, Button, Select } from "antd";
+import { sendEmail } from "@/utils/emails/sendMail";
+import { useState } from "react";
 
 const { Option } = Select
 export const itemStyles = {
@@ -12,34 +11,23 @@ export const itemStyles = {
 
 export function Footer() {
   const [form] = Form.useForm();
-  const formSend = useRef();
+  const [sendLoading, setSendLoading] = useState(false)
 
   const onFinish = (values) => {
-    console.log('Success:', values);
-
-    const data = {
-      service_id: 'process.env.NEXT_PUBLIC_SERVICE_ID',
-      template_id: 'process.env.NEXT_PUBLIC_TEMPLATE_ID',
-      user_id: 'process.env.NEXT_PUBLIC_MAILJS_PUBLIC_KEY',
-      template_params: {
-        'username': 'James',
-        'g-recaptcha-response': '03AHJ_ASjnLA214KSNKFJAK12sfKASfehbmfd...'
-      }
-    };
+    setSendLoading(true)
     try {
-      const response = axios.post("https://api.emailjs.com/api/v1.0/email/send", data)
-      console.log("respones", response)
-      return response
+      sendEmail(values)
+      form.resetFields()
+      setSendLoading(false)
     } catch (error) {
-      notification.error({
-        message: "Failed",
-        description: error.message
-      })
+      console.log(error)
+      setSendLoading(false)
     }
   };
   const onFinishFailed = (errorInfo) => {
     console.log('Failed:', errorInfo);
-  };
+  }
+ 
   const prefixSelector = (
     <Form.Item name="prefix" className="bg-white/25">
       <Select
@@ -73,7 +61,7 @@ export function Footer() {
           >
             <Form.Item
               label=""
-              name="name"
+              name="from_name"
               className="bg-white/25"
               rules={[
                 {
@@ -171,6 +159,7 @@ export function Footer() {
                 style={itemStyles.inputStyles}
                 type="secondary"
                 htmlType="submit"
+                loading={sendLoading}
                 block
               >
                 Send Message
