@@ -1,9 +1,23 @@
 import React from "react";
-import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
-import { Layout, Button } from "antd";
+import { MenuFoldOutlined, MenuUnfoldOutlined,UserOutlined,LogoutOutlined } from "@ant-design/icons";
+import { Layout, Button ,Flex,Dropdown,Space,Avatar} from "antd";
 const { Header } = Layout;
 
 const DashboardHeader = ({ collapsed, setCollapsed, colorBgContainer }) => {
+  const items = [
+    {
+      label: <a href="#" className="px-2 flex gap-2 text-base"> <UserOutlined /> Profile</a>,
+      key: '0',
+    },
+    {
+      type: 'divider',
+    },
+    {
+      label: <a href="#" className="px-2 flex gap-2 text-base"> <LogoutOutlined />Logout</a>,
+      key: '1',
+    },
+  ];
+
   return (
     <Header
       style={{
@@ -11,6 +25,8 @@ const DashboardHeader = ({ collapsed, setCollapsed, colorBgContainer }) => {
         background: colorBgContainer,
       }}
     >
+      <Flex justify="space-between">
+      
       <Button
         type="text"
         icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
@@ -21,6 +37,15 @@ const DashboardHeader = ({ collapsed, setCollapsed, colorBgContainer }) => {
           height: 64,
         }}
       />
+      <Dropdown menu={{items}} trigger={['click']} className="mr-2 md:mr-6">
+        <Space direction="vertical" size={16}>
+          <Space wrap size={16}>
+          <Avatar size={50} icon={<UserOutlined />} />
+          </Space>
+        </Space>
+        
+      </Dropdown>
+      </Flex>
     </Header>
   );
 };
