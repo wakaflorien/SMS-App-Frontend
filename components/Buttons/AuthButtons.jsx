@@ -1,16 +1,11 @@
 "use client";
-import { Icon } from "@iconify/react";
 import {
   GoogleAuthProvider,
   signInWithPopup,
-  GithubAuthProvider,
-  signInWithRedirect
 } from "firebase/auth";
 import Image from "next/image";
 import googleLogo from "@/public/google.png";
-import githubLogo from "@/public/github.png";
 import { signIn } from "next-auth/react";
-import { UserAuth } from "@/app/context/AuthContext";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { auth } from "@/app/api/firebase";
