@@ -14,6 +14,7 @@ const { Sider } = Layout;
 
 const DashboardLayout = ({ children }) => {
   const [collapsed, setCollapsed] = useState(false);
+
   const {
     token: { colorBgContainer },
   } = theme.useToken();
@@ -88,10 +89,21 @@ const DashboardLayout = ({ children }) => {
   const renderMenuItems = (items) =>
     items.map((item) =>
       item.children ? (
-        <Menu.SubMenu key={item.key} icon={item.icon} title={item.label} theme="light" 
+        <Menu.SubMenu
+          key={item.key}
+          icon={item.icon}
+          title={
+            
+              item.label
+          }
+          className="!text-white"
+          theme="light"
         >
           {item.children.map((child) => (
-            <Menu.Item key={child.key} onClick={() => router.push(child.link)} >
+            <Menu.Item
+              key={child.key}
+              onClick={() => router.push(child.link)}
+            >
               {child.label}
             </Menu.Item>
           ))}
@@ -116,7 +128,8 @@ const DashboardLayout = ({ children }) => {
     )
     .filter((key) => key !== null);
 
-  console.log(defaultSelectedKeys);
+    
+
   return (
     <Layout className="h-screen">
       <Sider trigger={null} collapsible collapsed={collapsed}>
