@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { FloatButton, Modal, Input, Divider } from "antd";
+import { FloatButton, Modal, Input, Divider,Button } from "antd";
 import { MessageOutlined, SearchOutlined } from "@ant-design/icons";
 
 const MessagesLayout = ({ children }) => {
@@ -19,7 +19,7 @@ const MessagesLayout = ({ children }) => {
   return (
     <>
       <FloatButton
-        icon={<MessageOutlined />}
+        icon={<MessageOutlined style={{fontSize:21}} />}
         type="primary"
         onClick={showModal}
         style={{ right: 50, width: 55, height: 55 }}
@@ -40,6 +40,10 @@ const MessagesLayout = ({ children }) => {
             prefix={<SearchOutlined color="red" />}
           />
           <TextArea placeholder="Message..." rows={4} />
+        </div>
+        <div className="flex justify-end mt-3 space-x-3">
+            <Button size="large" style={{width:100}} onClick={handleCancel}>Cancel</Button>
+            <Button type="primary" size="large" style={{width:100}}>Send</Button>
         </div>
       </Modal>
       {children}

@@ -13,17 +13,21 @@ const AllMessagesPage = () => {
       const dataSource = [
         {
           key: '1',
-          name: 'Mike',
-          messageContent: '32',
-          Target: '10 Downing Street',
-          Group: '10 Downing Street',
-          Email: 'sostene@fuelcapp.com',
+          name: 'Info Text',
+          messagecontent: 'Hellooo',
+          target: 'Home',
+          group: '2023-10-25',
+          datetime: '2023-10-25 19:09 PM',
+          email: 'sostene@fuelcapp.com',
         },
         {
           key: '2',
-          name: 'John',
-          age: 42,
-          address: '10 Downing Street',
+          name: 'Info Text',
+          messagecontent: 'Hiiiiii',
+          target: 'Home',
+          group: '2023-10-25',
+          datetime: '2023-10-25 19:09 PM',
+          email: 'sostene@fuelcapp.com',
         },
       ];
       
@@ -35,28 +39,28 @@ const AllMessagesPage = () => {
         },
         {
           title: 'Message Content',
-          dataIndex: 'Message Content',
-          key: 'Message Content',
+          dataIndex: 'messagecontent',
+          key: 'messagecontent',
         },
         {
           title: 'Target',
-          dataIndex: 'Target',
-          key: 'Target',
+          dataIndex: 'target',
+          key: 'target',
         },
         {
           title: 'Email',
-          dataIndex: 'Email',
-          key: 'Email',
+          dataIndex: 'email',
+          key: 'email',
         },
         {
           title: 'Date Time',
-          dataIndex: 'Date Time',
-          key: 'Date Time',
+          dataIndex: 'datetime',
+          key: 'datetime',
         },
         {
           title: 'Group',
-          dataIndex: 'Group',
-          key: 'Group',
+          dataIndex: 'group',
+          key: 'group',
         },
       ];
 
@@ -71,7 +75,7 @@ const AllMessagesPage = () => {
         }}
       >
         <Title level={3}>All Messages</Title>
-        <Table dataSource={dataSource} columns={columns}  />
+        <Table bordered dataSource={dataSource} columns={columns}  />
       </Content>
   )
 }
