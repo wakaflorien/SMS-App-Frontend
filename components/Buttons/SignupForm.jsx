@@ -1,32 +1,27 @@
+'use client';
 import {useState} from "react";
 import {useRouter} from "next/navigation";
-import {useSession} from "next-auth/react";
 
-export const SignupForm = () => {
-    const {data: session} = useSession()
-
+export const SignupForm = ({handleSignup,error}) => {
     const router = useRouter();
-    const [error, setError] = useState(null);
-
-    const handleSubmit = async (e) => {
+    console.log('Returned Error',error);
+    const signupWithEmailAndPassword = (e) => {
         e.preventDefault();
         const data = new FormData(e.currentTarget);
-        console.log("data", data, data.get("email"), data.get("password"))
-    };
-    if (session) {
-        return router.push("/dashboard")
+        handleSignup(data.get("email"), data.get("password"),data.get("fname"),data.get("lname"));
     }
+
     return (
         <form
             className="w-full mt-8 text-xl text-black font-semibold flex flex-col space-y-4"
-            onSubmit={handleSubmit}
+            onSubmit={signupWithEmailAndPassword}
         >
             {error && (
                 <span className="p-4 mb-2 text-lg font-semibold text-white bg-red-500 rounded-md">
           {error}
         </span>
             )}
-            <label htmlFor={"email"} className={"text-base font-normal"}>First Name</label>
+            <label htmlFor={"fname"} className={"text-base font-normal"}>First Name</label>
             <input
                 type="text"
                 name="fname"
@@ -34,7 +29,7 @@ export const SignupForm = () => {
                 required
                 className="w-full px-4 py-4 mb-4 border text-xs font-normal border-gray-300 rounded-md"
             />
-            <label htmlFor={"email"} className={"text-base font-normal"}>Last Name</label>
+            <label htmlFor={"lname"} className={"text-base font-normal"}>Last Name</label>
             <input
                 type="text"
                 name="lname"

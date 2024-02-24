@@ -4,6 +4,7 @@ import {Wrapper} from "../layout/Wrapper";
 import {CodeBracketIcon} from "@heroicons/react/24/solid";
 import {Cog6ToothIcon} from "@heroicons/react/24/outline"
 import {Button} from "@material-tailwind/react";
+import { useRouter } from "next/navigation";
 
 const offerCartds = [
   {
@@ -42,6 +43,7 @@ const offerCartds = [
 ];
 
 export function Offer() {
+  const router = useRouter()
   return (
     <Wrapper className={"my-9"} id="offers">
       <div className="w-full">
@@ -71,6 +73,7 @@ export function Offer() {
                 variant="outlined"
                 size={"lg"}
                 color="white"
+                onClick={() => router.push("/#contact")}
               >
                 Learn more
               </Button>
