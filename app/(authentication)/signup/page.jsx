@@ -2,7 +2,6 @@
 import {useState} from "react"
 import {Card,Typography} from "@material-tailwind/react";
 import {usePathname, useRouter} from "next/navigation";
-import {BreadcrumbsDefault} from "../../../components/Crumbs";
 import {SignupForm} from "@/components/Buttons/SignupForm";
 
 
@@ -37,9 +36,6 @@ export default function Login() {
 
     return (
         <main className={"flex flex-col items-center justify-center lg:py-10"}>
-            <header className={"lg:w-full w-full mx-auto"}>
-                <BreadcrumbsDefault pathname={pathname} />
-            </header>
             <Card color="transparent" shadow={false} className="flex items-center rounded-none">
                 <Typography variant="h4" color="blue-gray">
                     Sign Up
