@@ -9,7 +9,6 @@ import { NavigationEvents } from "@/components/navigation-events";
 import { AuthContextProvider } from "./context/AuthContext";
 import { AntdRegistry } from "@ant-design/nextjs-registry";
 import { ConfigProvider } from "antd";
-import ThemeConfig from "@/theme/themeConfig";
 
 const queryClient = new QueryClient();
 
@@ -20,7 +19,7 @@ const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <ConfigProvider theme={ThemeConfig}>
+    <ConfigProvider>
       <QueryClientProvider client={queryClient}>
         <ThemeProvider>
           <html lang="en">
