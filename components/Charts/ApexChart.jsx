@@ -10,7 +10,7 @@ export default function ApexChart({ onReady, type, ...otherProps }) {
       setChart(() => mod.default);
       onReady();
     });
-  }, []);
+  }, [onReady]);
 
   return hasType && Chart && <Chart {...otherProps} type={type} />;
 }
