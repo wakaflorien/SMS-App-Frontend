@@ -27,19 +27,19 @@ export const CredentialsForm = () => {
     }
   };
 
-  useEffect(() => {
-    const redirectUser = () => {
-      router.push("/dashboard");
-    };
+  // useEffect(() => {
+  //   const redirectUser = () => {
+  //     router.push("/dashboard");
+  //   };
 
-    const unsubscribe = auth.onAuthStateChanged((user) => {
-      if (user) {
-        redirectUser();
-      }
-    });
+  //   const unsubscribe = auth.onAuthStateChanged((user) => {
+  //     if (user) {
+  //       redirectUser();
+  //     }
+  //   });
 
-    return () => unsubscribe();
-  }, [router]);
+  //   return () => unsubscribe();
+  // }, [router]);
 
   return (
     <form

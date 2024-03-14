@@ -3,6 +3,7 @@ import {useState} from "react"
 import {Card,Typography} from "@material-tailwind/react";
 import {usePathname, useRouter} from "next/navigation";
 import {SignupForm} from "@/components/Buttons/SignupForm";
+import Link from "next/link";
 
 
 export default function Login() {
@@ -25,9 +26,10 @@ export default function Login() {
 
             if (data.error) {
                 setError(data.error);
-              } else {
-                router.push('/dashboard');
-              }
+              } 
+            //   else {
+            //     router.push('/dashboard');
+            //   }
         } catch (error) {
             console.error(error);
             setError('Internal Server Error');
@@ -43,6 +45,7 @@ export default function Login() {
                 <div className={"flex flex-col space-y-8 w-[500px] items-center"}>
                     <SignupForm handleSignup={handleSignup} error={error} />
                 </div>
+                <Typography className=" justify-self-start w-full mt-10 text-xl">Already have account? <Link href="/login" className="text-blue-700">Login</Link></Typography>
             </Card>
         </main>)
 }
