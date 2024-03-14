@@ -1,12 +1,20 @@
 import React from "react";
 import { MenuFoldOutlined, MenuUnfoldOutlined,UserOutlined,LogoutOutlined } from "@ant-design/icons";
 import { Layout, Button ,Flex,Dropdown,Space,Avatar} from "antd";
+import { auth } from "@/app/api/firebase";
+
+
 const { Header } = Layout;
 
 const DashboardHeader = ({ collapsed, setCollapsed, colorBgContainer }) => {
   const items = [
     {
-      label: <a href="#" className="px-2 flex gap-2 text-base"> <UserOutlined /> Profile</a>,
+      label: <a href="#" className="px-2 flex gap-2 text-base" onClick={() => {
+        auth.signOut();
+        if(auth.currentUser === null){
+          window.location.href = "/login";
+        }
+      }}> <UserOutlined /> Profile</a>,
       key: '0',
     },
     {

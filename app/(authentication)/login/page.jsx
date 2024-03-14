@@ -1,14 +1,11 @@
 'use client'
 import { Card, Typography } from "@material-tailwind/react";
-import { usePathname, useRouter } from "next/navigation";
 import {  GoogleSignInButton } from "@/components/Buttons/AuthButtons";
 import { CredentialsForm } from "@/components/Buttons/CredentialsForm";
 import { NavBar } from "@/components/sections/NavBar";
+import Link from "next/link";
 
 export default function Login() {
-    const router = useRouter()
-
-    const pathname = usePathname()
 
     return (
         <>
@@ -28,6 +25,7 @@ export default function Login() {
                         <span className={"font-bold text-base"}>Or</span>
                         <CredentialsForm />
                     </div>
+                    <Typography className=" justify-self-start w-full mt-10 text-xl">You don&apos;t have account? <Link href="/signup" className="text-blue-700">Signup</Link></Typography>
                 </Card>
             </main>
             </div>

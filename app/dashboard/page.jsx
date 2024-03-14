@@ -1,6 +1,7 @@
 "use client";
 import React from 'react';
 import { Layout, theme,Card } from 'antd';
+import Chart from '@/components/dashboard/Chart';
 const { Content } = Layout;
 
 
@@ -57,6 +58,7 @@ const DashboardPage = () => {
             <p>Card content</p>
           </Card>
           </div>
+          <Chart />
       </Content>
   );
 };
