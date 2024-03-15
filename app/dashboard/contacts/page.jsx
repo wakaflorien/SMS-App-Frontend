@@ -1,14 +1,16 @@
 "use client";
 import React from "react";
-import { Layout, theme, Input, Table, Spin, Alert } from "antd";
-import { ContactsOutlined, LoadingOutlined } from "@ant-design/icons";
+import { Layout, theme, Input, Table } from "antd";
+import { ContactsOutlined } from "@ant-design/icons";
 import { getContacts } from "@/utils/https/contacts";
 import { useQuery } from "@tanstack/react-query";
+import DashboardFetchingError from "@/components/dashboard/DashboardFetchingError";
+import DashboardFetchingLoader from "@/components/dashboard/DashboardFetchingLoader";
 
 const { Content } = Layout;
 
 const AllContactsPage = () => {
-  const { data, isLoading, isError, error } = useQuery({
+  const { data, isLoading, error } = useQuery({
     queryKey: ["contacts"],
     queryFn: getContacts,
   });
@@ -44,54 +46,12 @@ const AllContactsPage = () => {
     },
   ];
 
-  // const handleSearch = ()
-
   if (error)
     return (
-      <Content
-        style={{
-          margin: "24px 16px",
-          padding: 24,
-          minHeight: 280,
-          background: colorBgContainer,
-          borderRadius: borderRadiusLG,
-        }}
-      >
-        <Alert
-          message="Error!"
-          description="Unable to retrieve contacts"
-          type="error"
-        />
-      </Content>
+      <DashboardFetchingError alertDescription="Unable to retrieve contacts" />
     );
 
-  if (isLoading)
-    return (
-      <Content
-        style={{
-          margin: "24px 16px",
-          padding: 24,
-          minHeight: 280,
-          background: colorBgContainer,
-          borderRadius: borderRadiusLG,
-        }}
-        className="flex justify-center items-center space-x-5"
-      >
-        <div className="flex justify-center items-center space-x-5">
-          <span>Retrieving contacts</span>
-          <Spin
-            indicator={
-              <LoadingOutlined
-                style={{
-                  fontSize: 32,
-                }}
-                spin
-              />
-            }
-          />
-        </div>
-      </Content>
-    );
+  if (isLoading) return <DashboardFetchingLoader categoryName="contacts" />;
 
   return (
     <Content
