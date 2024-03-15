@@ -14,12 +14,16 @@ const { Sider } = Layout;
 
 const DashboardLayout = ({ children }) => {
   const [collapsed, setCollapsed] = useState(false);
+  const userToken = localStorage.getItem("token");
 
   const {
     token: { colorBgContainer },
   } = theme.useToken();
 
+  const currentPath = usePathname(); // Use the usePathname hook
   const router = useRouter();
+
+  if (!userToken) return router.push("/login");
 
   const menuItems = [
     {
@@ -59,11 +63,6 @@ const DashboardLayout = ({ children }) => {
         { key: "3.1", label: "All Contacts", link: "/dashboard/contacts" },
         {
           key: "3.2",
-          label: "Add New Contact",
-          link: "/dashboard/contacts/new",
-        },
-        {
-          key: "3.3",
           label: "Add From CSV",
           link: "/dashboard/contacts/fromcsv",
         },
@@ -73,10 +72,7 @@ const DashboardLayout = ({ children }) => {
       key: "4",
       icon: <TeamOutlined />,
       label: "Groups",
-      children: [
-        { key: "4.1", label: "All Groups", link: "/dashboard/groups" },
-        { key: "4.2", label: "Create Group", link: "/dashboard/groups/create" },
-      ],
+      link: "/dashboard/groups",
     },
     {
       key: "5",
@@ -92,18 +88,12 @@ const DashboardLayout = ({ children }) => {
         <Menu.SubMenu
           key={item.key}
           icon={item.icon}
-          title={
-            
-              item.label
-          }
+          title={item.label}
           className="!text-white"
           theme="light"
         >
           {item.children.map((child) => (
-            <Menu.Item
-              key={child.key}
-              onClick={() => router.push(child.link)}
-            >
+            <Menu.Item key={child.key} onClick={() => router.push(child.link)}>
               {child.label}
             </Menu.Item>
           ))}
@@ -119,7 +109,6 @@ const DashboardLayout = ({ children }) => {
       )
     );
 
-  const currentPath = usePathname(); // Use the usePathname hook
   const defaultSelectedKeys = menuItems
     .map((item) =>
       item.link || item.children.link === currentPath.replace(/\?$/, "")
@@ -127,8 +116,6 @@ const DashboardLayout = ({ children }) => {
         : null
     )
     .filter((key) => key !== null);
-
-    
 
   return (
     <Layout className="h-screen">
