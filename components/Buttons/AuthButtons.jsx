@@ -1,8 +1,5 @@
 "use client";
-import {
-  GoogleAuthProvider,
-  signInWithPopup,
-} from "firebase/auth";
+import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import Image from "next/image";
 import googleLogo from "@/public/google.png";
 import { signIn } from "next-auth/react";
@@ -30,7 +27,10 @@ export function GoogleSignInButton() {
         lastname: name[1],
       };
       const res = await axios.post("/api/google", data);
-      console.log("USER", res.data.user);
+      localStorage.setItem("token", token);
+      localStorage.setItem("uid", res.data.user.uid);
+      localStorage.setItem("id", res.data.user._id);
+      router.push("/dashboard");
     } catch (error) {
       console.log("GOOGLE ERROR", error);
     }
