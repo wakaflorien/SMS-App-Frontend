@@ -4,7 +4,7 @@ import { Wrapper } from "../layout/Wrapper";
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/solid";
-import {Button} from "@material-tailwind/react";
+import { Button } from "@material-tailwind/react";
 
 const navList = [
   {
@@ -58,9 +58,17 @@ export function NavBar() {
       <nav className="flex justify-between h-16 xl:h-20 items-center">
         <div className="flex gap-8 items-center">
           {/* logo */}
-          <div className="font-extrabold text-xl xl:text-3xl tracking-wide">
-            <Image src={"/images/logo.png"} alt={"Logo"} width={200} height={200}/>
-          </div>
+          <Link
+            href="/"
+            className="font-extrabold text-xl xl:text-3xl tracking-wide"
+          >
+            <Image
+              src={"/images/logo.png"}
+              alt={"Logo"}
+              width={200}
+              height={200}
+            />
+          </Link>
           <ul className="hidden xl:flex gap-9">
             <li>
               <a href={"/#about"}>About</a>
@@ -129,10 +137,10 @@ export function NavBar() {
             <a href={"/"}>System Status</a>
           </li>
           <li>
-            <a href={"/authentication"}>Login</a>
+            <a href={"/login"}>Login</a>
           </li>
           <li>
-            <a href={"/authentication"}>
+            <a href={"/signup"}>
               <Button
                 className="rounded-none  py-2 px-9 "
                 variant="outlined"

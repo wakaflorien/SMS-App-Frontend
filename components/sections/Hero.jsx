@@ -15,7 +15,7 @@ export function Hero() {
           </p>
         </div>
       </div>
-      <Link href={"/authentication"}>
+      <Link href={"/login"}>
         <Button
           className="rounded-none py-3 px-8"
           variant="outlined"
