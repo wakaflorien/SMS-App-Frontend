@@ -1,6 +1,7 @@
 import React from "react";
 import { Layout, theme, Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
+import LoadingSpinner from "../LoadingSpinner";
 
 const { Content } = Layout;
 
@@ -20,16 +21,7 @@ const DashboardFetchingLoader = ({ categoryName }) => {
     >
       <div className="flex justify-center items-center space-x-5">
         <span className="text-xl font-bold text-primary">Retrieving {categoryName}</span>
-        <Spin
-          indicator={
-            <LoadingOutlined
-              style={{
-                fontSize: 32,
-              }}
-              spin
-            />
-          }
-        />
+        <LoadingSpinner fontSize={32} />
       </div>
     </Content>
   );

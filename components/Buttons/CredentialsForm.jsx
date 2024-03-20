@@ -1,45 +1,32 @@
 "use client";
-import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { auth } from "@/app/api/firebase";
-import axios from "axios";
+import { useMutation } from "@tanstack/react-query";
+import { loginWithEmailAndPassword } from "@/utils/https/auth";
+import LoadingSpinner from "../LoadingSpinner";
 
 export const CredentialsForm = () => {
   const router = useRouter();
-  const [error, setError] = useState(null);
+
+  const { isPending, error, data, mutate, isSuccess } = useMutation({
+    mutationFn: loginWithEmailAndPassword,
+  });
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const data = new FormData(e.currentTarget);
-    console.log("data", data, data.get("email"), data.get("password"));
-
-    try {
-      const response = await axios.post("/api/login", {
-        email: data.get("email"),
-        password: data.get("password"),
-      });
-      console.log("user", response.data);
-      //   if (user) {
-      //     router.push("/dashboard");
-      //   }
-    } catch (error) {
-      console.log("Error: ", error);
-      setError("Your Email or Password is wrong!");
+    mutate({
+      email: data.get("email"),
+      password: data.get("password"),
+    });
+    if (isSuccess) {
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("uid", data.uid);
+      localStorage.setItem("id", data._id);
+      router.push("/dashboard");
     }
   };
 
-  // useEffect(() => {
-  //   const redirectUser = () => {
-  //     router.push("/dashboard");
-  //   };
-
-  //   const unsubscribe = auth.onAuthStateChanged((user) => {
-  //     if (user) {
-  //       redirectUser();
-  //     }
-  //   });
-
-  //   return () => unsubscribe();
-  // }, [router]);
+  console.log("data", data);
 
   return (
     <form
@@ -47,8 +34,10 @@ export const CredentialsForm = () => {
       onSubmit={handleSubmit}
     >
       {error && (
-        <span className="p-4 mb-2 text-lg font-semibold text-white bg-red-500 rounded-md">
-          {error}
+        <span className="p-4 mb-2 text-lg font-semibold text-white bg-red-400 rounded-md">
+          {error.response.data.error
+            ? error.response.data.error
+            : error.message}
         </span>
       )}
       <input
@@ -69,9 +58,11 @@ export const CredentialsForm = () => {
 
       <button
         type="submit"
+        disabled={isPending}
         className="w-full h-12 px-6 mt-4 text-lg text-white transition-colors duration-150 !bg-primary rounded-lg focus:shadow-outline hover:bg-blue-700"
       >
-        Log in
+        <span className="mr-4">Log in</span>
+        {isPending && <LoadingSpinner color="white" fontSize={23} />}
       </button>
     </form>
   );
