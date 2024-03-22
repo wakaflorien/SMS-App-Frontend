@@ -13,6 +13,7 @@ const AllMessagesPage = () => {
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
+  
   const { data, isLoading, error } = useQuery({
     queryKey: "messages",
     queryFn: getMessages,
