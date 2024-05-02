@@ -55,7 +55,7 @@ const AllMessagesPage = () => {
       <DashboardFetchingError alertDescription="Unable to retrieve groups" />
     );
 
-  if (isLoading) return <DashboardFetchingLoader categoryName="groups" />;
+  if (isLoading) return <DashboardFetchingLoader categoryName="Messages" />;
 
   return (
     <Content
