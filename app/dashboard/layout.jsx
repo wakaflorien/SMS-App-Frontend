@@ -39,11 +39,6 @@ const DashboardLayout = ({ children }) => {
       children: [
         { key: "2.1", label: "All Messages", link: "/dashboard/messages" },
         {
-          key: "2.2",
-          label: "Send New Message",
-          link: "/dashboard/messages/new",
-        },
-        {
           key: "2.3",
           label: "Send To group",
           link: "/dashboard/messages/group",
