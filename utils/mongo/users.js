@@ -118,3 +118,12 @@ export async function googleSignInAndSignup(email, lastname, firstname, uid) {
     throw new Error("User creation failed");
   }
 }
+
+export async function updateUserBalance(email, balance) {
+  await init();
+  try {
+    const { acknowledged } = await db.collection("users").updateOne();
+  } catch (error) {
+    throw new Error("User balance update failed");
+  }
+}
