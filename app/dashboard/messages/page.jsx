@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { Layout, theme, Table, Input } from "antd";
+import { Layout, theme, Table, Input, Tag, message } from "antd";
 import { TeamOutlined } from "@ant-design/icons";
 import { useQuery } from "@tanstack/react-query";
 import { getMessages } from "@/utils/https/messages";
@@ -13,13 +13,19 @@ const AllMessagesPage = () => {
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
-  
+
   const { data, isLoading, error } = useQuery({
     queryKey: "messages",
     queryFn: getMessages,
   });
 
-  const [filteredData, setFilteredData] = React.useState(data);
+  const newData = data?.map((message) => {
+    return {...message, messageStatus:'fail'}
+  });
+
+  console.log(newData)
+
+  const [filteredData, setFilteredData] = React.useState(newData);
   const [searchQuery, setSearchQuery] = React.useState("");
 
   const columns = [
@@ -42,6 +48,26 @@ const AllMessagesPage = () => {
       title: "Email",
       dataIndex: "email",
       key: "email",
+    },
+    {
+      title: "Status",
+      dataIndex: "messageStatus",
+      key: "messageStatus",
+      render: (_, { messageStatus }) => {
+        return (
+          <Tag
+            color={
+              messageStatus === "delivered"
+                ? "green"
+                : messageStatus === "sent"
+                ? "geekblue"
+                : "volcano"
+            }
+          >
+            {messageStatus}
+          </Tag>
+        );
+      },
     },
     {
       title: "Date Time",
@@ -86,7 +112,7 @@ const AllMessagesPage = () => {
 
       <Table
         bordered
-        dataSource={filteredData ? filteredData : data}
+        dataSource={filteredData ? filteredData : newData}
         columns={columns}
       />
     </Content>
