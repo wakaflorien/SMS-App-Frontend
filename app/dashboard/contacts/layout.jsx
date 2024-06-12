@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
-import { FloatButton, Modal, Input, Divider, Button } from "antd";
-import { ContactsOutlined, SearchOutlined } from "@ant-design/icons";
+import { FloatButton, Modal, Input, Divider, Button, notification } from "antd";
+import { ContactsOutlined } from "@ant-design/icons";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { createContact } from "@/utils/https/contacts";
 import LoadingSpinner from "@/components/LoadingSpinner";
@@ -10,12 +10,21 @@ const ContactsLayout = ({ children }) => {
   const { TextArea } = Input;
 
   const [isModalOpen, setIsModalOpen] = React.useState(false);
+  const [api, contextHolder] = notification.useNotification();
+
+  const openNotificationWithIcon = (type) => {
+    api[type]({
+      message: "Contact Created",
+      description: "Contact has been successfully created",
+    });
+  };
 
   const querryClient = useQueryClient();
-  const { mutate, data, error, isPending } = useMutation({
+  const { mutate, isPending, isSuccess } = useMutation({
     mutationFn: createContact,
     onSuccess: () => {
       querryClient.invalidateQueries("contacts");
+      openNotificationWithIcon("success");
     },
   });
 
@@ -31,24 +40,27 @@ const ContactsLayout = ({ children }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formData);
+    const formData = new FormData(e.target);
     const name = formData.get("name");
     const email = formData.get("email");
     const phone_number = formData.get("phone");
     const description = formData.get("description");
     mutate({ name, email, phone_number, description });
-    if (data) {
+    if (isSuccess) {
+      e.target.reset();
       handleCancel();
     }
   };
 
   return (
     <div>
+      {contextHolder}
+
       <FloatButton
         icon={<ContactsOutlined style={{ fontSize: 21 }} />}
         type="primary"
         onClick={showModal}
-        style={{ right: 50, width: 55, height: 55 }}
+        style={{ right: 45, width: 50, height: 50 }}
       />
       <Modal
         title="Create new Contact"
@@ -73,20 +85,14 @@ const ContactsLayout = ({ children }) => {
             </Button>
             <button
               type="submit"
-              className="bg-primary rounded-md py-1 px-2 text-white font-semibold"
-              style={{ width: 100 }}
-            >
-              Create{" "}
-              {isPending && <LoadingSpinner color="white" fontSize={20} />}
-            </button>
-            {/* <Button
-              type="primary"
-              typeof="submit"
-              size="large"
+              className="bg-primary rounded-md py-1 px-2 text-white font-semibold flex items-center justify-center border-none"
               style={{ width: 100 }}
             >
               Create
-            </Button> */}
+              {isPending && (
+                <LoadingSpinner color="white" className="ml-2" fontSize={18} />
+              )}
+            </button>
           </div>
         </form>
       </Modal>

@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { Layout, theme, Table, Input, Tag, message } from "antd";
+import { Layout, theme, Table, Input, Tag, Select,message } from "antd";
 import { TeamOutlined } from "@ant-design/icons";
 import { useQuery } from "@tanstack/react-query";
 import { getMessages } from "@/utils/https/messages";
@@ -20,7 +20,7 @@ const AllMessagesPage = () => {
   });
 
   const newData = data?.map((message) => {
-    return {...message, messageStatus:'fail'}
+    return {...message, messageStatus:'sent'}
   });
 
   console.log(newData)
@@ -73,6 +73,7 @@ const AllMessagesPage = () => {
       title: "Date Time",
       dataIndex: "createdAt",
       key: "createdAt",
+      render: (date) => new Date(date).toDateString(),
     },
   ];
 
@@ -94,10 +95,11 @@ const AllMessagesPage = () => {
       }}
     >
       <h3>All Messages</h3>
+      <div className="flex justify-between items-center">
       <Input
         size="large"
         placeholder="Search message by name, message..."
-        className="my-4"
+        className="my-4 mr-8"
         value={searchQuery}
         onChange={(e) => {
           setSearchQuery(e.target.value);
@@ -109,6 +111,20 @@ const AllMessagesPage = () => {
         }}
         prefix={<TeamOutlined style={{ fontSize: 17, color: "gray" }} />}
       />
+      <Select
+      defaultValue="All"
+      size="large"
+      style={{ width: 180 }}
+      // onChange={handleChange}
+      options={[
+        { value: 'sent', label: 'Sent' },
+        { value: 'delivered', label: 'Delivered' },
+        { value: 'faild', label: 'Failed'},
+      ]}
+      
+    />
+      </div>
+     
 
       <Table
         bordered

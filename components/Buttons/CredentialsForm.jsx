@@ -1,32 +1,33 @@
 "use client";
 import { useRouter } from "next/navigation";
 import { useMutation } from "@tanstack/react-query";
-import { loginWithEmailAndPassword } from "@/utils/https/auth";
+import { login } from "@/utils/https/auth";
 import LoadingSpinner from "../LoadingSpinner";
+import Cookies from "js-cookie";
 
 export const CredentialsForm = () => {
   const router = useRouter();
 
   const { isPending, error, data, mutate, isSuccess } = useMutation({
-    mutationFn: loginWithEmailAndPassword,
+    mutationFn: login,
   });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const data = new FormData(e.currentTarget);
+    const userData = new FormData(e.currentTarget);
     mutate({
-      email: data.get("email"),
-      password: data.get("password"),
+      phone_or_email: userData.get("phone_or_email"),
+      password: userData.get("password"),
     });
     if (isSuccess) {
-      localStorage.setItem("token", data.token);
-      localStorage.setItem("uid", data.uid);
-      localStorage.setItem("id", data._id);
-      router.push("/dashboard");
+      e.target.reset();
     }
   };
 
-  console.log("data", data);
+  if (isSuccess && data) {
+    Cookies.set("token", data.data.token);
+    router.push("/dashboard");
+  }
 
   return (
     <form
@@ -41,9 +42,9 @@ export const CredentialsForm = () => {
         </span>
       )}
       <input
-        type="email"
-        name="email"
-        placeholder="Email"
+        type="text"
+        name="phone_or_email"
+        placeholder="Email or Phone"
         required
         className="w-full px-4 py-4 mb-4 font-normal border border-gray-300 rounded-md"
       />

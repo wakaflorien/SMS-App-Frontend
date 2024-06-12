@@ -1,16 +1,13 @@
 "use client";
-import React from "react";
-import { Layout, theme, Card, Typography } from "antd";
-import Link from "next/link";
 import Chart from "@/components/dashboard/Chart";
 import {
+  CloseOutlined,
   DeliveredProcedureOutlined,
   SendOutlined,
-  CheckOutlined,
-  CloseOutlined,
-  WarningOutlined,
-  WalletOutlined,
+  WalletOutlined
 } from "@ant-design/icons";
+import { Card, Layout, theme, Typography } from "antd";
+import Link from "next/link";
 const { Content } = Layout;
 
 const DashboardPage = () => {

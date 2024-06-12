@@ -6,8 +6,8 @@ import {
   LogoutOutlined,
 } from "@ant-design/icons";
 import { Layout, Button, Flex, Dropdown, Space, Avatar } from "antd";
-import { auth } from "@/app/api/firebase";
 import { useRouter } from "next/navigation";
+import Cookies from "js-cookie";
 
 const { Header } = Layout;
 
@@ -15,9 +15,7 @@ const DashboardHeader = ({ collapsed, setCollapsed, colorBgContainer }) => {
   const router = useRouter();
 
   const logout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("id");
-    localStorage.removeItem("uid");
+    Cookies.remove("token");
     router.push("/");
   };
 
