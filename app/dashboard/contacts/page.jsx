@@ -85,6 +85,7 @@ const AllContactsPage = () => {
           bordered
           dataSource={filteredData ? filteredData : data}
           columns={columns}
+          pagination={{ pageSize: 7 }}
         />
       </div>
     </Content>

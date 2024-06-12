@@ -1,13 +1,22 @@
 "use client";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useMutation } from "@tanstack/react-query";
-import { signupWithEmailAndPassword } from "@/utils/https/auth";
+import { signup } from "@/utils/https/auth";
 import LoadingSpinner from "../LoadingSpinner";
+import Cookies from "js-cookie";
 
 export const SignupForm = () => {
-  const { mutate, data, isPending, error } = useMutation({
+  const [formError, setFormError] = useState({
+    full_name: "",
+    email: "",
+    password: "",
+    phone_number: "",
+  });
+
+  const { mutate, data, isPending, error, isSuccess } = useMutation({
     mutationKey: "signup",
-    mutationFn: signupWithEmailAndPassword,
+    mutationFn: signup,
   });
 
   const router = useRouter();
@@ -15,19 +24,40 @@ export const SignupForm = () => {
   const useSignup = (e) => {
     e.preventDefault();
     const userData = new FormData(e.currentTarget);
+    // Form validation
+    if (!userData.get("fullname")) {
+      setFormError({ ...error, full_name: "Full Name is required" });
+      return;
+    }
+    if (!userData.get("phone")) {
+      setFormError({ ...error, phone_number: "Phone is required" });
+      return;
+    }
+    if (!userData.get("email")) {
+      setFormError({ ...error, email: "Email is required" });
+      return;
+    }
+
+    if (!userData.get("password")) {
+      setFormError({ ...error, password: "Password is required" });
+      return;
+    }
+
     mutate({
       email: userData.get("email"),
       password: userData.get("password"),
-      lastname: userData.get("lname"),
-      firstname: userData.get("fname"),
+      phone_number: userData.get("phone"),
+      full_name: userData.get("fullname"),
     });
-    if (data) {
-      localStorage.setItem("token", data.token);
-      localStorage.setItem("uid", data.uid);
-      localStorage.setItem("id", data._id);
-      router.push("/dashboard");
+    if (isSuccess) {
+      e.target.reset();
     }
   };
+
+  if (isSuccess && data) {
+    Cookies.set("token", data.data.token);
+    router.push("/dashboard");
+  }
 
   return (
     <form
@@ -41,23 +71,26 @@ export const SignupForm = () => {
             : error.message}
         </span>
       )}
-      <label htmlFor={"fname"} className={"text-base font-normal"}>
-        First Name
+      <label htmlFor={"fullname"} className={"text-base font-normal"}>
+        Full Name
       </label>
       <input
         type="text"
-        name="fname"
-        placeholder="Doe"
+        name="fullname"
+        placeholder="Kaleb Curry"
         required
         className="w-full px-4 py-4 mb-4 border text-xs font-normal border-gray-300 rounded-md"
       />
-      <label htmlFor={"lname"} className={"text-base font-normal"}>
-        Last Name
+      {/* {formError.full_name && (
+        <span className="text-red-500">{formError.full_name}</span>
+      )} */}
+      <label htmlFor={"phone"} className={"text-base font-normal"}>
+        Phone
       </label>
       <input
         type="text"
-        name="lname"
-        placeholder="Jane"
+        name="phone"
+        placeholder="0787930291"
         required
         className="w-full px-4 py-4 mb-4 border text-xs font-normal border-gray-300 rounded-md"
       />

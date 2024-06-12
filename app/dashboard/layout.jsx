@@ -10,11 +10,12 @@ import {
 import { Layout, Menu, theme } from "antd";
 import DashboardHeader from "@/components/dashboard/DashboardHeader";
 import { useRouter, usePathname } from "next/navigation";
+import Cookies from "js-cookie";
 const { Sider } = Layout;
 
 const DashboardLayout = ({ children }) => {
   const [collapsed, setCollapsed] = useState(false);
-  const userToken = localStorage.getItem("token");
+  const userToken = Cookies.get("token");
 
   const {
     token: { colorBgContainer },
@@ -113,7 +114,7 @@ const DashboardLayout = ({ children }) => {
     .filter((key) => key !== null);
 
   return (
-    <Layout className="h-screen">
+    <Layout className="h-screen overflow-hidden">
       <Sider trigger={null} collapsible collapsed={collapsed}>
         <div className="demo-logo-vertical" />
         <Menu
