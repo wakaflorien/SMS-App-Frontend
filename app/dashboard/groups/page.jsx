@@ -5,14 +5,8 @@ import { createGroup, getGroups } from "@/utils/https/groups";
 import { SearchOutlined, TeamOutlined } from "@ant-design/icons";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import {
-  Button,
-  Divider,
-  FloatButton,
-  Input,
-  Layout,
-  Modal,
-  Table,
-  theme,
+  Button,Divider,FloatButton,Input,
+  Layout,Modal,Table,notification,theme,
 } from "antd";
 import React from "react";
 
@@ -30,6 +24,7 @@ const AllGroupsPage = () => {
 
   const [filteredData, setFilteredData] = React.useState(data);
   const [searchQuery, setSearchQuery] = React.useState("");
+  const [api, contextHolder] = notification.useNotification();
 
   const columns = [
     {
@@ -51,10 +46,29 @@ const AllGroupsPage = () => {
     },
   ];
 
+  const openNotificationWithIcon = (type) => {
+    api[type]({
+      message: "Group Created",
+      description: "Group has been successfully created",
+    });
+  };
+
   const querryClient = useQueryClient();
-  const { mutate, isPending,error:createError } = useMutation({
+  const {
+    mutate,
+    isPending,
+    error: createError,
+    isSuccess,
+  } = useMutation({
     mutationFn: createGroup,
-    onSuccess: querryClient.invalidateQueries("groups"),
+    onSuccess: () => {
+      querryClient.invalidateQueries("groups");
+      openNotificationWithIcon("success");
+      setTimeout(() => {
+        handleCancel();
+      })
+      // handleCancel();
+    },
   });
   const { TextArea } = Input;
   const [isModalOpen, setIsModalOpen] = React.useState(false);
@@ -71,9 +85,10 @@ const AllGroupsPage = () => {
   const handleCreateGroup = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
-    mutate({name:formData.get("name"), description:formData.get("description")})
-
-    // const groupName = form
+    mutate({
+      name: formData.get("name"),
+      description: formData.get("description"),
+    });
   };
 
   if (error)
@@ -85,11 +100,12 @@ const AllGroupsPage = () => {
 
   return (
     <>
+      {contextHolder}
       <FloatButton
         icon={<TeamOutlined style={{ fontSize: 21 }} />}
         type="primary"
         onClick={showModal}
-        style={{ right: 50, width: 55, height: 55 }}
+        style={{ right: 45, width: 50, height: 50 }}
       />
       <Content
         style={{
@@ -122,6 +138,7 @@ const AllGroupsPage = () => {
             bordered
             dataSource={filteredData ? filteredData : data}
             columns={columns}
+            pagination={{ pageSize: 7 }}
           />
         </div>
       </Content>
