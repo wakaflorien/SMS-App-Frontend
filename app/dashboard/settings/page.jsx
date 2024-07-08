@@ -1,7 +1,9 @@
 "use client";
 import React from "react";
-import { Layout, theme } from "antd";
+import { Layout, theme, Typography,Button } from "antd";
+
 const { Content } = Layout;
+const { Title } = Typography;
 
 const SettingsPage = () => {
   const {
@@ -24,7 +26,8 @@ const SettingsPage = () => {
         borderRadius: borderRadiusLG,
       }}
     >
-      SettingsPage --- Content
+      <Title level={4}>Profile</Title>
+      <Button type="primary" style={{width:100}}>Edit</Button>
     </Content>
   );
 };
