@@ -79,7 +79,7 @@ const DashboardLayout = ({ children }) => {
   ];
 
   const renderMenuItems = (items) =>
-    items.map((item) =>
+    items.map((item, index) =>
       item.children ? (
         <Menu.SubMenu
           key={item.key}
