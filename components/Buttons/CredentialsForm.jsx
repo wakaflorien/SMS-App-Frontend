@@ -36,7 +36,7 @@ export const CredentialsForm = () => {
     >
       {error && (
         <span className="p-4 mb-2 text-lg font-semibold text-white bg-red-400 rounded-md">
-          {error.response.data.error
+          {error.code !== "ERR_NETWORK" && error.response.data.error
             ? error.response.data.error
             : error.message}
         </span>

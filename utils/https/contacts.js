@@ -3,9 +3,6 @@ import axios from "axios";
 // const url = process.env.NEXT_PUBLIC_API_URL;
 const url = process.env.NEXT_PUBLIC_API_URL_LOCAL;
 
-
-
-
 export const getContacts = async () => {
     const response = await axios.get(
         `${url}/contacts/all`,
@@ -28,8 +25,19 @@ export const getContact = async (id) => {
 
 export const createContact = async (payload) => {
     const response = await axios.post(
-        `${url}/contacts/create`, payload,
+        `${url}/contacts/new`, payload,
     )
+    return response.data;
+}
+export const createBulkontacts = async (payload) => {
+    const response = await axios.post(
+        `${url}/contacts/bulk`, payload,
+    )
+    notification.success({
+        message: "Success",
+        description: "Conmtacts added successfully",
+        placement: "topRight",
+    })
     return response.data;
 }
 export const updateContact = async (id, payload) => {

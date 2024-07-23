@@ -15,8 +15,15 @@ const { Sider } = Layout;
 
 const DashboardLayout = ({ children }) => {
   const [collapsed, setCollapsed] = useState(false);
-  const userToken = Cookies.get("token");
+  const [currentLocation, setCurrentLocation] = useState(null);
 
+  React.useEffect(() => {
+    if (typeof window !== 'undefined') {
+      setCurrentLocation(window.location);
+    }
+  }, []);
+
+  const userToken = Cookies.get("token");
   const {
     token: { colorBgContainer },
   } = theme.useToken();
@@ -113,6 +120,7 @@ const DashboardLayout = ({ children }) => {
     )
     .filter((key) => key !== null);
 
+  if (!currentLocation) return <>Loading ...</>
   return (
     <Layout className="h-screen overflow-hidden">
       <Sider trigger={null} collapsible collapsed={collapsed}>

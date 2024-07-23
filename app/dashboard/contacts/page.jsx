@@ -1,29 +1,39 @@
 "use client";
-import React from "react";
-import { Layout, theme, Input, Table,FloatButton, Modal, Divider, Button, notification  } from "antd";
-import { ContactsOutlined } from "@ant-design/icons";
-import { getContacts } from "@/utils/https/contacts";
-import { useQuery,useMutation, useQueryClient } from "@tanstack/react-query";
+import React, { useState } from "react";
+import { Layout, theme, Input, Table, FloatButton, Modal, Divider, Button, notification, Form, Flex, Avatar, Typography, Collapse } from "antd";
+import { ContactsOutlined, UserOutlined } from "@ant-design/icons";
+import { getContact, getContacts } from "@/utils/https/contacts";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import DashboardFetchingError from "@/components/dashboard/DashboardFetchingError";
 import DashboardFetchingLoader from "@/components/dashboard/DashboardFetchingLoader";
 import { createContact } from "@/utils/https/contacts";
-import LoadingSpinner from "@/components/LoadingSpinner";
 
 
 const { Content } = Layout;
 const { TextArea } = Input;
+const { Text, Title } = Typography;
 
 const AllContactsPage = () => {
+  const { form } = Form.useForm()
+
   const { data, isLoading, error } = useQuery({
     queryKey: ["contacts"],
     queryFn: getContacts,
   });
-  
+
   const [api, contextHolder] = notification.useNotification();
 
   const [isModalOpen, setIsModalOpen] = React.useState(false);
   const [filteredData, setFilteredData] = React.useState(data);
   const [searchQuery, setSearchQuery] = React.useState("");
+  const [contactPayload, setContactPayload] = React.useState({
+    name: "",
+    phone_number: "",
+    email: "",
+    description: "",
+  })
+  const [contactId, setContactId] = React.useState(null)
+  const [modalType, setModalyType] = useState("create");
 
   const {
     token: { colorBgContainer, borderRadiusLG },
@@ -34,6 +44,7 @@ const AllContactsPage = () => {
       title: "Name",
       dataIndex: "name",
       key: "name",
+      render: (text) => <span className="capitalize">{text}</span>
     },
     {
       title: "Phone Number",
@@ -49,15 +60,19 @@ const AllContactsPage = () => {
       title: "Action",
       dataIndex: "",
       key: "x",
-      render: (text, record) => <a onClick={() => console.log(record)}>View</a>,
+      render: (text, record) => <a onClick={() => {
+        setModalyType("view");
+        showModal();
+        setContactId(record._id);
+      }}>View</a>,
     },
   ];
 
-  // Modals
 
-
-
-
+  const { data: contactData, isLoading: contactLoading, error: contactError } = useQuery({
+    queryKey: ["contact", contactId],
+    queryFn: () => getContact(contactId),
+  });
 
   const openNotificationWithIcon = (type) => {
     api[type]({
@@ -86,18 +101,9 @@ const AllContactsPage = () => {
   };
 
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const formData = new FormData(e.target);
-    const name = formData.get("name");
-    const email = formData.get("email");
-    const phone_number = formData.get("phone");
-    const description = formData.get("description");
-    mutate({ name, email, phone_number, description });
-    if (isSuccess) {
-      e.target.reset();
-      handleCancel();
-    }
+  const handleSubmit = () => {
+    mutate(contactPayload);
+    handleCancel();
   };
 
   if (error)
@@ -141,7 +147,7 @@ const AllContactsPage = () => {
             }
           />
           <Table
-            bordered
+            bordered={false}
             dataSource={filteredData ? filteredData : data}
             columns={columns}
             pagination={{ pageSize: 7 }}
@@ -151,42 +157,89 @@ const AllContactsPage = () => {
       <FloatButton
         icon={<ContactsOutlined style={{ fontSize: 21 }} />}
         type="primary"
-        onClick={showModal}
+        onClick={() => {
+          setModalyType("create");
+          showModal();
+        }}
         style={{ right: 45, width: 50, height: 50 }}
       />
       <Modal
-        title="Create new Contact"
+        title={modalType === "view" ? "View Contact" : "Create new Contact"}
         open={isModalOpen}
         centered
         onOk={handleOk}
         onCancel={handleCancel}
         footer={null}
       >
-        <Divider />
-        <form onSubmit={handleSubmit}>
-          <div className="flex flex-col space-y-5">
+        {modalType === "create" && (<>
+          <Divider />
+          <Form
+            form={form}
+            layout="vertical"
+            onFinish={() => {
+              handleSubmit();
+              form.resetFields();
+            }}
+            className="space-y-4"
+            initialValues={contactPayload}
+          >
             <h2>Enter your details to create a new contact.</h2>
-            <Input size="large" placeholder="Name" name="name" />
-            <Input size="large" placeholder="Email" name="email" />
-            <Input size="large" placeholder="Phone" name="phone" />
-            <TextArea placeholder="Description" rows={3} name="description" />
-          </div>
-          <div className="flex justify-end mt-4 space-x-3">
-            <Button size="large" style={{ width: 100 }} onClick={handleCancel}>
-              Cancel
-            </Button>
-            <button
-              type="submit"
-              className="bg-primary rounded-md py-1 px-2 text-white font-semibold flex items-center justify-center border-none"
-              style={{ width: 100 }}
-            >
-              Create
-              {isPending && (
-                <LoadingSpinner color="white" className="ml-2" fontSize={18} />
-              )}
-            </button>
-          </div>
-        </form>
+            <Form.Item name={"name"} label="Name" rules={[{ required: true, message: "Please enter your name" }]}>
+              <Input size="large" placeholder="Name" onChange={(e) => setContactPayload((prevState) => ({ ...prevState, name: e.target.value }))} />
+            </Form.Item>
+            <Form.Item name={"email"} label="Email" rules={[{ required: true, message: "Please enter your email" }]}>
+              <Input size="large" placeholder="Email" onChange={(e) => setContactPayload((prevState) => ({ ...prevState, email: e.target.value }))} />
+            </Form.Item>
+            <Form.Item name={"phone_number"} label="Phone" rules={[{ required: true, message: "Please enter your phone number" }]}>
+              <Input size="large" placeholder="Phone" maxLength={13} onChange={(e) => setContactPayload((prevState) => ({ ...prevState, phone_number: e.target.value }))} />
+            </Form.Item>
+            <Form.Item name={"description"} label="Description" rules={[{ required: true, message: "Please enter your description" }]}>
+              <TextArea placeholder="Description" rows={3} onChange={(e) => setContactPayload((prevState) => ({ ...prevState, description: e.target.value }))} />
+            </Form.Item>
+            <div className="flex justify-end mt-4 space-x-3">
+              <Button size="large" style={{ width: 100 }} onClick={handleCancel}>
+                Cancel
+              </Button>
+              <Button
+                htmlType="submit"
+                type="primary"
+                size="large"
+                loading={isPending}
+                style={{ width: 100 }}
+              >
+                Create
+              </Button>
+            </div>
+          </Form>
+        </>)}
+        {modalType === "view" && (<>
+          <Divider />
+          {contactLoading ? <DashboardFetchingLoader categoryName="contacts" /> : (<Flex vertical gap={8}>
+            <Avatar size={80} icon={<UserOutlined />} />
+            <Title level={5}>{contactData.name}</Title>
+            <Collapse
+              items={[{
+                key: 1, label: "Contact Details", children: <Flex vertical gap={4}>
+                  <Text>{contactData.email}</Text>
+                  <Text>{contactData.phone_number}</Text>
+                  <Text>{contactData.description}</Text>
+                </Flex>
+              }]}>
+            </Collapse>
+            <Flex>
+              <Button
+                onClick={() => {
+                  setModalyType("create");
+                  showModal();
+                  setContactPayload(contactData);
+                }}
+                type="primary"
+                size="large" >
+                Edit Contact
+              </Button>
+            </Flex>
+          </Flex>)}
+        </>)}
       </Modal>
     </>
   );

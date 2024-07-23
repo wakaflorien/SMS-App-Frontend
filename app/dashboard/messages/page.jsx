@@ -73,11 +73,13 @@ const AllMessagesPage = () => {
       title: "Name",
       dataIndex: ["user", "full_name"],
       key: "name",
+      render: (text) => <span className="capitalize">{text}</span>
     },
     {
       title: "Message Content",
       dataIndex: "message",
       key: "message",
+      render: (text) => <span className="capitalize">{text}</span>
     },
     // {
     //   title: "Target",
@@ -90,14 +92,13 @@ const AllMessagesPage = () => {
       key: "email",
     },
     {
-      title: "Status",
+      title: "Delivery Status",
       dataIndex: "messageStatus",
       key: "messageStatus",
       render: (_, { messageStatus, status }) => {
         return (
-          <Tag color={status === "sent" ? "geekblue" : "volcano"}>
+          <Tag color={status === "sent" ? "geekblue" : "volcano"} className="capitalize">
             {status}
-            {console.log(status)}
           </Tag>
         );
       },

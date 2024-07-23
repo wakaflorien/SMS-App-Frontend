@@ -1,12 +1,20 @@
 "use client";
 import Chart from "@/components/dashboard/Chart";
+import DashboardFetchingError from "@/components/dashboard/DashboardFetchingError";
+import DashboardFetchingLoader from "@/components/dashboard/DashboardFetchingLoader";
+import { getContacts } from "@/utils/https/contacts";
+import { getMessages } from "@/utils/https/messages";
+import { getLoggedInUser } from "@/utils/https/users";
 import {
   CloseOutlined,
   DeliveredProcedureOutlined,
   SendOutlined,
   WalletOutlined
 } from "@ant-design/icons";
+import { useQuery } from "@tanstack/react-query";
 import { Card, Layout, theme, Typography } from "antd";
+import Cookies from "js-cookie";
+import { jwtDecode } from "jwt-decode";
 import Link from "next/link";
 const { Content } = Layout;
 
@@ -15,7 +23,26 @@ const DashboardPage = () => {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
 
-  const { Title, Text } = Typography;
+  const token = Cookies.get("token");
+  const decoded = token && jwtDecode(token);
+  const { id: userId } = decoded;
+
+  const { data, isLoading, error } = useQuery({
+    queryKey: "messages",
+    queryFn: getMessages,
+  });
+
+  const { data: usersData, isLoading: usersLoading, error: usersError } = useQuery({
+    queryKey: ["user", userId],
+    queryFn: () => getLoggedInUser(userId),
+  });
+
+  if (error)
+    return (
+      <DashboardFetchingError alertDescription="Unable to retrieve message data" />
+    );
+
+  if (isLoading || usersLoading) return <DashboardFetchingLoader categoryName="Dashboard" />;
 
   return (
     <Content
@@ -27,6 +54,7 @@ const DashboardPage = () => {
       }}
       className="my-4 md:my-6  mx-2 md:mx-4 p-2 md:p-6"
     >
+      {console.log(data.map((message) => message.status))}
       <div className="block md:flex space-x-8 mt-3 space-y-2 mb-12">
         <Card
           style={{
@@ -40,7 +68,7 @@ const DashboardPage = () => {
                 <span className="text-gray-600 font-semibold">
                   Sent Messages
                 </span>
-                <span className="text-2xl font-bold">350</span>
+                <span className="text-2xl font-bold">{data.length}</span>
               </div>
               <div className="bg-blue-500 text-white px-2 py-1 rounded-lg">
                 <SendOutlined />
@@ -65,7 +93,7 @@ const DashboardPage = () => {
                 <span className="text-gray-600 font-semibold">
                   Failed Messages
                 </span>
-                <span className="text-2xl font-bold">150</span>
+                <span className="text-2xl font-bold">{data.filter((item) => item.status === "failed").length}</span>
               </div>
               <div className="bg-red-500 text-white px-2 py-1 rounded-lg">
                 <CloseOutlined />
@@ -90,7 +118,7 @@ const DashboardPage = () => {
                 <span className="text-gray-600 font-semibold">
                   Delivered Messages
                 </span>
-                <span className="text-2xl font-bold">200</span>
+                <span className="text-2xl font-bold">{data.filter((item) => item.status === "sent").length}</span>
               </div>
               <div className="bg-green-500 text-white px-2 py-1 rounded-lg">
                 <DeliveredProcedureOutlined />
@@ -115,7 +143,7 @@ const DashboardPage = () => {
                 <span className="text-gray-600 font-semibold">
                   Total Amount
                 </span>
-                <span className="text-2xl font-bold">$ 2000</span>
+                <span className="text-2xl font-bold">{usersData.balance}</span>
               </div>
               <div className="bg-yellow-400 text-white px-2 py-1 rounded-lg">
                 <WalletOutlined />

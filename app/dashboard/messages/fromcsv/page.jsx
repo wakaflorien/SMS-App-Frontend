@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { Layout, theme, Button, Upload, Input, Form } from "antd";
+import { Layout, theme, Button, Upload, Input, Form, Progress } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
 import { Icon } from "@iconify/react";
 import { readFile } from "@/utils/https/functions/readFile";
@@ -11,7 +11,7 @@ import { sendMessage } from "@/utils/https/messages";
 
 const { Content } = Layout;
 const allowedExtensions = ['.csv', '.xls', '.xlsx'];
-const acceptExtensions = allowedExtensions.join(',');
+export const acceptExtensions = allowedExtensions.join(',');
 
 const MessagesFromCsv = () => {
   const { form } = Form.useForm()
@@ -95,7 +95,6 @@ const MessagesFromCsv = () => {
         form={form}
         className="w-1/2"
         onFinish={()=> {
-          console.log(formValues);
           handleSubmit();
           form.resetFields();
         }}
@@ -116,6 +115,7 @@ const MessagesFromCsv = () => {
         <Form.Item label="Message" name="message" rules={[{ required: true, message: "Please enter message" }]}>
           <TextArea rows={4} onChange={(e) => setFormValues((prevState) => ({ ...prevState, message: e.target.value }))} />
         </Form.Item>
+        {isPending || uploadLoading && (<Progress />)}
         <Button type="primary" htmlType="submit" size="large" style={{ width: 120 }} loading={isPending}>
           Create
         </Button>
