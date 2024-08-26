@@ -2,7 +2,6 @@
 import Chart from "@/components/dashboard/Chart";
 import DashboardFetchingError from "@/components/dashboard/DashboardFetchingError";
 import DashboardFetchingLoader from "@/components/dashboard/DashboardFetchingLoader";
-import { getContacts } from "@/utils/https/contacts";
 import { getMessages } from "@/utils/https/messages";
 import { getLoggedInUser } from "@/utils/https/users";
 import {
@@ -19,12 +18,10 @@ import Link from "next/link";
 const { Content } = Layout;
 
 const DashboardPage = () => {
-  const {
-    token: { colorBgContainer, borderRadiusLG },
-  } = theme.useToken();
+  const { token: { colorBgContainer, borderRadiusLG }} = theme.useToken();
 
-  const token = Cookies.get("token");
-  const decoded = token && jwtDecode(token);
+  const tokenValue = Cookies.get("token");
+  const decoded = tokenValue && jwtDecode(tokenValue);
   const { id: userId } = decoded;
 
   const { data, isLoading, error } = useQuery({
@@ -54,7 +51,7 @@ const DashboardPage = () => {
       }}
       className="my-4 md:my-6  mx-2 md:mx-4 p-2 md:p-6"
     >
-      {console.log(data.map((message) => message.status))}
+      <>ndimuto</>
       <div className="block md:flex space-x-8 mt-3 space-y-2 mb-12">
         <Card
           style={{
