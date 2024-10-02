@@ -4,30 +4,36 @@ import { Form, Input, Button, Select } from "antd";
 import { sendEmail } from "@/utils/emails/sendMail";
 import { useState } from "react";
 
-const { Option } = Select
+const { Option } = Select;
 export const itemStyles = {
-  inputStyles: { borderRadius: "0px !important", height: "45px", width: "100%", textDecoration: "capitalize" }
-}
+  inputStyles: {
+    borderRadius: "0px !important",
+    height: "45px",
+    width: "100%",
+    textDecoration: "capitalize",
+  },
+};
 
 export function Footer() {
   const [form] = Form.useForm();
-  const [sendLoading, setSendLoading] = useState(false)
+  const [sendLoading, setSendLoading] = useState(false);
 
-  const onFinish = (values) => {
-    setSendLoading(true)
+  const onFinish = async (values) => {
+    let payload = { ...values, to_name: "Infotext Admin" };
+    setSendLoading(true);
     try {
-      sendEmail(values)
-      form.resetFields()
-      setSendLoading(false)
+      await sendEmail(payload);
+      form.resetFields();
+      setSendLoading(false);
     } catch (error) {
-      console.log(error)
-      setSendLoading(false)
+      console.log(error);
+      setSendLoading(false);
     }
   };
   const onFinishFailed = (errorInfo) => {
-    console.log('Failed:', errorInfo);
-  }
- 
+    console.log("Failed:", errorInfo);
+  };
+
   const prefixSelector = (
     <Form.Item name="prefix" className="bg-white/25">
       <Select
@@ -40,7 +46,10 @@ export function Footer() {
     </Form.Item>
   );
   return (
-    <div className="bg-blue-500 text-white opacity-100 min-h-screen flex items-center relative" id="contact">
+    <div
+      className="bg-blue-500 text-white opacity-100 min-h-screen flex items-center relative"
+      id="contact"
+    >
       <Wrapper className="py-14 xl:py-20 grid xl:grid-cols-12 gap-28 w-full">
         <div className="xl:col-span-5 max-w-full space-y-11">
           <h1 className="text-2xl xl:text-5xl font-extrabold">
@@ -66,7 +75,7 @@ export function Footer() {
               rules={[
                 {
                   required: true,
-                  message: 'Please input your name!',
+                  message: "Please input your name!",
                 },
               ]}
             >
@@ -83,7 +92,7 @@ export function Footer() {
               rules={[
                 {
                   required: true,
-                  message: 'Please input your phone number!',
+                  message: "Please input your phone number!",
                 },
               ]}
             >
@@ -91,7 +100,7 @@ export function Footer() {
                 placeholder="Phone number"
                 className="!bg-transparent !border-none"
                 style={itemStyles.inputStyles}
-              // addonBefore={prefixSelector}
+                // addonBefore={prefixSelector}
               />
             </Form.Item>
             <Form.Item
@@ -100,12 +109,12 @@ export function Footer() {
               className="bg-white/25"
               rules={[
                 {
-                  type: 'email',
-                  message: 'The input is not valid E-mail!',
+                  type: "email",
+                  message: "The input is not valid E-mail!",
                 },
                 {
                   required: true,
-                  message: 'Please input your E-mail!',
+                  message: "Please input your E-mail!",
                 },
               ]}
             >
@@ -121,7 +130,7 @@ export function Footer() {
               rules={[
                 {
                   required: true,
-                  message: 'Please input your phone number!',
+                  message: "Please input your phone number!",
                 },
               ]}
             >
@@ -137,23 +146,22 @@ export function Footer() {
               rules={[
                 {
                   required: true,
-                  message: 'Please input Messsage!',
+                  message: "Please input Messsage!",
                 },
               ]}
             >
               <Input.TextArea
-                showCount maxLength={100}
+                showCount
+                maxLength={100}
                 placeholder="Type your message here ..."
                 className="!bg-transparent !border-none !rounded-none"
                 style={{
                   height: 120,
-                  resize: 'none',
+                  resize: "none",
                 }}
               />
             </Form.Item>
-            <Form.Item
-              className="bg-white/25"
-            >
+            <Form.Item className="bg-white/25">
               <Button
                 className="!bg-blue-500 !border-white !text-white uppercase !text-sm font-bold"
                 style={itemStyles.inputStyles}
@@ -174,7 +182,9 @@ export function Footer() {
               <p>Space Centre</p>
             </h1>
             <div className="text-xl">
-              If you require any further information about InfoText Services, please do not hesitate to contact us. Our team of highly trained professionals are on standby to assist you.
+              If you require any further information about InfoText Services,
+              please do not hesitate to contact us. Our team of highly trained
+              professionals are on standby to assist you.
             </div>
             <div className="flex flex-col">
               <div className="grid  grid-cols-2 xl:grid-cols-12">
@@ -186,7 +196,9 @@ export function Footer() {
                 </div>
               </div>
               <div className="grid grid-cols-2 xl:grid-cols-12">
-                <div className="text-white font-bold xl:col-span-8">Telphone</div>
+                <div className="text-white font-bold xl:col-span-8">
+                  Telphone
+                </div>
                 <div className="text-white xl:col-span-4">
                   <p>SA: 086 111 2021</p>
                   <p>Telephone: +353 (0)21 731 9734</p>
