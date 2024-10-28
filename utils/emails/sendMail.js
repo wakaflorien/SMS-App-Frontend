@@ -11,9 +11,7 @@ export const sendEmail = async (payload) => {
   }
   
   try {
-    console.log(" Send Payload", body, url);
     const response = await axios.post(`${url}/contact-form`, body);
-    console.log("Response", response.data);
     notification.success({ message: "Success", description: "Email sent successfully", placement: "bottomRight" });
     return response.data;
   } catch (error) {
