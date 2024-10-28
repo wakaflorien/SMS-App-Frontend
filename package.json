@@ -12,7 +12,6 @@
   "dependencies": {
     "@ant-design/nextjs-registry": "^1.0.0",
     "@auth/prisma-adapter": "^1.0.9",
-    "@emailjs/browser": "^4.1.0",
     "@faker-js/faker": "^8.4.1",
     "@heroicons/react": "^2.0.18",
     "@iconify/react": "^4.1.1",

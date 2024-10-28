@@ -1,36 +1,22 @@
-import emailjs from "@emailjs/browser";
-import { message } from "antd";
+import {  notification } from "antd";
+import axios from "axios";
+const url = process.env.NEXT_PUBLIC_API_URL_LOCAL;
 
-export const sendEmail = async (templateParams) => {
-  // console.log("templateParams", templateParams);
-  emailjs.init({
-    publicKey: process.env.NEXT_PUBLIC_MAILJS_PUBLIC_KEY,
-    blockHeadless: true,
-    blockList: {
-      list: ["foo@emailjs.com", "bar@emailjs.com"],
-      watchVariable: "userEmail",
-    },
-    limitRate: {
-      id: "app",
-      throttle: 10000,
-    },
-  });
-
-  emailjs
-    .send(
-      process.env.NEXT_PUBLIC_SERVICE_ID,
-      process.env.NEXT_PUBLIC_TEMPLATE_ID,
-      templateParams,
-      process.env.NEXT_PUBLIC_MAILJS_PUBLIC_KEY,
-    )
-    .then(
-      (response) => {
-        // console.log("SUCCESS!", response.status, response.text);
-        message.success("Success!: Email sent successfully");
-      },
-      (error) => {
-        // console.log("FAILED...", error.text);
-        message.error(error.text || "Failed!: Sending email failed");
-      },
-    );
+export const sendEmail = async (payload) => {
+  const { email, message } = payload
+  const body = {
+    "from": email,
+    "message": message,
+    "subject": "Client's message",
+  }
+  
+  try {
+    console.log(" Send Payload", body, url);
+    const response = await axios.post(`${url}/contact-form`, body);
+    console.log("Response", response.data);
+    notification.success({ message: "Success", description: "Email sent successfully", placement: "bottomRight" });
+    return response.data;
+  } catch (error) {
+    console.log("Error", error);
+  }
 };
