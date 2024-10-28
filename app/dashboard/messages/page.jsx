@@ -24,6 +24,8 @@ const AllMessagesPage = () => {
   } = theme.useToken();
   const token = Cookies.get("token");
   const decoded = token && jwtDecode(token);
+  const { id: userId } = decoded;
+
   const querryClient = useQueryClient();
   const router = useRouter();
 
@@ -50,7 +52,7 @@ const AllMessagesPage = () => {
     queryFn: getContacts,
   });
 
-  const newData = data?.map((message) => {
+  const newData = data?.filter((message) => message?.user?._id === userId)?.map((message) => {
     return { ...message, messageStatus: "sent" };
   });
 

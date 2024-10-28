@@ -57,7 +57,6 @@ export function NavBar() {
     >
       <nav className="flex justify-between h-16 xl:h-20 items-center">
         <div className="flex gap-8 items-center">
-          {/* logo */}
           <Link
             href="/"
             className="font-extrabold text-xl xl:text-3xl tracking-wide"
@@ -82,9 +81,6 @@ export function NavBar() {
           </ul>
         </div>
         <ul className="hidden xl:flex justify-center items-center gap-7">
-          <li>
-            <a href={"/"}>System Status</a>
-          </li>
           <li>
             <a href={"/login"}>Login</a>
           </li>
@@ -132,9 +128,6 @@ export function NavBar() {
           </li>
           <li>
             <a href={"/#contact"}>Contact</a>
-          </li>
-          <li>
-            <a href={"/"}>System Status</a>
           </li>
           <li>
             <a href={"/login"}>Login</a>

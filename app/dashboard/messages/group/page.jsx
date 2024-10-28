@@ -94,7 +94,6 @@ const SendMessageToGroup = () => {
                 groupContacts: item.contacts.map((contact) => contact.phone_number),
               }))}
               onChange={(value, option) => {
-                console.log(value, option[0].groupContacts, "value, option.groupContacts");
                 setSendMessagePayload((prevState) => ({
                   ...prevState,
                   numbers: option[0]?.groupContacts,

@@ -16,7 +16,7 @@ const DashboardHeader = ({ collapsed, setCollapsed, colorBgContainer }) => {
 
   const logout = () => {
     Cookies.remove("token");
-    router.push("/");
+    router.push("/login");
   };
 
   const items = [

@@ -18,7 +18,7 @@ import Link from "next/link";
 const { Content } = Layout;
 
 const DashboardPage = () => {
-  const { token: { colorBgContainer, borderRadiusLG }} = theme.useToken();
+  const { token: { colorBgContainer, borderRadiusLG } } = theme.useToken();
 
   const tokenValue = Cookies.get("token");
   const decoded = tokenValue && jwtDecode(tokenValue);
@@ -33,6 +33,11 @@ const DashboardPage = () => {
     queryKey: ["user", userId],
     queryFn: () => getLoggedInUser(userId),
   });
+
+  const cardStyles = {
+    width: 300,
+    height: 130,
+  }
 
   if (error)
     return (
@@ -51,21 +56,15 @@ const DashboardPage = () => {
       }}
       className="my-4 md:my-6  mx-2 md:mx-4 p-2 md:p-6"
     >
-      <>ndimuto</>
       <div className="block md:flex space-x-8 mt-3 space-y-2 mb-12">
-        <Card
-          style={{
-            width: 300,
-            height: 130,
-          }}
-        >
+        <Card style={cardStyles}>
           <div className="flex flex-col space-y-4">
             <div className="flex justify-between items-center">
               <div className="flex flex-col space-y-1">
                 <span className="text-gray-600 font-semibold">
                   Sent Messages
                 </span>
-                <span className="text-2xl font-bold">{data.length}</span>
+                <span className="text-2xl font-bold">{data && data.filter((item) => item.user._id === usersData._id).length}</span>
               </div>
               <div className="bg-blue-500 text-white px-2 py-1 rounded-lg">
                 <SendOutlined />
@@ -79,10 +78,7 @@ const DashboardPage = () => {
         </Card>
 
         <Card
-          style={{
-            width: 300,
-            height: 130,
-          }}
+          style={cardStyles}
         >
           <div className="flex flex-col space-y-4">
             <div className="flex justify-between items-center">
@@ -90,7 +86,7 @@ const DashboardPage = () => {
                 <span className="text-gray-600 font-semibold">
                   Failed Messages
                 </span>
-                <span className="text-2xl font-bold">{data.filter((item) => item.status === "failed").length}</span>
+                <span className="text-2xl font-bold">{data.filter((item) => item.user._id === usersData._id && item.status === "failed").length}</span>
               </div>
               <div className="bg-red-500 text-white px-2 py-1 rounded-lg">
                 <CloseOutlined />
@@ -104,10 +100,7 @@ const DashboardPage = () => {
         </Card>
 
         <Card
-          style={{
-            width: 300,
-            height: 130,
-          }}
+          style={cardStyles}
         >
           <div className="flex flex-col space-y-4">
             <div className="flex justify-between items-center">
@@ -115,7 +108,7 @@ const DashboardPage = () => {
                 <span className="text-gray-600 font-semibold">
                   Delivered Messages
                 </span>
-                <span className="text-2xl font-bold">{data.filter((item) => item.status === "sent").length}</span>
+                <span className="text-2xl font-bold">{data.filter((item) => item.user._id === usersData._id && item.status === "sent").length}</span>
               </div>
               <div className="bg-green-500 text-white px-2 py-1 rounded-lg">
                 <DeliveredProcedureOutlined />
@@ -129,10 +122,7 @@ const DashboardPage = () => {
         </Card>
 
         <Card
-          style={{
-            width: 300,
-            height: 130,
-          }}
+          style={cardStyles}
         >
           <div className="flex flex-col space-y-4">
             <div className="flex justify-between items-center">
