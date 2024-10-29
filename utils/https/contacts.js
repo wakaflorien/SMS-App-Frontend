@@ -1,3 +1,4 @@
+import { notification } from "antd";
 import axios from "axios";
 
 // const url = process.env.NEXT_PUBLIC_API_URL;
@@ -30,14 +31,21 @@ export const createContact = async (payload) => {
     return response.data;
 }
 export const createBulkontacts = async (payload) => {
-    const response = await axios.post(
-        `${url}/contacts/bulk`, payload,
-    )
-    notification.success({
-        message: "Success",
-        description: "Conmtacts added successfully",
-        placement: "topRight",
-    })
+    const response = await axios.post(`${url}/contacts/bulk`, payload)
+
+    if (response.data.status === "success") {
+        notification.success({
+            message: response.data.status,
+            description: response.data.message,
+            placement: "topRight",
+        })
+    } else {
+        notification.error({
+            message: response.data.status,
+            description: response.data.message,
+            placement: "topRight",
+        })
+    }
     return response.data;
 }
 export const updateContact = async (id, payload) => {

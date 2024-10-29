@@ -17,18 +17,17 @@ const ContactsFromCsvPage = () => {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
 
-  const [formValues, setFormValues] = React.useState({
-    name: "",
-    email: "",
-    phone_number: "",
-    description: ""
-  });
+  const [formValues, setFormValues] = React.useState([{
+      name: "",
+      email: "",
+      phone_number: "",
+    }]);
   const [uploadLoading, setUploadLoading] = React.useState(false);
   const [uploadSuccess, setUploadSuccess] = React.useState(false);
   const [fileData, setFileData] = React.useState([]);
 
 
-  const fileProcessing = async (file) => {
+  const fileProcessing = async (file, onSuccess, onError) => {
     if (file) {
       setUploadLoading(true);
       const response = await readFile(file);
@@ -39,16 +38,27 @@ const ContactsFromCsvPage = () => {
         setFileData(response.fileData);
 
         // Update the state with the response data
-        setFormValues(response.fileData.map(item => ({
-          name: item.name,
-          email: item.email,
-          phone_number: item.phone_number,
-          description: item.description
-        })));
+        // setFormValues(response.fileData.map(item => ({
+        //   name: item.name,
+        //   email: item.email,
+        //   phone_number: item.phone_number,
+        //   description: item.description
+        // })));
 
+      setFormValues(prevState => [...response.fileData.map(item => ({
+        name: item.name,
+        email: item.email,
+        phone_number: item.phone_number,
+        description: "Bulk contact"
+      }))]);
+      
+        onSuccess("Ok");
+        message.success("Upload successful");
       } else {
         setUploadLoading(false)
         setUploadSuccess(false);
+        onSuccess("Ok");
+        onError("Something went wrong. Please try again later");
       }
     }
   }
@@ -56,11 +66,11 @@ const ContactsFromCsvPage = () => {
   const props = {
     name: 'file',
     accept: acceptExtensions,
-    showUploadList: false,
+    showUploadList: true,
     multiple: true,
     customRequest: async ({ onSuccess, onError, file }) => {
-      fileProcessing(file)
-    }
+      fileProcessing(file, onSuccess, onError)
+    },
   };
 
   const { mutate, data, isPending, error, isSuccess } = useMutation({
@@ -70,13 +80,12 @@ const ContactsFromCsvPage = () => {
         name: "",
         email: "",
         phone_number: "",
-        description: "",
       });
       querryClient.invalidateQueries("contacts");
     },
   });
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     const payload = {
       contacts: formValues
     }
@@ -97,13 +106,14 @@ const ContactsFromCsvPage = () => {
         layout="vertical"
         form={form}
         className="w-1/2"
-        onFinish={() => {
-          handleSubmit();
-          form.resetFields();
+        onFinish={async () => {
+          await handleSubmit();
+
+          // form.resetFields();
         }}
       >
         <Form.Item label="File" name="file" rules={[{ required: true, message: "Please select file" }]}>
-          <Dragger {...props} className="flex flex-col items-center rounded-md bg-white border-2 border-dashed border-[#1677FF] w-full text-[#1677FF]" >
+          <Dragger {...props} className="flex flex-col items-center rounded-md bg-white  w-full text-[#1677FF]" >
             <div className='flex flex-col items-center gap-2'>
               <p className="flex items-center justify-center">
                 <Icon icon="fa6-solid:file-circle-plus" width="40" height="36" className='text-[#1677FF]' />
@@ -115,10 +125,7 @@ const ContactsFromCsvPage = () => {
             </div>
           </Dragger>
         </Form.Item>
-        {/* {console.log(formValues, "formValues")}
-        <Form.Item label="Description" name="description" rules={[{ required: true, message: "Please enter message" }]}>
-          <TextArea rows={4} onChange={(e) => setFormValues((prevState) => ({ ...prevState, description: e.target.value }))} />
-        </Form.Item> */}
+
         {isPending || uploadLoading && (<Progress />)}
         <Button type="primary" htmlType="submit" size="large" style={{ width: 120 }} loading={isPending}>
           Create

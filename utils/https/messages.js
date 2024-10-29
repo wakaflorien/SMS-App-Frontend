@@ -22,11 +22,19 @@ export const sendMessage = async (payload) => {
         authorization: `Bearer ${token}`,
       },
     });
-    notification.success({
-      message: "Success",
-      description: "Message sent successfully",
-      placement: "topRight",
-    })
+    if (response.data.status === "success") {
+      notification.success({
+        message: response.data.status,
+        description: response.data.message,
+        placement: "topRight",
+      })
+    } else {
+      notification.error({
+        message: response.data.status,
+        description: response.data.message,
+        placement: "topRight",
+      })
+    }
     return response.data;
   } catch (error) {
     notification.error({
