@@ -178,7 +178,7 @@ const AllContactsPage = () => {
             layout="vertical"
             onFinish={() => {
               handleSubmit();
-              form.resetFields();
+              // form.resetFields();
             }}
             className="space-y-4"
             initialValues={contactPayload}

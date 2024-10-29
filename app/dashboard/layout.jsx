@@ -125,7 +125,7 @@ const DashboardLayout = ({ children }) => {
   return (
     <Layout className="h-screen overflow-hidden">
       <Sider trigger={null} collapsible collapsed={collapsed}>
-        <div className="demo-logo-vertical" />
+        {/* <div className="demo-logo-vertical" > </div> */}
         <Menu
           mode="inline"
           defaultSelectedKeys={[defaultSelectedKeys]}

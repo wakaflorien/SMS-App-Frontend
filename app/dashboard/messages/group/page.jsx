@@ -74,7 +74,7 @@ const SendMessageToGroup = () => {
           form={form}
           onFinish={() => {
             mutate(sendMessagePayload)
-            form.resetFields()
+            // form.resetFields()
           }}
           className="w-1/2"
         >

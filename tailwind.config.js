@@ -1,6 +1,9 @@
 /** @type {import('tailwindcss').Config} */
 // const withMT = require('@material-tailwind/react/utils/withMT')
 import withMT from '@material-tailwind/react/utils/withMT';
+import { createRequire } from 'module';
+
+const require = createRequire(import.meta.url);
 
 module.exports = withMT({
   content: [
@@ -28,4 +31,5 @@ module.exports = withMT({
   plugins: [
     require('flowbite/plugin'),
   ],
-})
+});
+

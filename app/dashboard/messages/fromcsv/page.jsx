@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { Layout, theme, Button, Upload, Input, Form, Progress } from "antd";
+import { Layout, theme, Button, Upload, Input, Form, Progress, message } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
 import { Icon } from "@iconify/react";
 import { readFile } from "@/utils/https/functions/readFile";
@@ -35,20 +35,55 @@ const MessagesFromCsv = () => {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
 
-  const fileProcessing = async (file) => {
+  function formatPhoneNumber(phoneNumber) {
+    // Remove any spaces or special characters
+    let cleaned = phoneNumber.replace(/\D/g, '');
+
+    if (cleaned.startsWith('0')) {
+      return '+250' + cleaned.substring(1);
+    }
+
+    if (cleaned.startsWith('7')) {
+      return '+250' + cleaned;
+    }
+
+    if (cleaned.startsWith('250')) {
+      return '+' + cleaned;
+    }
+
+    return cleaned;
+  }
+
+  // For handling multiple numbers
+  function formatPhoneNumbers(phoneNumbers) {
+    console.log("phoneNumbers", phoneNumbers);
+    if (Array.isArray(phoneNumbers)) {
+      return phoneNumbers.map(number => formatPhoneNumber(number));
+    }
+    return formatPhoneNumber(phoneNumbers);
+  }
+  const fileProcessing = async (file, onSuccess, onError) => {
     if (file) {
       setUploadLoading(true);
       const response = await readFile(file);
       // TODO: validate the response
+      const formatNumbers = formatPhoneNumbers(response.fileData.map((item) => item.phone_number));
+
       if (response) {
         setUploadLoading(false)
         setUploadSuccess(true);
-        setFileData(response.fileData);
-        setFormValues((prev) => ({ ...prev, numbers: response.fileData.map((item) => item.phone_number) }));
-
+        setFileData(formatNumbers);
+        setFormValues((prev) => ({
+          ...prev, numbers: formatNumbers
+        }));
+        onSuccess("Ok");
+        message.success("Upload successful");
       } else {
         setUploadLoading(false)
         setUploadSuccess(false);
+
+        message.error("Something went wrong. Please try again later");
+        onError("Something went wrong. Please try again later");
       }
     }
   }
@@ -56,10 +91,10 @@ const MessagesFromCsv = () => {
   const props = {
     name: 'file',
     accept: acceptExtensions,
-    showUploadList: false,
+    showUploadList: true,
     multiple: true,
     customRequest: async ({ onSuccess, onError, file }) => {
-      fileProcessing(file)
+      fileProcessing(file, onSuccess, onError);
     }
   };
 
@@ -76,7 +111,7 @@ const MessagesFromCsv = () => {
     },
   });
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     mutate(formValues);
   };
 
@@ -94,13 +129,20 @@ const MessagesFromCsv = () => {
         layout="vertical"
         form={form}
         className="w-1/2"
-        onFinish={()=> {
-          handleSubmit();
+        onFinish={async () => {
+          await handleSubmit();
+
           form.resetFields();
+
+          setFormValues(prevState => ({
+            ...prevState,
+            numbers: [],
+            message: "",
+          }))
         }}
       >
         <Form.Item label="File" name="file" rules={[{ required: true, message: "Please select file" }]}>
-          <Dragger {...props} className="flex flex-col items-center rounded-md bg-white border-2 border-dashed border-[#1677FF] w-full text-[#1677FF]" >
+          <Dragger {...props} className="flex flex-col items-center rounded-md bg-white   w-full text-[#1677FF]" >
             {uploadLoading ? "Uploading ...." : (<div className='flex flex-col items-center gap-2'>
               <p className="flex items-center justify-center">
                 <Icon icon="fa6-solid:file-circle-plus" width="40" height="36" className='text-[#1677FF]' />
@@ -117,7 +159,7 @@ const MessagesFromCsv = () => {
         </Form.Item>
         {isPending || uploadLoading && (<Progress />)}
         <Button type="primary" htmlType="submit" size="large" style={{ width: 120 }} loading={isPending}>
-          Create
+          Send
         </Button>
       </Form>
 
